@@ -440,8 +440,31 @@
       color: #616060f2;
     }
     /* Add styles for tabs */
-    .tabs { list-style: none; display: flex; }
-    .tab-link { padding: 10px; cursor: pointer; background: #ccc; margin-right: 5px; }
-    .tab-link.current { background: #999; }
-    .tab-content { display: none; padding: 20px; border: 1px solid #ccc; }
-    .tab-content.current { display: block; }
+.tabs {
+  list-style: none;
+  display: flex;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.tab-link {
+  padding: 10px;
+  cursor: pointer;
+  background: #ccc;
+  border-radius: 4px;
+}
+
+.tab-link.current {
+  background: #999;
+  font-weight: bold;
+}
+
+.tab-content {
+  display: none;
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+
+.tab-content.current {
+  display: block;
+}
