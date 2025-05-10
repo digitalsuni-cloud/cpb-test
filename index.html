@@ -86,10 +86,20 @@
   <div id="tab-2" class="tab-content">
     <!-- New CPB API tools content goes here -->
     <h3>CPB API Actions</h3>
-    <button onclick="getAllPriceBooks()">Get All Price Books</button>
-    <pre id="output"></pre>
-  </div>
+  <label for="customerApiId">Customer API ID:</label><br>
+  <input type="text" id="customerApiId" placeholder="Enter Customer API ID"><br><br>
 
+  <label for="billingAccount">Billing Account ID (Optional):</label><br>
+  <input type="text" id="billingAccount" placeholder="Leave empty for all"><br><br>
+
+  <label for="pricebookJson">PriceBook JSON:</label><br>
+  <textarea id="pricebookJson" rows="10" cols="80" placeholder="Paste your PriceBook JSON here"></textarea><br><br>
+
+  <button onclick="createAndAssignCPB()">Create & Assign CPB to Customer</button>
+
+  <h4>API Console Log:</h4>
+  <pre id="apiLog" style="background:#f4f4f4; padding:10px; border:1px solid #ccc; height:200px; overflow:auto;"></pre>
+    
   <script src="https://digitalsuni-cloud.github.io/cpb-test/script.js"></script>
 </body>
 </html>
