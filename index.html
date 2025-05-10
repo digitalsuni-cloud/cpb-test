@@ -8,6 +8,14 @@
 </head>
 <body>
   <body>
+      <!-- Tab Navigation -->
+  <ul class="tabs">
+    <li class="tab-link current" data-tab="tab-1">Price Book Generator</li>
+    <li class="tab-link" data-tab="tab-2">CPB API Tools</li>
+  </ul>
+
+  <!-- Tab Contents -->
+  <div id="tab-1" class="tab-content current">
   <h1>CloudHealth Custom Price Book XML/JSON Generator</h1>
 
   <label>Price Book Name (required):</label>
@@ -71,6 +79,15 @@
       <button onclick="copyToClipboard('outputJSON')" title="Copy to clipboard">📋</button>
       <button onclick="downloadText('outputJSON', 'output.JSON')" title="Download as file">💾</button>
     </div>
+  </div>
+
+    </div>
+
+  <div id="tab-2" class="tab-content">
+    <!-- New CPB API tools content goes here -->
+    <h3>CPB API Actions</h3>
+    <button onclick="getAllPriceBooks()">Get All Price Books</button>
+    <pre id="output"></pre>
   </div>
 
   <script src="https://digitalsuni-cloud.github.io/cpb-test/script.js"></script>
