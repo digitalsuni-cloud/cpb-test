@@ -86,19 +86,34 @@
   <div id="tab-2" class="tab-content">
     <!-- New CPB API tools content goes here -->
     <h3>CPB API Actions</h3>
-  <label for="customerApiId">Customer API ID:</label><br>
-  <input type="text" id="customerApiId" placeholder="Enter Customer API ID"><br><br>
+    <div class="ruleGroup">
+    <label for="customerApiId">Customer API ID:</label><br>
+    <input type="text" id="customerApiId" class="ruleName" placeholder="Enter Customer API ID">
 
-  <label for="billingAccount">Billing Account ID (Optional):</label><br>
-  <input type="text" id="billingAccount" placeholder="Leave empty for all"><br><br>
+    <label for="billingAccount">Billing Account ID (optional):</label><br>
+    <input type="text" id="billingAccount" class="ruleName" placeholder="Leave blank for all">
 
-  <label for="pricebookJson">PriceBook JSON:</label><br>
-  <textarea id="pricebookJson" rows="10" cols="80" placeholder="Paste your PriceBook JSON here"></textarea><br><br>
+    <label for="pricebookJson">PriceBook JSON:</label><br>
+    <textarea id="pricebookJson" rows="10" class="ruleName" placeholder="Paste your PriceBook JSON here"></textarea>
 
-  <button onclick="createAndAssignCPB()">Create & Assign CPB to Customer</button>
+    <button onclick="createAndAssignCPB()">Create & Assign CPB to Customer</button>
+  </div>
 
-  <h4>API Console Log:</h4>
-  <pre id="apiLog" style="background:#f4f4f4; padding:10px; border:1px solid #ccc; height:200px; overflow:auto;"></pre>
+  <div class="ruleGroup">
+    <label>API Console Log:</label>
+    <pre id="apiLog" style="
+      background-color: #f9f9f9;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      padding: 10px;
+      height: 200px;
+      overflow: auto;
+      white-space: pre-wrap;
+      font-family: monospace;
+      font-size: 13px;
+    "></pre>
+  </div>
+</div>
     
   <script src="https://digitalsuni-cloud.github.io/cpb-test/script.js"></script>
 </body>
