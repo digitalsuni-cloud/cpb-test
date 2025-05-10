@@ -1,4 +1,4 @@
-    //Add Rule Group Button
+//Add Rule Group Button
 
     function addRuleGroup(afterElement = null, insertAtTop = false) {
       const div = document.createElement('div');
@@ -720,3 +720,4 @@
         document.getElementById('infoModal').style.display = 'none';
       };
     });
+// Add more functions after this
