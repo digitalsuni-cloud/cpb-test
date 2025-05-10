@@ -720,3 +720,34 @@
         document.getElementById('infoModal').style.display = 'none';
       };
     });
+  // Tab switching logic
+    const tabs = document.querySelectorAll('.tab-link');
+    const contents = document.querySelectorAll('.tab-content');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('current'));
+        contents.forEach(c => c.classList.remove('current'));
+
+        tab.classList.add('current');
+        document.getElementById(tab.dataset.tab).classList.add('current');
+      });
+    });
+
+    // Example API function
+    async function getAllPriceBooks() {
+      const output = document.getElementById('output');
+      output.textContent = 'Loading...';
+      try {
+        const response = await fetch('https://chapi.cloudhealthtech.com/v1/partner/price_books', {
+          headers: {
+            'Authorization': 'Bearer YOUR_API_KEY',
+            'Accept': 'application/json'
+          }
+        });
+        const data = await response.json();
+        output.textContent = JSON.stringify(data, null, 2);
+      } catch (error) {
+        output.textContent = 'Error: ' + error.message;
+      }
+    }
