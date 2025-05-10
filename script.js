@@ -721,39 +721,4 @@
       };
     });
 // Add more functions after this
-  // Tab switching logic
-const tabs = document.querySelectorAll('.tab-link');
-const contents = document.querySelectorAll('.tab-content');
-
-tabs.forEach(tab => {
-  tab.addEventListener('click', () => {
-    // Remove 'current' class from all tabs and contents
-    tabs.forEach(t => t.classList.remove('current'));
-    contents.forEach(c => c.classList.remove('current'));
-
-    // Add 'current' class to clicked tab and corresponding content
-    tab.classList.add('current');
-    document.getElementById(tab.dataset.tab).classList.add('current');
-  });
-});
-  function logToConsoleBox(message) {
-    const logBox = document.getElementById('apiLog');
-    logBox.textContent += `${message}\n`;
-    logBox.scrollTop = logBox.scrollHeight;
-  }
-
-  async function createAndAssignCPB() {
-    const customerApiId = document.getElementById('customerApiId').value.trim();
-    const billingAccount = document.getElementById('billingAccount').value.trim();
-    const pricebookJson = document.getElementById('pricebookJson').value.trim();
-
-    if (!customerApiId || !pricebookJson) {
-      logToConsoleBox("Customer API ID and PriceBook JSON are required.");
-      return;
-    }
-
-    logToConsoleBox("Starting CPB creation and assignment sequence...");
-
-    // Awaiting logic from you
-    logToConsoleBox("Ready to implement API call logic...");
-  }
+ 
