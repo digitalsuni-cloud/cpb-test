@@ -735,3 +735,24 @@ tabs.forEach(tab => {
     document.getElementById(tab.dataset.tab).classList.add('current');
   });
 });
+  function logToConsoleBox(message) {
+    const logBox = document.getElementById('apiLog');
+    logBox.textContent += `${message}\n`;
+    logBox.scrollTop = logBox.scrollHeight;
+  }
+
+  async function createAndAssignCPB() {
+    const customerApiId = document.getElementById('customerApiId').value.trim();
+    const billingAccount = document.getElementById('billingAccount').value.trim();
+    const pricebookJson = document.getElementById('pricebookJson').value.trim();
+
+    if (!customerApiId || !pricebookJson) {
+      logToConsoleBox("Customer API ID and PriceBook JSON are required.");
+      return;
+    }
+
+    logToConsoleBox("Starting CPB creation and assignment sequence...");
+
+    // Awaiting logic from you
+    logToConsoleBox("Ready to implement API call logic...");
+  }
