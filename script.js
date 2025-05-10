@@ -720,5 +720,3 @@
         document.getElementById('infoModal').style.display = 'none';
       };
     });
-// Add more functions after this
- 
