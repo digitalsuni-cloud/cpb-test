@@ -829,7 +829,7 @@ function copyToClipboard(textareaId) {
   textarea.setSelectionRange(0, 99999); // For mobile
   document.execCommand("copy");
 }
-
+/*
 function downloadText(textareaId, filename) {
   const text = document.getElementById(textareaId).value;
   const blob = new Blob([text], { type: 'text/plain' });
@@ -840,4 +840,4 @@ function downloadText(textareaId, filename) {
   link.download = filename;
   link.click();
 }
-
+*/
