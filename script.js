@@ -745,6 +745,10 @@ function downloadText(textareaId, extension) {
   link.download = filename;
   link.click();
 }
+
+// CPB API Actions.....
+
+
 async function createAndAssignCPB() {
   const customerApiId = document.getElementById('customerApiId').value.trim();
   const billingAccount = document.getElementById('billingAccount').value.trim();
@@ -760,6 +764,9 @@ async function createAndAssignCPB() {
   if (!apiKey) return logToConsole("❌ API Key is required.");
 
   logToConsole("🔁 Starting PriceBook creation...");
+
+  // Debug: Log the JSON before making the request
+  logToConsole("🔍 Debug JSON: " + JSON.stringify(cpbJson));
 
   // Step 1: Try to create the PriceBook
   let cpbResponse = await fetch("https://chapi.cloudhealthtech.com/v1/price_books", {
@@ -845,8 +852,3 @@ async function createAndAssignCPB() {
   logToConsole(`✅ PriceBook successfully assigned to billing account (${billingPayload.billing_account_owner_id}). Done!`);
 }
 
-function logToConsole(msg) {
-  const logBox = document.getElementById("apiLog");
-  logBox.textContent += msg + "\n";
-  logBox.scrollTop = logBox.scrollHeight;
-}
