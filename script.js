@@ -14,17 +14,20 @@ document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('infoButton').addEventListener('click', function () {
     var infoModal = document.getElementById('infoModal');
     infoModal.style.display = 'block';
-        document.getElementById('infoContent').innerHTML = `
-        <p><strong>Rule Order:</strong> Custom price book XML specifications process rules in top-down order. The first applicable rule that satisfies all specified constraints for a line item is used, and then no subsequent rules are used for that line item. If no applicable and matching rule is found, the line item will have a 0% calculated price adjustment.</p>
-        <p><strong>Rule Applicability:</strong> Rule applicability is determined by the startDate and endDate attributes in enabled RuleGroup elements. startDates and endDates are inclusive. Whether or not an applicable rule is actually used depends on its order relative to other rules and the constraints it specifies for matching line items.</p>
-        <p><strong>For more details:</strong> <a href="https://apidocs.cloudhealthtech.com/#price-book_introduction-to-price-book-api" target="_blank" style="color: #4ca1af;">API Documentation</a></p>
-      `;
+    document.getElementById('infoContent').innerHTML = `
+      <p><strong>Rule Order:</strong> Custom price book XML specifications process rules in top-down order...</p>
+      <p><strong>For more details:</strong> <a href="https://apidocs.cloudhealthtech.com/#price-book_introduction-to-price-book-api" target="_blank">API Documentation</a></p>
+    `;
   });
 
   window.closeModal = function () {
     document.getElementById('infoModal').style.display = 'none';
   };
+
+  // Other existing functions defined here, including createAndAssignCPB, logToConsoleBox, etc.
+});
 //Add Rule Group Button
+
 function addRuleGroup(afterElement = null, insertAtTop = false) {
   const div = document.createElement('div');
   div.className = 'ruleGroup';
@@ -720,21 +723,17 @@ function copyToClipboard(textareaId) {
   textarea.setSelectionRange(0, 99999); // For mobile
   document.execCommand("copy");
 }
-/*
+
 function downloadText(textareaId, filename) {
   const text = document.getElementById(textareaId).value;
   const blob = new Blob([text], { type: 'text/plain' });
   const link = document.createElement("a");
-  const fileNameInput = document.getElementById('bookName');
-  const filename = bookNameInput.value.trim();
   link.href = URL.createObjectURL(blob);
   link.download = filename;
   link.click();
 }
-*/
 
-  // Other existing functions defined here, including createAndAssignCPB, logToConsoleBox, etc.
-  async function createAndAssignCPB() {
+async function createAndAssignCPB() {
   const customerApiId = document.getElementById('customerApiId').value.trim();
   const billingAccount = document.getElementById('billingAccount').value.trim();
   let cpbJson;
@@ -839,4 +838,3 @@ function logToConsole(msg) {
   logBox.textContent += msg + "\n";
   logBox.scrollTop = logBox.scrollHeight;
 }
-});
