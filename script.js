@@ -834,10 +834,10 @@ function downloadText(textareaId, filename) {
   const text = document.getElementById(textareaId).value;
   const blob = new Blob([text], { type: 'text/plain' });
   const link = document.createElement("a");
-  const bookNameInput = document.getElementById('bookName');
-  const bookName = bookNameInput.value.trim();
+  const fileNameInput = document.getElementById('bookName');
+  const filename = bookNameInput.value.trim();
   link.href = URL.createObjectURL(blob);
-  link.download = bookName;
+  link.download = filename;
   link.click();
 }
 
