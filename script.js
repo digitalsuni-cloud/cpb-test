@@ -25,6 +25,112 @@ document.addEventListener('DOMContentLoaded', function () {
   };
 
   // Other existing functions defined here, including createAndAssignCPB, logToConsoleBox, etc.
+  
+async function createAndAssignCPB() {
+  const customerApiId = document.getElementById('customerApiId').value.trim();
+  const billingAccount = document.getElementById('billingAccount').value.trim();
+  let cpbJson;
+
+  try {
+    cpbJson = JSON.parse(document.getElementById('pricebookJson').value.trim());
+  } catch (err) {
+    return logToConsole("❌ Invalid JSON. Please fix and try again.");
+  }
+
+  const apiKey = prompt("Enter your API Key:");
+  if (!apiKey) return logToConsole("❌ API Key is required.");
+
+  logToConsole("🔁 Starting PriceBook creation...");
+
+  // Step 1: Try to create the PriceBook
+  let cpbResponse = await fetch("https://chapi.cloudhealthtech.com/v1/price_books", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${apiKey}`
+    },
+    body: JSON.stringify(cpbJson)
+  });
+
+  let cpbData = await cpbResponse.json();
+
+  if (cpbResponse.status === 422 && cpbData.errors?.includes("Book name has already been taken")) {
+    logToConsole("⚠️ Book name already taken.");
+    const newName = prompt("Book name already exists. Enter a new name to retry:");
+    if (!newName) return logToConsole("❌ Book creation aborted.");
+    cpbJson.name = newName;
+
+    // Retry with new name
+    cpbResponse = await fetch("https://chapi.cloudhealthtech.com/v1/price_books", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${apiKey}`
+      },
+      body: JSON.stringify(cpbJson)
+    });
+    cpbData = await cpbResponse.json();
+  }
+
+  if (cpbResponse.status !== 201) {
+    return logToConsole(`❌ Failed to create PriceBook. Status: ${cpbResponse.status}, Response: ${JSON.stringify(cpbData)}`);
+  }
+
+  const priceBookId = cpbData.price_book.id;
+  logToConsole(`✅ Created PriceBook with ID: ${priceBookId}`);
+
+  // Step 2: Assign to Customer
+  const assignmentResponse = await fetch("https://chapi.cloudhealthtech.com/v1/price_book_assignments", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${apiKey}`
+    },
+    body: JSON.stringify({
+      price_book_id: priceBookId,
+      target_client_api_id: customerApiId
+    })
+  });
+
+  const assignmentData = await assignmentResponse.json();
+
+  if (assignmentResponse.status !== 201) {
+    return logToConsole(`❌ Failed to assign PriceBook to customer. Status: ${assignmentResponse.status}, Response: ${JSON.stringify(assignmentData)}`);
+  }
+
+  const assignmentId = assignmentData.id;
+  logToConsole(`✅ Assigned PriceBook to customer. Assignment ID: ${assignmentId}`);
+
+  // Step 3: Assign to Billing Account or All
+  const billingPayload = {
+    price_book_assignment_id: assignmentId,
+    billing_account_owner_id: billingAccount || "ALL",
+    target_client_api_id: customerApiId
+  };
+
+  const billingAssignResp = await fetch("https://chapi.cloudhealthtech.com/v1/price_book_account_assignments", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${apiKey}`
+    },
+    body: JSON.stringify(billingPayload)
+  });
+
+  const billingData = await billingAssignResp.json();
+
+  if (billingAssignResp.status !== 201) {
+    return logToConsole(`❌ Failed to assign to billing account. Status: ${billingAssignResp.status}, Response: ${JSON.stringify(billingData)}`);
+  }
+
+  logToConsole(`✅ PriceBook successfully assigned to billing account (${billingPayload.billing_account_owner_id}). Done!`);
+}
+
+function logToConsole(msg) {
+  const logBox = document.getElementById("apiLog");
+  logBox.textContent += msg + "\n";
+  logBox.scrollTop = logBox.scrollHeight;
+}
 });
 //Add Rule Group Button
 
@@ -743,110 +849,4 @@ function downloadText(textareaId, extension) {
   link.href = URL.createObjectURL(blob);
   link.download = filename;
   link.click();
-}
-
-async function createAndAssignCPB() {
-  const customerApiId = document.getElementById('customerApiId').value.trim();
-  const billingAccount = document.getElementById('billingAccount').value.trim();
-  let cpbJson;
-
-  try {
-    cpbJson = JSON.parse(document.getElementById('pricebookJson').value.trim());
-  } catch (err) {
-    return logToConsole("❌ Invalid JSON. Please fix and try again.");
-  }
-
-  const apiKey = prompt("Enter your API Key:");
-  if (!apiKey) return logToConsole("❌ API Key is required.");
-
-  logToConsole("🔁 Starting PriceBook creation...");
-
-  // Step 1: Try to create the PriceBook
-  let cpbResponse = await fetch("https://chapi.cloudhealthtech.com/v1/price_books", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${apiKey}`
-    },
-    body: JSON.stringify(cpbJson)
-  });
-
-  let cpbData = await cpbResponse.json();
-
-  if (cpbResponse.status === 422 && cpbData.errors?.includes("Book name has already been taken")) {
-    logToConsole("⚠️ Book name already taken.");
-    const newName = prompt("Book name already exists. Enter a new name to retry:");
-    if (!newName) return logToConsole("❌ Book creation aborted.");
-    cpbJson.name = newName;
-
-    // Retry with new name
-    cpbResponse = await fetch("https://chapi.cloudhealthtech.com/v1/price_books", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${apiKey}`
-      },
-      body: JSON.stringify(cpbJson)
-    });
-    cpbData = await cpbResponse.json();
-  }
-
-  if (cpbResponse.status !== 201) {
-    return logToConsole(`❌ Failed to create PriceBook. Status: ${cpbResponse.status}, Response: ${JSON.stringify(cpbData)}`);
-  }
-
-  const priceBookId = cpbData.price_book.id;
-  logToConsole(`✅ Created PriceBook with ID: ${priceBookId}`);
-
-  // Step 2: Assign to Customer
-  const assignmentResponse = await fetch("https://chapi.cloudhealthtech.com/v1/price_book_assignments", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${apiKey}`
-    },
-    body: JSON.stringify({
-      price_book_id: priceBookId,
-      target_client_api_id: customerApiId
-    })
-  });
-
-  const assignmentData = await assignmentResponse.json();
-
-  if (assignmentResponse.status !== 201) {
-    return logToConsole(`❌ Failed to assign PriceBook to customer. Status: ${assignmentResponse.status}, Response: ${JSON.stringify(assignmentData)}`);
-  }
-
-  const assignmentId = assignmentData.id;
-  logToConsole(`✅ Assigned PriceBook to customer. Assignment ID: ${assignmentId}`);
-
-  // Step 3: Assign to Billing Account or All
-  const billingPayload = {
-    price_book_assignment_id: assignmentId,
-    billing_account_owner_id: billingAccount || "ALL",
-    target_client_api_id: customerApiId
-  };
-
-  const billingAssignResp = await fetch("https://chapi.cloudhealthtech.com/v1/price_book_account_assignments", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${apiKey}`
-    },
-    body: JSON.stringify(billingPayload)
-  });
-
-  const billingData = await billingAssignResp.json();
-
-  if (billingAssignResp.status !== 201) {
-    return logToConsole(`❌ Failed to assign to billing account. Status: ${billingAssignResp.status}, Response: ${JSON.stringify(billingData)}`);
-  }
-
-  logToConsole(`✅ PriceBook successfully assigned to billing account (${billingPayload.billing_account_owner_id}). Done!`);
-}
-
-function logToConsole(msg) {
-  const logBox = document.getElementById("apiLog");
-  logBox.textContent += msg + "\n";
-  logBox.scrollTop = logBox.scrollHeight;
 }
