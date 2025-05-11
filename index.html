@@ -60,26 +60,26 @@
       title="Copy the JSON payload content and replace the API key for the Terminal Command">For Terminal Command
       Use</button>
 
-<h2>Generated XML:</h2>
-<div style="position: relative; width: 75%;">
-  <textarea id="outputXML" rows="10" style="width: 100%;"></textarea>
-  <div class="icon-actions">
-    <button onclick="copyToClipboard('outputXML')" title="Copy to clipboard">📋</button>
-    <button onclick="downloadText('outputXML', 'xml')" title="Download as file">💾</button>
-  </div>
-</div>
+    <h2>Generated XML:</h2>
+    <div style="position: relative; width: 75%;">
+      <textarea id="outputXML" rows="10" style="width: 100%;"></textarea>
+      <div class="icon-actions">
+        <button onclick="copyToClipboard('outputXML')" title="Copy to clipboard">📋</button>
+        <button onclick="downloadText('outputXML', 'xml')" title="Download as file">💾</button>
+      </div>
+    </div>
 
-<h2>Custom Pricebook JSON Payload:</h2>
-<div style="position: relative; width: 75%;">
-  <textarea id="outputJSON" rows="10" style="width: 100%;"></textarea>
-  <div class="icon-actions">
-    <button onclick="copyToClipboard('outputJSON')" title="Copy to clipboard">📋</button>
-    <button onclick="downloadText('outputJSON', 'json')" title="Download as file">💾</button>
-  </div>
-</div>
+    <h2>Custom Pricebook JSON Payload:</h2>
+    <div style="position: relative; width: 75%;">
+      <textarea id="outputJSON" rows="10" style="width: 100%;"></textarea>
+      <div class="icon-actions">
+        <button onclick="copyToClipboard('outputJSON')" title="Copy to clipboard">📋</button>
+        <button onclick="downloadText('outputJSON', 'json')" title="Download as file">💾</button>
+      </div>
+    </div>
+  </div> <!-- END of tab-1 -->
 
-
-  <!-- Tab 2: CPB API Tools -->
+  <!-- Tab 2: CPB API Tools (Moved outside of tab-1) -->
   <div id="tab-2" class="tab-content">
     <h3>CPB API Actions</h3>
     <label for="customerApiId">Customer API ID:</label><br>
@@ -95,7 +95,7 @@
 
     <label>API Console Log:</label>
     <pre id="apiLog" style="background-color: #f9f9f9; border: 1px solid #ccc; padding: 10px; height: 200px; overflow: auto; white-space: pre-wrap; font-family: monospace; font-size: 13px;"></pre>
-  </div>
+  </div> <!-- END of tab-2 -->
 
   <script src="script.js"></script> 
 </body>
