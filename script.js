@@ -730,16 +730,18 @@ function downloadText(textareaId, extension) {
   let base = nameInput ? nameInput.value.trim() : 'output';
   if (!base) base = 'output';
 
-  // Sanitize filename and ensure correct extension
+  // Sanitize filename
   base = base.replace(/[^\w\-]/g, '_');
-  if (!base.toLowerCase().endsWith(`.${extension}`)) {
-    base += `.${extension}`;
-  }
+
+  // Add date timestamp
+  const now = new Date();
+  const timestamp = now.toISOString().split('T')[0]; // YYYY-MM-DD
+  const filename = `${base}_${timestamp}.${extension}`;
 
   const blob = new Blob([text], { type: 'text/plain' });
   const link = document.createElement("a");
   link.href = URL.createObjectURL(blob);
-  link.download = base;
+  link.download = filename;
   link.click();
 }
 
