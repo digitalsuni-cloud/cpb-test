@@ -724,20 +724,24 @@ function copyToClipboard(textareaId) {
   document.execCommand("copy");
 }
 
-function downloadText(textareaId, defaultFilename) {
-  const filenameInput = document.getElementById('bookName');
-  const filename = filenameInput && filenameInput.value.trim()
-    ? filenameInput.value.trim()
-    : defaultFilename;
-
+function downloadText(textareaId, extension) {
   const text = document.getElementById(textareaId).value;
+  const nameInput = document.getElementById('bookName');
+  let base = nameInput ? nameInput.value.trim() : 'output';
+  if (!base) base = 'output';
+
+  // Sanitize filename and ensure correct extension
+  base = base.replace(/[^\w\-]/g, '_');
+  if (!base.toLowerCase().endsWith(`.${extension}`)) {
+    base += `.${extension}`;
+  }
+
   const blob = new Blob([text], { type: 'text/plain' });
   const link = document.createElement("a");
   link.href = URL.createObjectURL(blob);
-  link.download = filename;
+  link.download = base;
   link.click();
 }
-
 
 async function createAndAssignCPB() {
   const customerApiId = document.getElementById('customerApiId').value.trim();
