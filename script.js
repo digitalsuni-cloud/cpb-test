@@ -724,7 +724,12 @@ function copyToClipboard(textareaId) {
   document.execCommand("copy");
 }
 
-function downloadText(textareaId, filename) {
+function downloadText(textareaId, defaultFilename) {
+  const filenameInput = document.getElementById('bookName');
+  const filename = filenameInput && filenameInput.value.trim()
+    ? filenameInput.value.trim()
+    : defaultFilename;
+
   const text = document.getElementById(textareaId).value;
   const blob = new Blob([text], { type: 'text/plain' });
   const link = document.createElement("a");
@@ -732,6 +737,7 @@ function downloadText(textareaId, filename) {
   link.download = filename;
   link.click();
 }
+
 
 async function createAndAssignCPB() {
   const customerApiId = document.getElementById('customerApiId').value.trim();
