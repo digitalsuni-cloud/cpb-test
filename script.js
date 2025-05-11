@@ -1,53 +1,37 @@
-
 document.addEventListener('DOMContentLoaded', function () {
-  // Tab switching logic
+  // Tab Switching Logic
   const tabs = document.querySelectorAll('.tab-link');
   const contents = document.querySelectorAll('.tab-content');
-
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
-      // Remove 'current' class from all tabs and contents
       tabs.forEach(t => t.classList.remove('current'));
       contents.forEach(c => c.classList.remove('current'));
-
-      // Add 'current' class to clicked tab and corresponding content
       tab.classList.add('current');
-      const targetContent = document.getElementById(tab.dataset.tab);
-      if (targetContent) {
-        targetContent.classList.add('current');
-      }
+      document.getElementById(tab.dataset.tab).classList.add('current');
     });
   });
 
-  // Info button logic
-  const infoButton = document.getElementById('infoButton');
-  const infoModal = document.getElementById('infoModal');
-  const infoContent = document.getElementById('infoContent');
+  document.getElementById('infoButton').addEventListener('click', function () {
+    var infoModal = document.getElementById('infoModal');
+    infoModal.style.display = 'block';
+    document.getElementById('infoContent').innerHTML = `
+      <p><strong>Rule Order:</strong> Custom price book XML specifications process rules in top-down order...</p>
+      <p><strong>For more details:</strong> <a href="https://apidocs.cloudhealthtech.com/#price-book_introduction-to-price-book-api" target="_blank">API Documentation</a></p>
+    `;
+  });
 
-  if (infoButton && infoModal && infoContent) {
-    infoButton.addEventListener('click', function () {
-      infoModal.style.display = 'block';
-      infoContent.innerHTML = `
-        <p><strong>Rule Order:</strong> Custom price book XML specifications process rules in top-down order. The first applicable rule that satisfies all specified constraints for a line item is used, and then no subsequent rules are used for that line item. If no applicable and matching rule is found, the line item will have a 0% calculated price adjustment.</p>
-        <p><strong>Rule Applicability:</strong> Rule applicability is determined by the startDate and endDate attributes in enabled RuleGroup elements. startDates and endDates are inclusive. Whether or not an applicable rule is actually used depends on its order relative to other rules and the constraints it specifies for matching line items.</p>
-        <p><strong>For more details:</strong> <a href="https://apidocs.cloudhealthtech.com/#price-book_introduction-to-price-book-api" target="_blank" style="color: #4ca1af;">API Documentation</a></p>
-      `;
-    });
-  }
-
-  // Make closeModal globally accessible
   window.closeModal = function () {
-    if (infoModal) {
-      infoModal.style.display = 'none';
-    }
+    document.getElementById('infoModal').style.display = 'none';
   };
+
+  // Other existing functions defined here, including createAndAssignCPB, logToConsoleBox, etc.
 });
 //Add Rule Group Button
 
-    function addRuleGroup(afterElement = null, insertAtTop = false) {
-      const div = document.createElement('div');
-      div.className = 'ruleGroup';
-      div.innerHTML = `
+function addRuleGroup(afterElement = null, insertAtTop = false) {
+  const div = document.createElement('div');
+  div.className = 'ruleGroup';
+  div.innerHTML = `
     <div class="section-title">Rule Group</div>
     <label>Start Date:</label>
     <input type="date" class="startDate" required />
@@ -65,24 +49,24 @@ document.addEventListener('DOMContentLoaded', function () {
     <button class="remove-rule-group" onclick="this.parentElement.remove()" style="margin-right: 15px;">Remove Rule Group</button>
   `;
 
-      const container = document.getElementById('groupsContainer');
+  const container = document.getElementById('groupsContainer');
 
-      if (insertAtTop) {
-        container.insertBefore(div, container.firstChild);
-      } else if (afterElement) {
-        container.insertBefore(div, afterElement.nextSibling);
-      } else {
-        container.appendChild(div);
-      }
-    }
+  if (insertAtTop) {
+    container.insertBefore(div, container.firstChild);
+  } else if (afterElement) {
+    container.insertBefore(div, afterElement.nextSibling);
+  } else {
+    container.appendChild(div);
+  }
+}
 
-    // Add Billing Rule Button
+// Add Billing Rule Button
 
-    function addRule(button) {
-      const rulesContainer = button.previousElementSibling;
-      const div = document.createElement('div');
-      div.className = 'rule';
-      div.innerHTML = `
+function addRule(button) {
+  const rulesContainer = button.previousElementSibling;
+  const div = document.createElement('div');
+  div.className = 'rule';
+  div.innerHTML = `
         <label>Billing Rule Name:</label>
         <input type="text" class="ruleName" placeholder="Enter Billing Rule name" />
 
@@ -357,25 +341,25 @@ document.addEventListener('DOMContentLoaded', function () {
 
         <button class="remove-rule" onclick="this.parentElement.remove()">Remove Billing Rule</button>
       `;
-      rulesContainer.appendChild(div);
-    }
+  rulesContainer.appendChild(div);
+}
 
-    function addUsageType(button) {
-      const container = button.closest('.sub-group').querySelector('.usageTypes');
-      const div = document.createElement('div');
-      div.className = 'sub-entry';
-      div.innerHTML = `
+function addUsageType(button) {
+  const container = button.closest('.sub-group').querySelector('.usageTypes');
+  const div = document.createElement('div');
+  div.className = 'sub-entry';
+  div.innerHTML = `
         <button type="button" class="remove-usagetype" onclick="this.parentElement.remove()">×</button>
         <input type="text" class="usageTypeName" placeholder="UsageType name..." />
       `;
-      container.appendChild(div);
-    }
+  container.appendChild(div);
+}
 
-    function addLineItemDescription(button) {
-      const container = button.closest('.sub-group').querySelector('.lineItemDescriptions');
-      const div = document.createElement('div');
-      div.className = 'sub-entry';
-      div.innerHTML = `
+function addLineItemDescription(button) {
+  const container = button.closest('.sub-group').querySelector('.lineItemDescriptions');
+  const div = document.createElement('div');
+  div.className = 'sub-entry';
+  div.innerHTML = `
         <button type="button" class="remove-lineitem" onclick="this.parentElement.remove()">×</button>
         <select class="lineItemType">
           <option value="contains">contains</option>
@@ -384,34 +368,34 @@ document.addEventListener('DOMContentLoaded', function () {
         </select>
         <input type="text" class="lineItemValue" placeholder="Enter LineItem Description..." />
       `;
-      container.appendChild(div);
-    }
+  container.appendChild(div);
+}
 
-    function addOperation(button) {
-      const container = button.closest('.sub-group').querySelector('.operations');
-      const div = document.createElement('div');
-      div.className = 'sub-entry';
-      div.innerHTML = `
+function addOperation(button) {
+  const container = button.closest('.sub-group').querySelector('.operations');
+  const div = document.createElement('div');
+  div.className = 'sub-entry';
+  div.innerHTML = `
     <button type="button" class="remove-lineitem" onclick="this.parentElement.remove()">×</button>
     <input type="text" class="operationName" placeholder="Enter Operation name..." />
   `;
-      container.appendChild(div);
-    }
-    function addRecordType(button) {
-      const container = button.closest('.sub-group').querySelector('.recordTypes');
-      const div = document.createElement('div');
-      div.className = 'sub-entry';
-      div.innerHTML = `
+  container.appendChild(div);
+}
+function addRecordType(button) {
+  const container = button.closest('.sub-group').querySelector('.recordTypes');
+  const div = document.createElement('div');
+  div.className = 'sub-entry';
+  div.innerHTML = `
     <button type="button" class="remove-lineitem" onclick="this.parentElement.remove()">×</button>
     <input type="text" class="recordTypeName" placeholder="Enter RecordType..." />
   `;
-      container.appendChild(div);
-    }
-    function addInstanceProperty(button) {
-      const container = button.closest('.sub-group').querySelector('.instanceProperties');
-      const div = document.createElement('div');
-      div.className = 'sub-entry';
-      div.innerHTML = `
+  container.appendChild(div);
+}
+function addInstanceProperty(button) {
+  const container = button.closest('.sub-group').querySelector('.instanceProperties');
+  const div = document.createElement('div');
+  div.className = 'sub-entry';
+  div.innerHTML = `
     <button type="button" class="remove-lineitem" onclick="this.parentElement.remove()">×</button>
     <input type="text" class="instanceType" placeholder="Instance Type (e.g., t2)" />
     <input type="text" class="instanceSize" placeholder="Instance Size (e.g., 8xlarge)" />
@@ -420,353 +404,437 @@ document.addEventListener('DOMContentLoaded', function () {
       <label for="reservedInstance" class="checkbox-label"> Reserved</label>
     </div>
   `;
-      container.appendChild(div);
-    }
-    function addSavingsPlanOfferingType(button) {
-      const container = button.closest('.sub-group').querySelector('.savingsPlanOfferingTypes');
-      const div = document.createElement('div');
-      div.className = 'sub-entry';
-      div.innerHTML = `
+  container.appendChild(div);
+}
+function addSavingsPlanOfferingType(button) {
+  const container = button.closest('.sub-group').querySelector('.savingsPlanOfferingTypes');
+  const div = document.createElement('div');
+  div.className = 'sub-entry';
+  div.innerHTML = `
     <button type="button" class="remove-lineitem" onclick="this.parentElement.remove()">×</button>
     <input type="text" class="savingsPlanOfferingTypeName" placeholder="Enter Savings Plan Offering Type..." />
   `;
-      container.appendChild(div);
+  container.appendChild(div);
+}
+
+//Export XML Button Function
+
+function generateXML() {
+  const createdByInput = document.getElementById('createdBy');
+  const createdBy = createdByInput.value;
+  const comment = document.getElementById('comment').value || '';
+
+  if (!createdBy) {
+    alert("Created By is required.");
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    createdByInput.style.border = '2px solid red';
+    createdByInput.focus();
+    return;
+  }
+  createdByInput.style.border = '';
+
+  const groups = document.querySelectorAll('.ruleGroup');
+  let xml = `<?xml version="1.0" encoding="UTF-8"?>\n<CHTBillingRules createdBy="${createdBy}" date="${new Date().toISOString().split('T')[0]}">\n\t<Comment>${comment}</Comment>\n`;
+
+  groups.forEach(group => {
+    let startDate = group.querySelector('.startDate').value;
+    if (!startDate) {
+      const now = new Date();
+      startDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-01`;
     }
+    const endDate = group.querySelector('.endDate').value;
+    const enabled = group.querySelector('.enabled').value;
 
-    //Export XML Button Function
+    xml += `\t<RuleGroup startDate="${startDate}"${endDate ? ` endDate="${endDate}"` : ''}${enabled === "false" ? ` enabled="false"` : ''}>\n`;
 
-    function generateXML() {
-      const createdByInput = document.getElementById('createdBy');
-      const createdBy = createdByInput.value;
-      const comment = document.getElementById('comment').value || '';
+    const rules = group.querySelectorAll('.rule');
+    rules.forEach(rule => {
+      const name = rule.querySelector('.ruleName').value;
+      const adj = rule.querySelector('.billingAdjustment').value || '0.00';
+      const type = rule.querySelector('.billingRuleType').value;
+      const dataTransfer = rule.querySelector('.includeDataTransfer').value;
+      const rip = rule.querySelector('.includeRIPurchases').value;
+      const product = rule.querySelector('.productName').value || 'ANY';
 
-      if (!createdBy) {
-        alert("Created By is required.");
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        createdByInput.style.border = '2px solid red';
-        createdByInput.focus();
-        return;
-      }
-      createdByInput.style.border = '';
+      const prodDT = rule.querySelector('.productIncludeDataTransfer').value;
+      const prodRIP = rule.querySelector('.productIncludeRIPurchases').value;
+      const region = rule.querySelector('.region').value;
 
-      const groups = document.querySelectorAll('.ruleGroup');
-      let xml = `<?xml version="1.0" encoding="UTF-8"?>\n<CHTBillingRules createdBy="${createdBy}" date="${new Date().toISOString().split('T')[0]}">\n\t<Comment>${comment}</Comment>\n`;
+      xml += `\t\t<BillingRule name="${name}" includeDataTransfer="${dataTransfer}"${rip === "true" ? ` includeRIPurchases="true"` : ''}>\n`;
+      xml += `\t\t\t<BasicBillingRule billingAdjustment="${adj}" billingRuleType="${type}"/>\n`;
+      xml += `\t\t\t<Product productName="${product}"${prodDT ? ` includeDataTransfer="${prodDT}"` : ''}${prodRIP ? ` includeRIPurchases="${prodRIP}"` : ''}>`;
 
-      groups.forEach(group => {
-        let startDate = group.querySelector('.startDate').value;
-        if (!startDate) {
-          const now = new Date();
-          startDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-01`;
+      let subTags = '';
+
+      if (region) subTags += `\n\t\t\t\t<Region name="${region}"/>`;
+
+      rule.querySelectorAll('.usageTypes .usageTypeName').forEach(el => {
+        const val = el.value.trim();
+        if (val) subTags += `\n\t\t\t\t<UsageType name="${val}"/>`;
+      });
+
+      rule.querySelectorAll('.operations .operationName').forEach(el => {
+        const val = el.value.trim();
+        if (val) subTags += `\n\t\t\t\t<Operation name="${val}"/>`;
+      });
+
+      rule.querySelectorAll('.recordTypes .recordTypeName').forEach(el => {
+        const val = el.value.trim();
+        if (val) subTags += `\n\t\t\t\t<RecordType name="${val}"/>`;
+      });
+
+      rule.querySelectorAll('.instanceProperties .sub-entry').forEach(entry => {
+        const type = entry.querySelector('.instanceType').value.trim();
+        const size = entry.querySelector('.instanceSize').value.trim();
+        const reserved = entry.querySelector('.reservedInstance').checked;
+
+        if (type || size || reserved === false || reserved === true) {
+          subTags += `\n\t\t\t\t<InstanceProperties`;
+          if (type) subTags += ` instanceType="${type}"`;
+          if (size) subTags += ` instanceSize="${size}"`;
+          subTags += ` reserved="${reserved ? 'true' : 'false'}"`;
+          subTags += ` />`;
         }
-        const endDate = group.querySelector('.endDate').value;
-        const enabled = group.querySelector('.enabled').value;
-
-        xml += `\t<RuleGroup startDate="${startDate}"${endDate ? ` endDate="${endDate}"` : ''}${enabled === "false" ? ` enabled="false"` : ''}>\n`;
-
-        const rules = group.querySelectorAll('.rule');
-        rules.forEach(rule => {
-          const name = rule.querySelector('.ruleName').value;
-          const adj = rule.querySelector('.billingAdjustment').value || '0.00';
-          const type = rule.querySelector('.billingRuleType').value;
-          const dataTransfer = rule.querySelector('.includeDataTransfer').value;
-          const rip = rule.querySelector('.includeRIPurchases').value;
-          const product = rule.querySelector('.productName').value || 'ANY';
-
-          const prodDT = rule.querySelector('.productIncludeDataTransfer').value;
-          const prodRIP = rule.querySelector('.productIncludeRIPurchases').value;
-          const region = rule.querySelector('.region').value;
-
-          xml += `\t\t<BillingRule name="${name}" includeDataTransfer="${dataTransfer}"${rip === "true" ? ` includeRIPurchases="true"` : ''}>\n`;
-          xml += `\t\t\t<BasicBillingRule billingAdjustment="${adj}" billingRuleType="${type}"/>\n`;
-          xml += `\t\t\t<Product productName="${product}"${prodDT ? ` includeDataTransfer="${prodDT}"` : ''}${prodRIP ? ` includeRIPurchases="${prodRIP}"` : ''}>`;
-
-          let subTags = '';
-
-          if (region) subTags += `\n\t\t\t\t<Region name="${region}"/>`;
-
-          rule.querySelectorAll('.usageTypes .usageTypeName').forEach(el => {
-            const val = el.value.trim();
-            if (val) subTags += `\n\t\t\t\t<UsageType name="${val}"/>`;
-          });
-
-          rule.querySelectorAll('.operations .operationName').forEach(el => {
-            const val = el.value.trim();
-            if (val) subTags += `\n\t\t\t\t<Operation name="${val}"/>`;
-          });
-
-          rule.querySelectorAll('.recordTypes .recordTypeName').forEach(el => {
-            const val = el.value.trim();
-            if (val) subTags += `\n\t\t\t\t<RecordType name="${val}"/>`;
-          });
-
-          rule.querySelectorAll('.instanceProperties .sub-entry').forEach(entry => {
-            const type = entry.querySelector('.instanceType').value.trim();
-            const size = entry.querySelector('.instanceSize').value.trim();
-            const reserved = entry.querySelector('.reservedInstance').checked;
-
-            if (type || size || reserved === false || reserved === true) {
-              subTags += `\n\t\t\t\t<InstanceProperties`;
-              if (type) subTags += ` instanceType="${type}"`;
-              if (size) subTags += ` instanceSize="${size}"`;
-              subTags += ` reserved="${reserved ? 'true' : 'false'}"`;
-              subTags += ` />`;
-            }
-          });
-
-          rule.querySelectorAll('.lineItemDescriptions .sub-entry').forEach(item => {
-            const key = item.querySelector('.lineItemType').value;
-            const val = item.querySelector('.lineItemValue').value;
-            if (val) subTags += `\n\t\t\t\t<LineItemDescription ${key}="${val}" />`;
-          });
-
-          rule.querySelectorAll('.savingsPlanOfferingTypes .savingsPlanOfferingTypeName').forEach(el => {
-            const val = el.value.trim();
-            if (val) subTags += `\n\t\t\t\t<SavingsPlanOfferingType name="${val}"/>`;
-          });
-
-          if (subTags) {
-            xml += `${subTags}\n\t\t\t</Product>\n`;
-          } else {
-            xml += `</Product>\n`;
-          }
-
-          xml += `\t\t</BillingRule>\n`;
-        });
-
-        xml += `\t</RuleGroup>\n`;
       });
 
-      xml += `</CHTBillingRules>`;
-      document.getElementById('outputXML').value = xml;
-    }
-
-    //ExportJSON Function
-
-    function exportJSON() {
-      const bookNameInput = document.getElementById('bookName');
-      const bookName = bookNameInput.value.trim();
-
-      if (!bookName) {
-        alert("Price Book Name is required.");
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        bookNameInput.style.border = '2px solid red';
-        bookNameInput.focus();
-        return;
-      } else {
-        bookNameInput.style.border = '';
-      }
-      document.getElementById('outputXML').value = '';
-      if (typeof generateXML === 'function') {
-        generateXML();
-      }
-
-      const xml = document.getElementById('outputXML').value;
-      if (!xml) {
-        alert("Failed to generate XML.");
-        return;
-      }
-
-      const escapedXML = xml.replace(/"/g, '\\"');
-      const json = `{"book_name":"${bookName}","specification":"${escapedXML}"}`;
-      document.getElementById('outputJSON').value = json;
-    }
-
-    // Export for Terminal Function
-
-    function exportForTerminal() {
-      const bookNameInput = document.getElementById('bookName');
-      const bookName = bookNameInput.value.trim();
-
-      if (!bookName) {
-        alert("Price Book Name is required.");
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        bookNameInput.style.border = '2px solid red';
-        bookNameInput.focus();
-        return;
-      } else {
-        bookNameInput.style.border = '';
-      }
-      document.getElementById('outputXML').value = '';
-      if (typeof generateXML === 'function') {
-        generateXML();
-      }
-
-      const xml = document.getElementById('outputXML').value;
-      if (!xml) {
-        alert("Failed to generate XML.");
-        return;
-      }
-
-      const escapedXML = xml.replace(/"/g, '\\"');
-      const jsonPayload = `{"book_name":"${bookName}","specification":"${escapedXML}"}`;
-
-      const curlCommand = `curl -X POST https://chapi.cloudhealthtech.com/v1/price_books \\\n` +
-        `  -H "Authorization: Bearer <YOUR_API_TOKEN>" \\\n` +
-        `  -H "Content-Type: application/json" \\\n` +
-        `  -d '${jsonPayload}'`;
-
-      document.getElementById('outputJSON').value = curlCommand;
-    }
-
-    //import file function
-
-    document.getElementById('importButton').addEventListener('click', function () {
-      document.getElementById('importFile').click();
-    });
-
-    document.getElementById('importFile').addEventListener('change', function (event) {
-      document.getElementById('outputXML').value = '';
-      document.getElementById('outputJSON').value = '';
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-          const result = e.target.result;
-          if (file.type === 'application/json' || file.name.endsWith('.json')) {
-            const jsonContent = JSON.parse(result);
-            populateFieldsFromXMLString(jsonContent.specification, jsonContent);
-          } else if (file.type === 'text/xml' || file.name.endsWith('.xml')) {
-            populateFieldsFromXMLString(result);
-          } else {
-            alert('Unsupported file format. Please upload a JSON or XML file.');
-          }
-        };
-        reader.readAsText(file);
-      }
-    });
-
-    function populateFieldsFromXMLString(xmlString, jsonContent = null) {
-      const parser = new DOMParser();
-      const xmlDoc = parser.parseFromString(xmlString, 'application/xml');
-
-      const bookNameValue = jsonContent ? jsonContent.book_name : '';
-      document.getElementById('bookName').value = bookNameValue;
-
-      const createdByValue = jsonContent ? jsonContent.createdBy : xmlDoc.documentElement.getAttribute('createdBy');
-      document.getElementById('createdBy').value = createdByValue || '';
-
-      const comment = xmlDoc.querySelector('Comment')?.textContent || '';
-      document.getElementById('comment').value = comment;
-
-      document.getElementById('groupsContainer').innerHTML = '';
-
-      const ruleGroups = xmlDoc.getElementsByTagName('RuleGroup');
-      Array.from(ruleGroups).forEach(ruleGroup => {
-        addRuleGroup();
-        const currentGroup = document.querySelector('.ruleGroup:last-child');
-
-        currentGroup.querySelector('.startDate').value = ruleGroup.getAttribute('startDate');
-        currentGroup.querySelector('.endDate').value = ruleGroup.getAttribute('endDate');
-        currentGroup.querySelector('.enabled').value = ruleGroup.getAttribute('enabled') || 'true';
-
-        const billingRules = ruleGroup.getElementsByTagName('BillingRule');
-        Array.from(billingRules).forEach(billingRule => {
-          addRule(currentGroup.querySelector('button'));
-          const currentRule = currentGroup.querySelector('.rule:last-child');
-
-          currentRule.querySelector('.ruleName').value = billingRule.getAttribute('name');
-          currentRule.querySelector('.billingAdjustment').value = billingRule.getElementsByTagName('BasicBillingRule')[0].getAttribute('billingAdjustment');
-          currentRule.querySelector('.billingRuleType').value = billingRule.getElementsByTagName('BasicBillingRule')[0].getAttribute('billingRuleType');
-          currentRule.querySelector('.includeDataTransfer').value = billingRule.getAttribute('includeDataTransfer');
-          currentRule.querySelector('.includeRIPurchases').value = billingRule.getAttribute('includeRIPurchases');
-
-          const product = billingRule.getElementsByTagName('Product')[0];
-          if (product) {
-            currentRule.querySelector('.productName').value = product.getAttribute('productName');
-            currentRule.querySelector('.productIncludeDataTransfer').value = product.getAttribute('includeDataTransfer');
-            currentRule.querySelector('.productIncludeRIPurchases').value = product.getAttribute('includeRIPurchases');
-
-            const region = product.getElementsByTagName('Region')[0];
-            if (region) {
-              currentRule.querySelector('.region').value = region.getAttribute('name');
-            }
-
-            populateSubEntries(currentRule.querySelector('.usageTypes'), product.getElementsByTagName('UsageType'), 'name', addUsageType);
-            populateSubEntries(currentRule.querySelector('.operations'), product.getElementsByTagName('Operation'), 'name', addOperation);
-            populateSubEntries(currentRule.querySelector('.recordTypes'), product.getElementsByTagName('RecordType'), 'name', addRecordType);
-
-            Array.from(product.getElementsByTagName('InstanceProperties')).forEach(instanceProperty => {
-              addInstanceProperty(currentRule.querySelector('.instanceProperties + .sub-entry button'));
-              const newInstance = currentRule.querySelector('.instanceProperties .sub-entry:last-child');
-              newInstance.querySelector('.instanceType').value = instanceProperty.getAttribute('instanceType');
-              newInstance.querySelector('.instanceSize').value = instanceProperty.getAttribute('instanceSize');
-              const reservedAttr = instanceProperty.getAttribute('reserved');
-              newInstance.querySelector('.reservedInstance').checked = reservedAttr === 'true';
-            });
-
-            Array.from(product.getElementsByTagName('LineItemDescription')).forEach(lineItem => {
-              addLineItemDescription(currentRule.querySelector('.lineItemDescriptions + .sub-entry button'));
-              const newDescription = currentRule.querySelector('.lineItemDescriptions .sub-entry:last-child');
-              ['contains', 'startsWith', 'matchesRegex'].forEach(type => {
-                if (lineItem.getAttribute(type)) {
-                  newDescription.querySelector('.lineItemType').value = type;
-                  newDescription.querySelector('.lineItemValue').value = lineItem.getAttribute(type);
-                }
-              });
-            });
-
-            populateSubEntries(currentRule.querySelector('.savingsPlanOfferingTypes'), product.getElementsByTagName('SavingsPlanOfferingType'), 'name', addSavingsPlanOfferingType);
-          }
-        });
+      rule.querySelectorAll('.lineItemDescriptions .sub-entry').forEach(item => {
+        const key = item.querySelector('.lineItemType').value;
+        const val = item.querySelector('.lineItemValue').value;
+        if (val) subTags += `\n\t\t\t\t<LineItemDescription ${key}="${val}" />`;
       });
-    }
 
-    function populateSubEntries(container, xmlElements, attrName, addFunction, specificAttrs = []) {
-      Array.from(xmlElements).forEach(element => {
-        const button = container.nextElementSibling.querySelector('button');
-        addFunction(button);
-        const newEntry = container.querySelector('.sub-entry:last-child');
-        if (attrName) {
-          newEntry.querySelector('input').value = element.getAttribute(attrName) || '';
-        } else if (specificAttrs.length) {
-          specificAttrs.forEach(attr => {
-            const input = newEntry.querySelector(`.${attr}`);
-            if (attr === 'reserved') {
-              input.checked = element.getAttribute(attr) === 'true';
-            } else {
-              input.value = element.getAttribute(attr) || '';
+      rule.querySelectorAll('.savingsPlanOfferingTypes .savingsPlanOfferingTypeName').forEach(el => {
+        const val = el.value.trim();
+        if (val) subTags += `\n\t\t\t\t<SavingsPlanOfferingType name="${val}"/>`;
+      });
+
+      if (subTags) {
+        xml += `${subTags}\n\t\t\t</Product>\n`;
+      } else {
+        xml += `</Product>\n`;
+      }
+
+      xml += `\t\t</BillingRule>\n`;
+    });
+
+    xml += `\t</RuleGroup>\n`;
+  });
+
+  xml += `</CHTBillingRules>`;
+  document.getElementById('outputXML').value = xml;
+}
+
+//ExportJSON Function
+
+function exportJSON() {
+  const bookNameInput = document.getElementById('bookName');
+  const bookName = bookNameInput.value.trim();
+
+  if (!bookName) {
+    alert("Price Book Name is required.");
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    bookNameInput.style.border = '2px solid red';
+    bookNameInput.focus();
+    return;
+  } else {
+    bookNameInput.style.border = '';
+  }
+  document.getElementById('outputXML').value = '';
+  if (typeof generateXML === 'function') {
+    generateXML();
+  }
+
+  const xml = document.getElementById('outputXML').value;
+  if (!xml) {
+    alert("Failed to generate XML.");
+    return;
+  }
+
+  const escapedXML = xml.replace(/"/g, '\\"');
+  const json = `{"book_name":"${bookName}","specification":"${escapedXML}"}`;
+  document.getElementById('outputJSON').value = json;
+}
+
+// Export for Terminal Function
+
+function exportForTerminal() {
+  const bookNameInput = document.getElementById('bookName');
+  const bookName = bookNameInput.value.trim();
+
+  if (!bookName) {
+    alert("Price Book Name is required.");
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    bookNameInput.style.border = '2px solid red';
+    bookNameInput.focus();
+    return;
+  } else {
+    bookNameInput.style.border = '';
+  }
+  document.getElementById('outputXML').value = '';
+  if (typeof generateXML === 'function') {
+    generateXML();
+  }
+
+  const xml = document.getElementById('outputXML').value;
+  if (!xml) {
+    alert("Failed to generate XML.");
+    return;
+  }
+
+  const escapedXML = xml.replace(/"/g, '\\"');
+  const jsonPayload = `{"book_name":"${bookName}","specification":"${escapedXML}"}`;
+
+  const curlCommand = `curl -X POST https://chapi.cloudhealthtech.com/v1/price_books \\\n` +
+    `  -H "Authorization: Bearer <YOUR_API_TOKEN>" \\\n` +
+    `  -H "Content-Type: application/json" \\\n` +
+    `  -d '${jsonPayload}'`;
+
+  document.getElementById('outputJSON').value = curlCommand;
+}
+
+//import file function
+
+document.getElementById('importButton').addEventListener('click', function () {
+  document.getElementById('importFile').click();
+});
+
+document.getElementById('importFile').addEventListener('change', function (event) {
+  document.getElementById('outputXML').value = '';
+  document.getElementById('outputJSON').value = '';
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const result = e.target.result;
+      if (file.type === 'application/json' || file.name.endsWith('.json')) {
+        const jsonContent = JSON.parse(result);
+        populateFieldsFromXMLString(jsonContent.specification, jsonContent);
+      } else if (file.type === 'text/xml' || file.name.endsWith('.xml')) {
+        populateFieldsFromXMLString(result);
+      } else {
+        alert('Unsupported file format. Please upload a JSON or XML file.');
+      }
+    };
+    reader.readAsText(file);
+  }
+});
+
+function populateFieldsFromXMLString(xmlString, jsonContent = null) {
+  const parser = new DOMParser();
+  const xmlDoc = parser.parseFromString(xmlString, 'application/xml');
+
+  const bookNameValue = jsonContent ? jsonContent.book_name : '';
+  document.getElementById('bookName').value = bookNameValue;
+
+  const createdByValue = jsonContent ? jsonContent.createdBy : xmlDoc.documentElement.getAttribute('createdBy');
+  document.getElementById('createdBy').value = createdByValue || '';
+
+  const comment = xmlDoc.querySelector('Comment')?.textContent || '';
+  document.getElementById('comment').value = comment;
+
+  document.getElementById('groupsContainer').innerHTML = '';
+
+  const ruleGroups = xmlDoc.getElementsByTagName('RuleGroup');
+  Array.from(ruleGroups).forEach(ruleGroup => {
+    addRuleGroup();
+    const currentGroup = document.querySelector('.ruleGroup:last-child');
+
+    currentGroup.querySelector('.startDate').value = ruleGroup.getAttribute('startDate');
+    currentGroup.querySelector('.endDate').value = ruleGroup.getAttribute('endDate');
+    currentGroup.querySelector('.enabled').value = ruleGroup.getAttribute('enabled') || 'true';
+
+    const billingRules = ruleGroup.getElementsByTagName('BillingRule');
+    Array.from(billingRules).forEach(billingRule => {
+      addRule(currentGroup.querySelector('button'));
+      const currentRule = currentGroup.querySelector('.rule:last-child');
+
+      currentRule.querySelector('.ruleName').value = billingRule.getAttribute('name');
+      currentRule.querySelector('.billingAdjustment').value = billingRule.getElementsByTagName('BasicBillingRule')[0].getAttribute('billingAdjustment');
+      currentRule.querySelector('.billingRuleType').value = billingRule.getElementsByTagName('BasicBillingRule')[0].getAttribute('billingRuleType');
+      currentRule.querySelector('.includeDataTransfer').value = billingRule.getAttribute('includeDataTransfer');
+      currentRule.querySelector('.includeRIPurchases').value = billingRule.getAttribute('includeRIPurchases');
+
+      const product = billingRule.getElementsByTagName('Product')[0];
+      if (product) {
+        currentRule.querySelector('.productName').value = product.getAttribute('productName');
+        currentRule.querySelector('.productIncludeDataTransfer').value = product.getAttribute('includeDataTransfer');
+        currentRule.querySelector('.productIncludeRIPurchases').value = product.getAttribute('includeRIPurchases');
+
+        const region = product.getElementsByTagName('Region')[0];
+        if (region) {
+          currentRule.querySelector('.region').value = region.getAttribute('name');
+        }
+
+        populateSubEntries(currentRule.querySelector('.usageTypes'), product.getElementsByTagName('UsageType'), 'name', addUsageType);
+        populateSubEntries(currentRule.querySelector('.operations'), product.getElementsByTagName('Operation'), 'name', addOperation);
+        populateSubEntries(currentRule.querySelector('.recordTypes'), product.getElementsByTagName('RecordType'), 'name', addRecordType);
+
+        Array.from(product.getElementsByTagName('InstanceProperties')).forEach(instanceProperty => {
+          addInstanceProperty(currentRule.querySelector('.instanceProperties + .sub-entry button'));
+          const newInstance = currentRule.querySelector('.instanceProperties .sub-entry:last-child');
+          newInstance.querySelector('.instanceType').value = instanceProperty.getAttribute('instanceType');
+          newInstance.querySelector('.instanceSize').value = instanceProperty.getAttribute('instanceSize');
+          const reservedAttr = instanceProperty.getAttribute('reserved');
+          newInstance.querySelector('.reservedInstance').checked = reservedAttr === 'true';
+        });
+
+        Array.from(product.getElementsByTagName('LineItemDescription')).forEach(lineItem => {
+          addLineItemDescription(currentRule.querySelector('.lineItemDescriptions + .sub-entry button'));
+          const newDescription = currentRule.querySelector('.lineItemDescriptions .sub-entry:last-child');
+          ['contains', 'startsWith', 'matchesRegex'].forEach(type => {
+            if (lineItem.getAttribute(type)) {
+              newDescription.querySelector('.lineItemType').value = type;
+              newDescription.querySelector('.lineItemValue').value = lineItem.getAttribute(type);
             }
           });
+        });
+
+        populateSubEntries(currentRule.querySelector('.savingsPlanOfferingTypes'), product.getElementsByTagName('SavingsPlanOfferingType'), 'name', addSavingsPlanOfferingType);
+      }
+    });
+  });
+}
+
+function populateSubEntries(container, xmlElements, attrName, addFunction, specificAttrs = []) {
+  Array.from(xmlElements).forEach(element => {
+    const button = container.nextElementSibling.querySelector('button');
+    addFunction(button);
+    const newEntry = container.querySelector('.sub-entry:last-child');
+    if (attrName) {
+      newEntry.querySelector('input').value = element.getAttribute(attrName) || '';
+    } else if (specificAttrs.length) {
+      specificAttrs.forEach(attr => {
+        const input = newEntry.querySelector(`.${attr}`);
+        if (attr === 'reserved') {
+          input.checked = element.getAttribute(attr) === 'true';
+        } else {
+          input.value = element.getAttribute(attr) || '';
         }
       });
     }
+  });
+}
 
-    //copy to clipBoard function
+//copy to clipBoard function
 
-    function copyToClipboard(textareaId) {
-      const textarea = document.getElementById(textareaId);
-      textarea.select();
-      textarea.setSelectionRange(0, 99999); // For mobile
-      document.execCommand("copy");
-    }
+function copyToClipboard(textareaId) {
+  const textarea = document.getElementById(textareaId);
+  textarea.select();
+  textarea.setSelectionRange(0, 99999); // For mobile
+  document.execCommand("copy");
+}
 
-    function downloadText(textareaId, filename) {
-      const text = document.getElementById(textareaId).value;
-      const blob = new Blob([text], { type: 'text/plain' });
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = filename;
-      link.click();
-    }
+function downloadText(textareaId, filename) {
+  const text = document.getElementById(textareaId).value;
+  const blob = new Blob([text], { type: 'text/plain' });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = filename;
+  link.click();
+}
 
-  function logToConsoleBox(message) {
-    const logBox = document.getElementById('apiLog');
-    logBox.textContent += `${message}\n`;
-    logBox.scrollTop = logBox.scrollHeight;
+async function createAndAssignCPB() {
+  const customerApiId = document.getElementById('customerApiId').value.trim();
+  const billingAccount = document.getElementById('billingAccount').value.trim();
+  let cpbJson;
+
+  try {
+    cpbJson = JSON.parse(document.getElementById('pricebookJson').value.trim());
+  } catch (err) {
+    return logToConsole("❌ Invalid JSON. Please fix and try again.");
   }
 
-  async function createAndAssignCPB() {
-    const customerApiId = document.getElementById('customerApiId').value.trim();
-    const billingAccount = document.getElementById('billingAccount').value.trim();
-    const pricebookJson = document.getElementById('pricebookJson').value.trim();
+  const apiKey = prompt("Enter your API Key:");
+  if (!apiKey) return logToConsole("❌ API Key is required.");
 
-    if (!customerApiId || !pricebookJson) {
-      logToConsoleBox("Customer API ID and PriceBook JSON are required.");
-      return;
-    }
+  logToConsole("🔁 Starting PriceBook creation...");
 
-    logToConsoleBox("Starting CPB creation and assignment sequence...");
+  // Step 1: Try to create the PriceBook
+  let cpbResponse = await fetch("https://chapi.cloudhealthtech.com/v1/price_books", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${apiKey}`
+    },
+    body: JSON.stringify(cpbJson)
+  });
 
-    // Awaiting logic from you
-    logToConsoleBox("Ready to implement API call logic...");
+  let cpbData = await cpbResponse.json();
+
+  if (cpbResponse.status === 422 && cpbData.errors?.includes("Book name has already been taken")) {
+    logToConsole("⚠️ Book name already taken.");
+    const newName = prompt("Book name already exists. Enter a new name to retry:");
+    if (!newName) return logToConsole("❌ Book creation aborted.");
+    cpbJson.name = newName;
+
+    // Retry with new name
+    cpbResponse = await fetch("https://chapi.cloudhealthtech.com/v1/price_books", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${apiKey}`
+      },
+      body: JSON.stringify(cpbJson)
+    });
+    cpbData = await cpbResponse.json();
   }
+
+  if (cpbResponse.status !== 201) {
+    return logToConsole(`❌ Failed to create PriceBook. Status: ${cpbResponse.status}, Response: ${JSON.stringify(cpbData)}`);
+  }
+
+  const priceBookId = cpbData.price_book.id;
+  logToConsole(`✅ Created PriceBook with ID: ${priceBookId}`);
+
+  // Step 2: Assign to Customer
+  const assignmentResponse = await fetch("https://chapi.cloudhealthtech.com/v1/price_book_assignments", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${apiKey}`
+    },
+    body: JSON.stringify({
+      price_book_id: priceBookId,
+      target_client_api_id: customerApiId
+    })
+  });
+
+  const assignmentData = await assignmentResponse.json();
+
+  if (assignmentResponse.status !== 201) {
+    return logToConsole(`❌ Failed to assign PriceBook to customer. Status: ${assignmentResponse.status}, Response: ${JSON.stringify(assignmentData)}`);
+  }
+
+  const assignmentId = assignmentData.id;
+  logToConsole(`✅ Assigned PriceBook to customer. Assignment ID: ${assignmentId}`);
+
+  // Step 3: Assign to Billing Account or All
+  const billingPayload = {
+    price_book_assignment_id: assignmentId,
+    billing_account_owner_id: billingAccount || "ALL",
+    target_client_api_id: customerApiId
+  };
+
+  const billingAssignResp = await fetch("https://chapi.cloudhealthtech.com/v1/price_book_account_assignments", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${apiKey}`
+    },
+    body: JSON.stringify(billingPayload)
+  });
+
+  const billingData = await billingAssignResp.json();
+
+  if (billingAssignResp.status !== 201) {
+    return logToConsole(`❌ Failed to assign to billing account. Status: ${billingAssignResp.status}, Response: ${JSON.stringify(billingData)}`);
+  }
+
+  logToConsole(`✅ PriceBook successfully assigned to billing account (${billingPayload.billing_account_owner_id}). Done!`);
+}
+
+function logToConsole(msg) {
+  const logBox = document.getElementById("apiLog");
+  logBox.textContent += msg + "\n";
+  logBox.scrollTop = logBox.scrollHeight;
+}
