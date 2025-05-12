@@ -594,6 +594,9 @@ function exportForTerminal() {
 }
 
 //import file function
+document.getElementById('importButton').addEventListener('click', function () {
+      document.getElementById('importFile').click();
+    });
 
 document.getElementById('importFile').addEventListener('change', function (event) {
   document.getElementById('outputXML').value = '';
