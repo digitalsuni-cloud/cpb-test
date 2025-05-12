@@ -595,10 +595,6 @@ function exportForTerminal() {
 
 //import file function
 
-document.getElementById('importButton').addEventListener('click', function () {
-  document.getElementById('importFile').click();
-});
-
 document.getElementById('importFile').addEventListener('change', function (event) {
   document.getElementById('outputXML').value = '';
   document.getElementById('outputJSON').value = '';
@@ -607,18 +603,69 @@ document.getElementById('importFile').addEventListener('change', function (event
     const reader = new FileReader();
     reader.onload = function (e) {
       const result = e.target.result;
+
       if (file.type === 'application/json' || file.name.endsWith('.json')) {
-        const jsonContent = JSON.parse(result);
-        populateFieldsFromXMLString(jsonContent.specification, jsonContent);
+        let jsonContent = null;
+        let xmlString = null;
+
+        try {
+          // First attempt normal JSON parsing
+          jsonContent = JSON.parse(result);
+          xmlString = jsonContent.specification;
+        } catch (err) {
+          console.warn('Standard JSON.parse failed. Attempting to extract XML manually...');
+
+          // Manual fallback: extract "book_name" and "specification" manually
+          const bookNameMatch = result.match(/"book_name"\s*:\s*"([^"]*)"/);
+          const specStart = result.indexOf('"specification"');
+          const specColon = result.indexOf(':', specStart);
+          const specQuoteStart = result.indexOf('"', specColon + 1);
+
+          if (specStart !== -1 && specColon !== -1 && specQuoteStart !== -1) {
+            let specContent = result.substring(specQuoteStart + 1);
+
+            // Find last closing quote safely (ignore any escaped quotes)
+            let specQuoteEnd = specContent.lastIndexOf('"');
+            while (specContent[specQuoteEnd - 1] === '\\') {
+              // If the quote is escaped, keep looking left
+              specQuoteEnd = specContent.lastIndexOf('"', specQuoteEnd - 2);
+            }
+
+            specContent = specContent.substring(0, specQuoteEnd);
+
+            // Unescape backslash-escaped characters
+            xmlString = specContent
+              .replace(/\\"/g, '"')
+              .replace(/\\n/g, '\n')
+              .replace(/\\t/g, '\t')
+              .replace(/\\\\/g, '\\');
+
+            jsonContent = {
+              book_name: bookNameMatch ? bookNameMatch[1] : 'Unknown'
+            };
+          } else {
+            alert('Failed to extract XML from malformed JSON.');
+            return;
+          }
+        }
+
+        if (xmlString) {
+          populateFieldsFromXMLString(xmlString, jsonContent);
+        } else {
+          alert('Could not find specification data.');
+        }
+
       } else if (file.type === 'text/xml' || file.name.endsWith('.xml')) {
         populateFieldsFromXMLString(result);
       } else {
         alert('Unsupported file format. Please upload a JSON or XML file.');
       }
     };
+
     reader.readAsText(file);
   }
 });
+
 
 function populateFieldsFromXMLString(xmlString, jsonContent = null) {
   const parser = new DOMParser();
