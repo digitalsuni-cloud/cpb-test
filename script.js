@@ -526,6 +526,7 @@
       const json = `{"book_name":"${bookName}","specification":"${escapedXML}"}`;
       document.getElementById('outputJSON').value = json;
   updateAssignCustomerJSON('<PriceBookID_From_Previous_Command_Output>');
+     updateAssignCustomerAccountJSON('<PriceBookAssignmentID_From_Previous_Command_Output>');
     }
 
     // Export for Terminal Function
@@ -564,9 +565,10 @@
 
       document.getElementById('outputJSON').value = curlCommand;
        updateAssignCustomerCurl('<PriceBookID_From_Previous_Command_Output>');
+     updateAssignCustomerAccountCurl('<PriceBookAssignmentID_From_Previous_Command_Output>');
     }
 
-
+//Assign CPB to Customer JSON
 function updateAssignCustomerJSON(priceBookId) {
   const cxAPIIdInput = document.getElementById('cxAPIId').value.trim();
   const clientAPIId = cxAPIIdInput !== '' ? cxAPIIdInput : '<Enter ClientAPI ID>';
@@ -579,7 +581,7 @@ function updateAssignCustomerJSON(priceBookId) {
   const assignCustomerArea = document.getElementById('assignCustomerJSON');
   assignCustomerArea.value = JSON.stringify(payload, null, 2);
 }
-
+//Assign CPB to Customer CURL
 function updateAssignCustomerCurl(priceBookId) {
   const cxAPIIdInput = document.getElementById('cxAPIId').value.trim();
   const clientAPIId = cxAPIIdInput !== '' ? cxAPIIdInput : '<Enter ClientAPI ID>';
@@ -595,6 +597,46 @@ function updateAssignCustomerCurl(priceBookId) {
   const assignCustomerArea = document.getElementById('assignCustomerJSON');
   assignCustomerArea.value = curlCommand;
 }
+
+//Assign CPB to Customer Account JSON
+function updateAssignCustomerAccountJSON(priceBookAssignmentId) {
+  const cxAPIIdInput = document.getElementById('cxAPIId').value.trim();
+  const cxPayerIdInput = document.getElementById('cxPayerId').value.trim();
+
+  const clientAPIId = cxAPIIdInput !== '' ? cxAPIIdInput : '<Enter ClientAPI ID>';
+  const billingAccountOwnerId = cxPayerIdInput !== '' ? cxPayerIdInput : 'ALL';
+
+  const jsonContent = `{
+    "price_book_assignment_id": "${priceBookAssignmentId}",
+    "billing_account_owner_id": "${billingAccountOwnerId}",
+    "target_client_api_id": "${clientAPIId}"
+  }`;
+
+  const assignCustomerAccountArea = document.getElementById('assignCustomerAccountJSON');
+  assignCustomerAccountArea.value = jsonContent;
+}
+
+//Assign CPB to Customer Account CURL
+function updateAssignCustomerAccountCurl(priceBookAssignmentId) {
+  const cxAPIIdInput = document.getElementById('cxAPIId').value.trim();
+  const cxPayerIdInput = document.getElementById('cxPayerId').value.trim();
+
+  const clientAPIId = cxAPIIdInput !== '' ? cxAPIIdInput : '<Enter ClientAPI ID>';
+  const billingAccountOwnerId = cxPayerIdInput !== '' ? cxPayerIdInput : 'ALL';
+
+  const curlCommand = `curl -X POST https://chapi.cloudhealthtech.com/v1/price_book_account_assignments \\
+  -H "Authorization: Bearer <YOUR_API_TOKEN>" \\
+  -H "Content-Type: application/json" \\
+  -d '{
+    "price_book_assignment_id": "${priceBookAssignmentId}",
+    "billing_account_owner_id": "${billingAccountOwnerId}",
+    "target_client_api_id": "${clientAPIId}"
+}'`;
+
+  const assignCustomerAccountArea = document.getElementById('assignCustomerAccountJSON');
+  assignCustomerAccountArea.value = curlCommand;
+}
+
 
 
 
