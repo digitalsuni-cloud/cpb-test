@@ -9,7 +9,16 @@
 <body>
 
   <h1>CloudHealth Custom Price Book XML/JSON Generator</h1>
+  <button id="importButton" class="importJSON"
+    title="Import an existing Price Book specification in JSON/XML to modify">
+    Import Existing Price Book
+  </button>
+  <input type="file" id="importFile" accept=".json, .xml" style="display: none;" />
 
+  <div id="groupsContainer"></div>
+
+  <br>
+<br>
   <label for="bookName">Price Book Name (required):</label>
   <input type="text" id="bookName" placeholder="Enter CPB Name" required />
 
@@ -48,16 +57,7 @@
     </div>
   </div>
 
-  <button id="importButton" class="importJSON"
-    title="Import an existing Price Book specification in JSON/XML to modify"
-    style="margin-left: 330px;">
-    Import Existing Price Book
-  </button>
-  <input type="file" id="importFile" accept=".json, .xml" style="display: none;" />
-
-  <div id="groupsContainer"></div>
-
-  <br>
+<br>
 
   <button class="xmlGen" onclick="generateXML()" style="margin-right: 30px;">Generate XML</button>
   <button class="export-json" onclick="exportJSON()" style="margin-right: 15px;"
