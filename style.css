@@ -139,7 +139,9 @@
 
     #bookName,
     #createdBy,
-    #comment {
+    #comment,
+    #cxAPIId
+    #cxPayerId{
       width: 15%;
       padding: 5px;
       border-radius: 6px;
@@ -150,7 +152,9 @@
 
     #bookName+label,
     #createdBy+label,
-    #comment+label {
+    #comment+label,
+    #cxAPIId+label,
+    #cxPayerId+label{
       margin-top: 15px;
     }
 
