@@ -143,6 +143,10 @@
       border-radius: 6px;
       box-sizing: border-box;
     }
+    .required-asterisk {
+      color: red;
+      margin-left: 2px;
+    }
 
     #bookName,
     #createdBy,
