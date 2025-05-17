@@ -153,8 +153,9 @@
     #comment+label{
       margin-top: 15px;
     }
+
     #cxAPIId{
-      width: 12ch;
+      width: 15ch;
       padding: 5px;
       border-radius: 6px;
       margin-right: 15px;
@@ -162,7 +163,7 @@
       box-sizing: border-box;
     }
     #cxPayerId {
-      width: 65%;
+      width: 60%;
       padding: 5px;
       border-radius: 6px;
       margin-right: 15px;
