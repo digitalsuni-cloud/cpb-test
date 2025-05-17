@@ -8,57 +8,53 @@
 </head>
 <body>
 
-  <!-- Tab Navigation -->
-  <ul class="tabs">
-    <li class="tab-link current" data-tab="tab-1">Price Book Generator</li>
-    <li class="tab-link" data-tab="tab-2">CPB API Tools</li>
-  </ul>
+ <body>
+  <h1>CloudHealth Custom Price Book XML/JSON Generator</h1>
 
-  <!-- Tab 1: Price Book Generator -->
-  <div id="tab-1" class="tab-content current">
-    <h1>CloudHealth Custom Price Book XML/JSON Generator</h1>
-    <label>Price Book Name (required):</label>
-    <input type="text" id="bookName" placeholder="Enter CPB Name" required />
+  <label>Price Book Name (required):</label>
+  <input type="text" id="bookName" placeholder="Enter CPB Name" required />
 
-    <label>Created By (required):</label>
-    <input type="email" id="createdBy" placeholder="Enter Name/Email" required />
+  <label>Created By (required):</label>
+  <input type="email" id="createdBy" placeholder="Enter Name/Email" required />
 
-    <label>Comment:</label>
-    <input type="text" id="comment" placeholder="Enter CPB Description" />
-    <br>
-    <button onclick="addRuleGroup(null, true)">Add Rule Group</button>
+  <label>Comment:</label>
+  <input type="text" id="comment" placeholder="Enter CPB Description" />
+  <br>
+  <button onclick="addRuleGroup(null, true)">Add Rule Group</button>
 
-    <!-- Info Button -->
-    <button id="infoButton" title="Click for more info on Rule Groups"
-      style="background-color: #4ca1af; color: #fff; border: none; padding: 4px 6px; border-radius: 50%; font-size: 14px; cursor: pointer;">
-      i
-    </button>
+  <!-- Info Button -->
+  <button id="infoButton" title="Click for more info on Rule Groups"
+    style="background-color: #4ca1af; color: #fff; border: none; padding: 4px 6px; border-radius: 50%; font-size: 14px; cursor: pointer; font-family: 'Pacifico', cursive; font-weight: normal; transition: background-color 0.3s ease, transform 0.2s ease;">
+    i
+  </button>
 
-    <!-- Modal -->
-    <div id="infoModal"
-      style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); z-index: 1000;">
-      <div style="background-color: #222; margin: 15% auto; padding: 20px; width: 80%; max-width: 600px; border-radius: 8px; text-align: left; color: #fff;">
-        <h2>Rule Info</h2>
-        <div id="infoContent"></div>
-        <button onclick="closeModal()"
-          style="background-color: #4ca1af; color: #fff; padding: 8px 16px; border: none; border-radius: 5px; cursor: pointer;">Close</button>
-      </div>
+  <!-- Modal for detailed info on click -->
+  <div id="infoModal"
+    style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); z-index: 1000;">
+    <div
+      style="background-color: #222; margin: 15% auto; padding: 20px; width: 80%; max-width: 600px; border-radius: 8px; text-align: left; color: #fff;">
+      <h2>Rule Info</h2>
+      <div id="infoContent"></div>
+      <button onclick="closeModal()"
+        style="background-color: #4ca1af; color: #fff; padding: 8px 16px; border: none; border-radius: 5px; cursor: pointer;">Close</button>
     </div>
+  </div>
 
-    <button class="importJSON" id="importButton"
-      title="Export the existing price book specification JSON/XML and import it to modify the existing CPB"
-      style="margin-left: 360px;">Import Existing Pricebook</button>
-    <input type="file" id="importFile" accept=".json, .xml" style="display: none;" />
 
-    <div id="groupsContainer"></div>
-    <br>
-    <button class="xmlGen" onclick="generateXML()" style="margin-right: 30px;">Generate XML</button>
-    <button class="export-json" onclick="exportJSON()" style="margin-right: 15px;"
-      title="Copy the JSON content to use in Postman's Body tab">Generate JSON for REST API Payload
-      Body</button>
-    <button class="export-json" onclick="exportForTerminal()"
-      title="Copy the JSON payload content and replace the API key for the Terminal Command">For Terminal Command
-      Use</button>
+  <button class="importJSON" id="importButton"
+    title="Export the existing price book specification JSON/XML and import it to modify the existing CPB"
+    style="margin-left: 360px;">Import Existing Pricebook</button>
+  <input type="file" id="importFile" accept=".json, .xml" style="display: none;" />
+
+  <div id="groupsContainer"></div>
+  <br>
+  <button class="xmlGen" onclick="generateXML()" style="margin-right: 30px;">Generate XML</button>
+  <button class="export-json" onclick="exportJSON()" style="margin-right: 15px;"
+    title="Copy the JSON content to use in Postman's Body tab">Generate JSON for REST API Payload
+    Body</button>
+  <button class="export-json" onclick="exportForTerminal()"
+    title="Copy the JSON payload content and replace the API key for the Terminal Command">For Terminal Command
+    Use</button>
 
     <h2>Generated XML:</h2>
     <div style="position: relative; width: 75%;">
@@ -77,25 +73,7 @@
         <button onclick="downloadText('outputJSON', 'json')" title="Download as file">💾</button>
       </div>
     </div>
-  </div> <!-- END of tab-1 -->
-
-  <!-- Tab 2: CPB API Tools (Moved outside of tab-1) -->
-  <div id="tab-2" class="tab-content">
-    <h3>CPB API Actions</h3>
-    <label for="customerApiId">Customer API ID:</label><br>
-    <input type="text" id="customerApiId" placeholder="Enter Customer API ID">
-
-    <label for="billingAccount">Billing Account ID (optional):</label><br>
-    <input type="text" id="billingAccount" placeholder="Leave blank for all">
-
-    <label for="pricebookJson">PriceBook JSON:</label><br>
-    <textarea id="pricebookJson" rows="10" style="width: 100%;" placeholder="Paste your PriceBook JSON here"></textarea>
-    <br>
-    <button onclick="createAndAssignCPB()">Create & Assign CPB to Customer</button>
-
-    <label>API Console Log:</label>
-    <pre id="apiLog" style="background-color: #f9f9f9; border: 1px solid #ccc; padding: 10px; height: 200px; overflow: auto; white-space: pre-wrap; font-family: monospace; font-size: 13px;"></pre>
-  </div> <!-- END of tab-2 -->
+  </div>
 
   <script src="script.js"></script> 
 </body>
