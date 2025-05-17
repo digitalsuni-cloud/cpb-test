@@ -525,6 +525,7 @@
       const escapedXML = xml.replace(/"/g, '\\"');
       const json = `{"book_name":"${bookName}","specification":"${escapedXML}"}`;
       document.getElementById('outputJSON').value = json;
+  updateAssignCustomerJSON('<PriceBookID_From_Previous_Command_Output>');
     }
 
     // Export for Terminal Function
@@ -562,7 +563,40 @@
         `  -d '${jsonPayload}'`;
 
       document.getElementById('outputJSON').value = curlCommand;
+       updateAssignCustomerCurl('<PriceBookID_From_Previous_Command_Output>');
     }
+
+
+function updateAssignCustomerJSON(priceBookId) {
+  const cxAPIIdInput = document.getElementById('cxAPIId').value.trim();
+  const clientAPIId = cxAPIIdInput !== '' ? cxAPIIdInput : '<Enter ClientAPI ID>';
+
+  const payload = {
+    price_book_id: priceBookId,
+    target_client_api_id: clientAPIId
+  };
+
+  const assignCustomerArea = document.getElementById('assignCustomerJSON');
+  assignCustomerArea.value = JSON.stringify(payload, null, 2);
+}
+
+function updateAssignCustomerCurl(priceBookId) {
+  const cxAPIIdInput = document.getElementById('cxAPIId').value.trim();
+  const clientAPIId = cxAPIIdInput !== '' ? cxAPIIdInput : '<Enter ClientAPI ID>';
+
+  const curlCommand = `curl -X POST https://chapi.cloudhealthtech.com/v1/price_book_assignments \\
+  -H "Authorization: Bearer <YOUR_API_TOKEN>" \\
+  -H "Content-Type: application/json" \\
+  -d '{
+    "price_book_id": "${priceBookId}",
+    "target_client_api_id": "${clientAPIId}"
+}'`;
+
+  const assignCustomerArea = document.getElementById('assignCustomerJSON');
+  assignCustomerArea.value = curlCommand;
+}
+
+
 
     //import file function
 
