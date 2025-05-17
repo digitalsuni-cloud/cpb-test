@@ -604,17 +604,29 @@ function updateAssignCustomerAccountJSON(priceBookAssignmentId) {
   const cxPayerIdInput = document.getElementById('cxPayerId').value.trim();
 
   const clientAPIId = cxAPIIdInput !== '' ? cxAPIIdInput : '<Enter ClientAPI ID>';
-  const billingAccountOwnerId = cxPayerIdInput !== '' ? cxPayerIdInput : 'ALL';
 
-  const jsonContent = `{
-    "price_book_assignment_id": "${priceBookAssignmentId}",
-    "billing_account_owner_id": "${billingAccountOwnerId}",
-    "target_client_api_id": "${clientAPIId}"
-  }`;
+  //Split billing_account_owner_id by commas, trim each, filter empty values
+  let billingAccountOwnerIdArray = [];
+
+  if (cxPayerIdInput === '') {
+    billingAccountOwnerIdArray = ["ALL"];
+  } else {
+    billingAccountOwnerIdArray = cxPayerIdInput
+      .split(',')
+      .map(id => id.trim())
+      .filter(id => id !== '');
+  }
+
+  const jsonContent = {
+    price_book_assignment_id: priceBookAssignmentId,
+    billing_account_owner_id: billingAccountOwnerIdArray,
+    target_client_api_id: clientAPIId
+  };
 
   const assignCustomerAccountArea = document.getElementById('assignCustomerAccountJSON');
-  assignCustomerAccountArea.value = jsonContent;
+  assignCustomerAccountArea.value = JSON.stringify(jsonContent, null, 2); // Pretty print JSON
 }
+
 
 //Assign CPB to Customer Account CURL
 function updateAssignCustomerAccountCurl(priceBookAssignmentId) {
@@ -622,23 +634,32 @@ function updateAssignCustomerAccountCurl(priceBookAssignmentId) {
   const cxPayerIdInput = document.getElementById('cxPayerId').value.trim();
 
   const clientAPIId = cxAPIIdInput !== '' ? cxAPIIdInput : '<Enter ClientAPI ID>';
-  const billingAccountOwnerId = cxPayerIdInput !== '' ? cxPayerIdInput : 'ALL';
+
+  let billingAccountOwnerIdArray = [];
+
+  if (cxPayerIdInput === '') {
+    billingAccountOwnerIdArray = ["ALL"];
+  } else {
+    billingAccountOwnerIdArray = cxPayerIdInput
+      .split(',')
+      .map(id => id.trim())
+      .filter(id => id !== '');
+  }
+
+  const billingAccountOwnerIdJSON = JSON.stringify(billingAccountOwnerIdArray);
 
   const curlCommand = `curl -X POST https://chapi.cloudhealthtech.com/v1/price_book_account_assignments \\
   -H "Authorization: Bearer <YOUR_API_TOKEN>" \\
   -H "Content-Type: application/json" \\
   -d '{
     "price_book_assignment_id": "${priceBookAssignmentId}",
-    "billing_account_owner_id": "${billingAccountOwnerId}",
+    "billing_account_owner_id": ${billingAccountOwnerIdJSON},
     "target_client_api_id": "${clientAPIId}"
 }'`;
 
   const assignCustomerAccountArea = document.getElementById('assignCustomerAccountJSON');
   assignCustomerAccountArea.value = curlCommand;
 }
-
-
-
 
     //import file function
 
