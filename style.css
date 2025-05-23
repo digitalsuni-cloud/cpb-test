@@ -4,6 +4,7 @@ body {
   color: #333;
   margin: 0;
   padding: 0;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 header {
@@ -128,4 +129,51 @@ footer {
 
 footer p {
   margin: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #121212;
+    color: #e0e0e0;
+  }
+
+  header {
+    background-color: #1e88e5;
+  }
+
+  .import-section,
+  .details-section,
+  .action-section,
+  .output-section,
+  .results-section {
+    background-color: #1f1f1f;
+  }
+
+  .input-group input,
+  textarea {
+    background-color: #333;
+    border: 1px solid #555;
+    color: #e0e0e0;
+  }
+
+  button {
+    background-color: #2196f3;
+  }
+
+  button:hover {
+    background-color: #1976d2;
+  }
+
+  .icon-actions button {
+    background-color: #333;
+    border: 1px solid #555;
+  }
+
+  .icon-actions button:hover {
+    background-color: #444;
+  }
+
+  footer {
+    background-color: #212121;
+  }
 }
