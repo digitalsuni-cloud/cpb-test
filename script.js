@@ -122,7 +122,7 @@ function addRule(button) {
           <label>Usage Types:</label>
           <div class="usageTypes"></div>
           <div class="sub-entry">
-            <button class="addUsageType" type="button" onclick="addUsageType(this)">+</button>
+            <button class="addUsageType small-button" type="button" onclick="addUsageType(this)">+</button>
           </div>
         </div>
 
@@ -131,7 +131,7 @@ function addRule(button) {
   <label>Operations:</label>
   <div class="operations"></div>
   <div class="sub-entry">
-    <button class="addOperation" type="button" onclick="addOperation(this)">+</button>
+    <button class="addOperation small-button" type="button" onclick="addOperation(this)">+</button>
   </div>
 </div>
 
@@ -140,7 +140,7 @@ function addRule(button) {
   <label>Record Types:</label>
   <div class="recordTypes"></div>
   <div class="sub-entry">
-    <button class="addRecordType" type="button" onclick="addRecordType(this)">+</button>
+    <button class="addRecordType small-button" type="button" onclick="addRecordType(this)">+</button>
   </div>
 </div>
 
@@ -149,7 +149,7 @@ function addRule(button) {
   <label>Instance Properties:</label>
   <div class="instanceProperties"></div>
   <div class="sub-entry">
-    <button class="addInstanceProperty" type="button" onclick="addInstanceProperty(this)">+</button>
+    <button class="addInstanceProperty small-button" type="button" onclick="addInstanceProperty(this)">+</button>
   </div>
 </div>
 
@@ -158,7 +158,7 @@ function addRule(button) {
           <label>Line Item Descriptions:</label>
           <div class="lineItemDescriptions"></div>
           <div class="sub-entry">
-            <button class="addLineItem" type="button" onclick="addLineItemDescription(this)">+</button>
+            <button class="addLineItem small-button" type="button" onclick="addLineItemDescription(this)">+</button>
           </div>
         </div>
 
@@ -167,34 +167,34 @@ function addRule(button) {
   <label>Savings Plan Offering Types:</label>
   <div class="savingsPlanOfferingTypes"></div>
   <div class="sub-entry">
-    <button class="addSavingsPlanOfferingType" type="button" onclick="addSavingsPlanOfferingType(this)">+</button>
+    <button class="addSavingsPlanOfferingType small-button" type="button" onclick="addSavingsPlanOfferingType(this)">+</button>
   </div>
 </div>
 <br />
 <button class="remove-rule" onclick="this.parentElement.remove()">Remove Billing Rule</button>
 <br />
-<br>
       `;
   rulesContainer.appendChild(div);
 }
 
-    function addUsageType(button) {
-      const container = button.closest('.sub-group').querySelector('.usageTypes');
-      const div = document.createElement('div');
-      div.className = 'sub-entry';
-      div.innerHTML = `
-        <button type="button" class="remove-usagetype" onclick="this.parentElement.remove()">×</button>
+
+function addUsageType(button) {
+  const container = button.closest('.sub-group').querySelector('.usageTypes');
+  const div = document.createElement('div');
+  div.className = 'sub-entry';
+  div.innerHTML = `
+        <button type="button" class="remove-usagetype small-button" onclick="this.parentElement.remove()">×</button>
         <input type="text" class="usageTypeName" placeholder="UsageType name..." />
       `;
-      container.appendChild(div);
-    }
+  container.appendChild(div);
+}
 
-    function addLineItemDescription(button) {
-      const container = button.closest('.sub-group').querySelector('.lineItemDescriptions');
-      const div = document.createElement('div');
-      div.className = 'sub-entry';
-      div.innerHTML = `
-        <button type="button" class="remove-lineitem" onclick="this.parentElement.remove()">×</button>
+function addLineItemDescription(button) {
+  const container = button.closest('.sub-group').querySelector('.lineItemDescriptions');
+  const div = document.createElement('div');
+  div.className = 'sub-entry';
+  div.innerHTML = `
+        <button type="button" class="remove-lineitem small-button" onclick="this.parentElement.remove()">×</button>
         <select class="lineItemType">
           <option value="contains">contains</option>
           <option value="startsWith">startsWith</option>
@@ -202,35 +202,35 @@ function addRule(button) {
         </select>
         <input type="text" class="lineItemValue" placeholder="Enter LineItem Description..." />
       `;
-      container.appendChild(div);
-    }
+  container.appendChild(div);
+}
 
-    function addOperation(button) {
-      const container = button.closest('.sub-group').querySelector('.operations');
-      const div = document.createElement('div');
-      div.className = 'sub-entry';
-      div.innerHTML = `
-    <button type="button" class="remove-lineitem" onclick="this.parentElement.remove()">×</button>
+function addOperation(button) {
+  const container = button.closest('.sub-group').querySelector('.operations');
+  const div = document.createElement('div');
+  div.className = 'sub-entry';
+  div.innerHTML = `
+    <button type="button" class="remove-lineitem small-button" onclick="this.parentElement.remove()">×</button>
     <input type="text" class="operationName" placeholder="Enter Operation name..." />
   `;
-      container.appendChild(div);
-    }
-    function addRecordType(button) {
-      const container = button.closest('.sub-group').querySelector('.recordTypes');
-      const div = document.createElement('div');
-      div.className = 'sub-entry';
-      div.innerHTML = `
-    <button type="button" class="remove-lineitem" onclick="this.parentElement.remove()">×</button>
+  container.appendChild(div);
+}
+function addRecordType(button) {
+  const container = button.closest('.sub-group').querySelector('.recordTypes');
+  const div = document.createElement('div');
+  div.className = 'sub-entry';
+  div.innerHTML = `
+    <button type="button" class="remove-lineitem small-button" onclick="this.parentElement.remove()">×</button>
     <input type="text" class="recordTypeName" placeholder="Enter RecordType..." />
   `;
-      container.appendChild(div);
-    }
-    function addInstanceProperty(button) {
-      const container = button.closest('.sub-group').querySelector('.instanceProperties');
-      const div = document.createElement('div');
-      div.className = 'sub-entry';
-      div.innerHTML = `
-    <button type="button" class="remove-lineitem" onclick="this.parentElement.remove()">×</button>
+  container.appendChild(div);
+}
+function addInstanceProperty(button) {
+  const container = button.closest('.sub-group').querySelector('.instanceProperties');
+  const div = document.createElement('div');
+  div.className = 'sub-entry';
+  div.innerHTML = `
+    <button type="button" class="remove-lineitem small-button" onclick="this.parentElement.remove()">×</button>
     <input type="text" class="instanceType" placeholder="Instance Type (e.g., t2)" />
     <input type="text" class="instanceSize" placeholder="Instance Size (e.g., 8xlarge)" />
     <div class="checkbox-wrapper">
@@ -238,18 +238,18 @@ function addRule(button) {
       <label for="reservedInstance" class="checkbox-label"> Reserved</label>
     </div>
   `;
-      container.appendChild(div);
-    }
-    function addSavingsPlanOfferingType(button) {
-      const container = button.closest('.sub-group').querySelector('.savingsPlanOfferingTypes');
-      const div = document.createElement('div');
-      div.className = 'sub-entry';
-      div.innerHTML = `
-    <button type="button" class="remove-lineitem" onclick="this.parentElement.remove()">×</button>
+  container.appendChild(div);
+}
+function addSavingsPlanOfferingType(button) {
+  const container = button.closest('.sub-group').querySelector('.savingsPlanOfferingTypes');
+  const div = document.createElement('div');
+  div.className = 'sub-entry';
+  div.innerHTML = `
+    <button type="button" class="remove-lineitem small-button" onclick="this.parentElement.remove()">×</button>
     <input type="text" class="savingsPlanOfferingTypeName" placeholder="Enter Savings Plan Offering Type..." />
   `;
-      container.appendChild(div);
-    }
+  container.appendChild(div);
+}
 
     //Export XML Button Function
 
@@ -727,6 +727,8 @@ function downloadText(textareaId, extension) {
 }
     //info button
     document.addEventListener('DOMContentLoaded', function () {
+      document.getElementById('infoButton').classList.add('small-button');
+
       document.getElementById('infoButton').addEventListener('click', function () {
         var infoModal = document.getElementById('infoModal');
         infoModal.style.display = 'block';
@@ -741,3 +743,6 @@ function downloadText(textareaId, extension) {
         document.getElementById('infoModal').style.display = 'none';
       };
     });
+
+console.log('updated addRule and other functions');
+")
