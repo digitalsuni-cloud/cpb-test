@@ -48,6 +48,17 @@ section {
   padding: 20px;
 }
 
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.grid-item {
+  display: flex;
+  flex-direction: column;
+}
+
 .input-group {
   margin-bottom: 15px;
 }
