@@ -42,7 +42,7 @@ section {
 .addInstanceProperty,
 .addLineItem,
 .addSavingsPlanOfferingType {
-  background-color: #007bff; /* Ensure these buttons have the blue color */
+  background-color: #007bff; /* Blue color for "+" button */
   color: white;
   border: none;
   border-radius: 4px;
@@ -62,8 +62,10 @@ section {
 }
 
 .remove-rule-group,
+.ruleGroup .sub-entry .remove-lineitem,
+.ruleGroup .sub-entry .remove-usagetype,
 .remove-rule {
-  background-color: #dc3545;
+  background-color: #dc3545; /* Red color for "X" button */
   color: white;
   border: none;
   border-radius: 4px;
@@ -74,6 +76,8 @@ section {
 }
 
 .remove-rule-group:hover,
+.ruleGroup .sub-entry .remove-lineitem:hover,
+.ruleGroup .sub-entry .remove-usagetype:hover,
 .remove-rule:hover {
   background-color: #c82333;
 }
@@ -325,6 +329,8 @@ footer p {
   }
 
   .remove-rule-group,
+  .ruleGroup .sub-entry .remove-lineitem,
+  .ruleGroup .sub-entry .remove-usagetype,
   .remove-rule {
     background-color: #dc3545;
     color: white;
@@ -337,6 +343,8 @@ footer p {
   }
 
   .remove-rule-group:hover,
+  .ruleGroup .sub-entry .remove-lineitem:hover,
+  .ruleGroup .sub-entry .remove-usagetype:hover,
   .remove-rule:hover {
     background-color: #c82333;
   }
