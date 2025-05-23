@@ -254,42 +254,42 @@ function addRule(button) {
             <label>Usage Types:</label>
             <div class="usageTypesContainer"></div>
             <div class="sub-entry">
-                <button class="addUsageType" type="button" onclick="addUsageType(this)">+</button>
+                <button class="addUsageType add-btn" type="button" onclick="addUsageType(this)">+</button>
             </div>
         </div>
         <div class="sub-group operations" style="display: none;">
             <label>Operations:</label>
             <div class="operationsContainer"></div>
             <div class="sub-entry">
-                <button class="addOperation" type="button" onclick="addOperation(this)">+</button>
+                <button class="addOperation add-btn" type="button" onclick="addOperation(this)">+</button>
             </div>
         </div>
         <div class="sub-group recordTypes" style="display: none;">
             <label>Record Types:</label>
             <div class="recordTypesContainer"></div>
             <div class="sub-entry">
-                <button class="addRecordType" type="button" onclick="addRecordType(this)">+</button>
+                <button class="addRecordType add-btn" type="button" onclick="addRecordType(this)">+</button>
             </div>
         </div>
         <div class="sub-group instanceProperties" style="display: none;">
             <label>Instance Properties:</label>
             <div class="instancePropertiesContainer"></div>
             <div class="sub-entry">
-                <button class="addInstanceProperty" type="button" onclick="addInstanceProperty(this)">+</button>
+                <button class="addInstanceProperty add-btn" type="button" onclick="addInstanceProperty(this)">+</button>
             </div>
         </div>
         <div class="sub-group lineItemDescriptions" style="display: none;">
             <label>Line Item Descriptions:</label>
             <div class="lineItemDescriptionsContainer"></div>
             <div class="sub-entry">
-                <button class="addLineItem" type="button" onclick="addLineItemDescription(this)">+</button>
+                <button class="addLineItem add-btn" type="button" onclick="addLineItemDescription(this)">+</button>
             </div>
         </div>
         <div class="sub-group savingsPlanOfferingTypes" style="display: none;">
             <label>Savings Plan Offering Types:</label>
             <div class="savingsPlanOfferingTypesContainer"></div>
             <div class="sub-entry">
-                <button class="addSavingsPlanOfferingType" type="button" onclick="addSavingsPlanOfferingType(this)">+</button>
+                <button class="addSavingsPlanOfferingType add-btn" type="button" onclick="addSavingsPlanOfferingType(this)">+</button>
             </div>
         </div>
         
@@ -312,7 +312,7 @@ function addUsageType(button) {
     const div = document.createElement('div');
     div.className = 'sub-entry';
     div.innerHTML = `
-        <button type="button" class="remove-usagetype" onclick="this.parentElement.remove()">×</button>
+        <button type="button" class="remove-btn remove-usagetype" onclick="this.parentElement.remove()">×</button>
         <input type="text" class="usageTypeName" placeholder="UsageType name..." />
     `;
     container.appendChild(div);
@@ -323,7 +323,7 @@ function addLineItemDescription(button) {
     const div = document.createElement('div');
     div.className = 'sub-entry';
     div.innerHTML = `
-        <button type="button" class="remove-lineitem" onclick="this.parentElement.remove()">×</button>
+        <button type="button" class="remove-btn remove-lineitem" onclick="this.parentElement.remove()">×</button>
         <select class="lineItemType">
             <option value="contains">contains</option>
             <option value="startsWith">startsWith</option>
@@ -339,7 +339,7 @@ function addOperation(button) {
     const div = document.createElement('div');
     div.className = 'sub-entry';
     div.innerHTML = `
-        <button type="button" class="remove-lineitem" onclick="this.parentElement.remove()">×</button>
+        <button type="button" class="remove-btn remove-lineitem" onclick="this.parentElement.remove()">×</button>
         <input type="text" class="operationName" placeholder="Enter Operation name..." />
     `;
     container.appendChild(div);
@@ -350,7 +350,7 @@ function addRecordType(button) {
     const div = document.createElement('div');
     div.className = 'sub-entry';
     div.innerHTML = `
-        <button type="button" class="remove-lineitem" onclick="this.parentElement.remove()">×</button>
+        <button type="button" class="remove-btn remove-lineitem" onclick="this.parentElement.remove()">×</button>
         <input type="text" class="recordTypeName" placeholder="Enter RecordType..." />
     `;
     container.appendChild(div);
@@ -361,7 +361,7 @@ function addInstanceProperty(button) {
     const div = document.createElement('div');
     div.className = 'sub-entry';
     div.innerHTML = `
-        <button type="button" class="remove-lineitem" onclick="this.parentElement.remove()">×</button>
+        <button type="button" class="remove-btn remove-lineitem" onclick="this.parentElement.remove()">×</button>
         <input type="text" class="instanceType" placeholder="Instance Type (e.g., t2)" />
         <input type="text" class="instanceSize" placeholder="Instance Size (e.g., 8xlarge)" />
         <div class="checkbox-wrapper">
@@ -377,7 +377,7 @@ function addSavingsPlanOfferingType(button) {
     const div = document.createElement('div');
     div.className = 'sub-entry';
     div.innerHTML = `
-        <button type="button" class="remove-lineitem" onclick="this.parentElement.remove()">×</button>
+        <button type="button" class="remove-btn remove-lineitem" onclick="this.parentElement.remove()">×</button>
         <input type="text" class="savingsPlanOfferingTypeName" placeholder="Enter Savings Plan Offering Type..." />
     `;
     container.appendChild(div);
