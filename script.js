@@ -237,44 +237,55 @@ function addRule(button) {
         <br>
         <label>Region (optional):</label>
         <input type="text" class="region" />
-        <div class="sub-group">
+        <!-- Dropdown for optional parameters -->
+        <label>Optional Parameters:</label>
+        <select class="optional-parameters" onchange="addOptionalParameter(this)">
+            <option value="">Select Parameter</option>
+            <option value="usageTypes">Usage Types</option>
+            <option value="operations">Operations</option>
+            <option value="recordTypes">Record Types</option>
+            <option value="instanceProperties">Instance Properties</option>
+            <option value="lineItemDescriptions">Line Item Descriptions</option>
+            <option value="savingsPlanOfferingTypes">Savings Plan Offering Types</option>
+        </select>
+        <div class="sub-group usageTypes" style="display: none;">
             <label>Usage Types:</label>
-            <div class="usageTypes"></div>
+            <div class="usageTypesContainer"></div>
             <div class="sub-entry">
                 <button class="addUsageType" type="button" onclick="addUsageType(this)">+</button>
             </div>
         </div>
-        <div class="sub-group">
+        <div class="sub-group operations" style="display: none;">
             <label>Operations:</label>
-            <div class="operations"></div>
+            <div class="operationsContainer"></div>
             <div class="sub-entry">
                 <button class="addOperation" type="button" onclick="addOperation(this)">+</button>
             </div>
         </div>
-        <div class="sub-group">
+        <div class="sub-group recordTypes" style="display: none;">
             <label>Record Types:</label>
-            <div class="recordTypes"></div>
+            <div class="recordTypesContainer"></div>
             <div class="sub-entry">
                 <button class="addRecordType" type="button" onclick="addRecordType(this)">+</button>
             </div>
         </div>
-        <div class="sub-group">
+        <div class="sub-group instanceProperties" style="display: none;">
             <label>Instance Properties:</label>
-            <div class="instanceProperties"></div>
+            <div class="instancePropertiesContainer"></div>
             <div class="sub-entry">
                 <button class="addInstanceProperty" type="button" onclick="addInstanceProperty(this)">+</button>
             </div>
         </div>
-        <div class="sub-group">
+        <div class="sub-group lineItemDescriptions" style="display: none;">
             <label>Line Item Descriptions:</label>
-            <div class="lineItemDescriptions"></div>
+            <div class="lineItemDescriptionsContainer"></div>
             <div class="sub-entry">
                 <button class="addLineItem" type="button" onclick="addLineItemDescription(this)">+</button>
             </div>
         </div>
-        <div class="sub-group">
+        <div class="sub-group savingsPlanOfferingTypes" style="display: none;">
             <label>Savings Plan Offering Types:</label>
-            <div class="savingsPlanOfferingTypes"></div>
+            <div class="savingsPlanOfferingTypesContainer"></div>
             <div class="sub-entry">
                 <button class="addSavingsPlanOfferingType" type="button" onclick="addSavingsPlanOfferingType(this)">+</button>
             </div>
@@ -282,6 +293,91 @@ function addRule(button) {
         <button class="remove-rule-btn" onclick="this.parentElement.remove()">Remove Billing Rule</button>
     `;
     rulesContainer.appendChild(div);
+}
+
+function addOptionalParameter(selectElement) {
+    const value = selectElement.value;
+    if (value) {
+        const container = selectElement.closest('.rule').querySelector(`.${value}`);
+        container.style.display = 'block';
+        selectElement.value = ''; // Reset dropdown
+    }
+}
+
+function addUsageType(button) {
+    const container = button.closest('.sub-group').querySelector('.usageTypesContainer');
+    const div = document.createElement('div');
+    div.className = 'sub-entry';
+    div.innerHTML = `
+        <button type="button" class="remove-btn remove-usagetype" onclick="this.parentElement.remove()">×</button>
+        <input type="text" class="usageTypeName" placeholder="UsageType name..." />
+    `;
+    container.appendChild(div);
+}
+
+function addLineItemDescription(button) {
+    const container = button.closest('.sub-group').querySelector('.lineItemDescriptionsContainer');
+    const div = document.createElement('div');
+    div.className = 'sub-entry';
+    div.innerHTML = `
+        <button type="button" class="remove-btn remove-lineitem" onclick="this.parentElement.remove()">×</button>
+        <select class="lineItemType">
+            <option value="contains">contains</option>
+            <option value="startsWith">startsWith</option>
+            <option value="matchesRegex">matchesRegex</option>
+        </select>
+        <input type="text" class="lineItemValue" placeholder="Enter LineItem Description..." />
+    `;
+    container.appendChild(div);
+}
+
+function addOperation(button) {
+    const container = button.closest('.sub-group').querySelector('.operationsContainer');
+    const div = document.createElement('div');
+    div.className = 'sub-entry';
+    div.innerHTML = `
+        <button type="button" class="remove-btn remove-lineitem" onclick="this.parentElement.remove()">×</button>
+        <input type="text" class="operationName" placeholder="Enter Operation name..." />
+    `;
+    container.appendChild(div);
+}
+
+function addRecordType(button) {
+    const container = button.closest('.sub-group').querySelector('.recordTypesContainer');
+    const div = document.createElement('div');
+    div.className = 'sub-entry';
+    div.innerHTML = `
+        <button type="button" class="remove-btn remove-lineitem" onclick="this.parentElement.remove()">×</button>
+        <input type="text" class="recordTypeName" placeholder="Enter RecordType..." />
+    `;
+    container.appendChild(div);
+}
+
+function addInstanceProperty(button) {
+    const container = button.closest('.sub-group').querySelector('.instancePropertiesContainer');
+    const div = document.createElement('div');
+    div.className = 'sub-entry';
+    div.innerHTML = `
+        <button type="button" class="remove-btn remove-lineitem" onclick="this.parentElement.remove()">×</button>
+        <input type="text" class="instanceType" placeholder="Instance Type (e.g., t2)" />
+        <input type="text" class="instanceSize" placeholder="Instance Size (e.g., 8xlarge)" />
+        <div class="checkbox-wrapper">
+            <input type="checkbox" class="reservedInstance" id="reservedInstance" />
+            <label for="reservedInstance" class="checkbox-label"> Reserved</label>
+        </div>
+    `;
+    container.appendChild(div);
+}
+
+function addSavingsPlanOfferingType(button) {
+    const container = button.closest('.sub-group').querySelector('.savingsPlanOfferingTypesContainer');
+    const div = document.createElement('div');
+    div.className = 'sub-entry';
+    div.innerHTML = `
+        <button type="button" class="remove-btn remove-lineitem" onclick="this.parentElement.remove()">×</button>
+        <input type="text" class="savingsPlanOfferingTypeName" placeholder="Enter Savings Plan Offering Type..." />
+    `;
+    container.appendChild(div);
 }
 
 // Copy to Clipboard Function
