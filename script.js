@@ -5,15 +5,23 @@
       div.className = 'ruleGroup';
       div.innerHTML = `
     <div class="section-title">Rule Group</div>
-    <label>Start Date:</label>
-    <input type="date" class="startDate" required />
-    <label>End Date (optional):</label>
-    <input type="date" class="endDate" />
-    <label>Enabled:</label>
-    <select class="enabled">
-      <option value="true" selected>true</option>
-      <option value="false">false</option>
-    </select>
+    <div class="flex-container">
+      <div class="flex-item">
+        <label>Start Date:</label>
+        <input type="date" class="startDate" required />
+      </div>
+      <div class="flex-item">
+        <label>End Date (optional):</label>
+        <input type="date" class="endDate" />
+      </div>
+      <div class="flex-item">
+        <label>Enabled:</label>
+        <select class="enabled">
+          <option value="true" selected>true</option>
+          <option value="false">false</option>
+        </select>
+      </div>
+    </div>
 
     <div class="rules"></div>
     <button onclick="addRule(this)" style="margin-right: 15px;">Add Billing Rule</button>
@@ -39,219 +47,73 @@
       const div = document.createElement('div');
       div.className = 'rule';
       div.innerHTML = `
-        <label>Billing Rule Name:</label>
-        <input type="text" class="ruleName" placeholder="Enter Billing Rule name" />
-
-        <label>Billing Adjustment (e.g. 0.00):</label>
-        <input type="int" class="billingAdjustment" />
-
-        <label>Billing Rule Type:</label>
-        <select class="billingRuleType">
-          <option value="percentDiscount">percentDiscount</option>
-          <option value="percentIncrease">percentIncrease</option>
-          <option value="fixedRate">fixedRate</option>
-        </select>
-
-        <div class="small-label">Include Data Transfer:</div>
-        <div class="small-select">
-          <select class="includeDataTransfer">
-            <option value="true">true</option>
-            <option value="false">false</option>
-          </select>
+        <div class="flex-container">
+          <div class="flex-item">
+            <label>Billing Rule Name:</label>
+            <input type="text" class="ruleName" placeholder="Enter Billing Rule name" />
+          </div>
         </div>
 
-        <div class="small-label">Include RI Purchases:</div>
-        <div class="small-select">
-          <select class="includeRIPurchases">
-            <option value="true">true</option>
-            <option value="false" selected>false</option>
-          </select>
+        <div class="flex-container">
+          <div class="flex-item">
+            <label>Billing Adjustment (e.g. 0.00):</label>
+            <input type="int" class="billingAdjustment" />
+          </div>
+          <div class="flex-item">
+            <label>Billing Rule Type:</label>
+            <select class="billingRuleType">
+              <option value="percentDiscount">percentDiscount</option>
+              <option value="percentIncrease">percentIncrease</option>
+              <option value="fixedRate">fixedRate</option>
+            </select>
+          </div>
+          <div class="flex-item">
+            <div class="small-label">Include Data Transfer:</div>
+            <div class="small-select">
+              <select class="includeDataTransfer">
+                <option value="true">true</option>
+                <option value="false">false</option>
+              </select>
+            </div>
+          </div>
+          <div class="flex-item">
+            <div class="small-label">Include RI Purchases:</div>
+            <div class="small-select">
+              <select class="includeRIPurchases">
+                <option value="true">true</option>
+                <option value="false" selected>false</option>
+              </select>
+            </div>
+          </div>
         </div>
 
-        <label>Product Name:</label>
-        <input type="text" class="productName" list="productList" placeholder="Leave empty for Any Products" />
-            <datalist id="productList">
-  <option value="Amazon API Gateway" />
-  <option value="Amazon AppFlow" />
-  <option value="Amazon AppStream" />
-  <option value="Amazon Athena" />
-  <option value="Amazon Bedrock" />
-  <option value="Amazon Chime" />
-  <option value="Amazon CloudFront" />
-  <option value="Amazon CloudSearch" />
-  <option value="Amazon CodeWhisperer" />
-  <option value="Amazon Cognito" />
-  <option value="Amazon Comprehend" />
-  <option value="Amazon Connect" />
-  <option value="Amazon DataZone" />
-  <option value="Amazon Detective" />
-  <option value="Amazon DevOps Guru" />
-  <option value="Amazon DocumentDB (with MongoDB compatibility)" />
-  <option value="Amazon DynamoDB" />
-  <option value="Amazon EC2" />
-  <option value="Amazon EC2 Container Registry (ECR)" />
-  <option value="Amazon Elastic Compute Cloud" />
-  <option value="Amazon Elastic Container Registry Public" />
-  <option value="Amazon Elastic Container Service" />
-  <option value="Amazon Elastic Container Service for Kubernetes" />
-  <option value="Amazon Elastic File System" />
-  <option value="Amazon Elastic MapReduce" />
-  <option value="Amazon Elastic Transcoder" />
-  <option value="Amazon ElastiCache" />
-  <option value="Amazon FSx" />
-  <option value="Amazon Glacier" />
-  <option value="Amazon GuardDuty" />
-  <option value="Amazon HealthLake" />
-  <option value="Amazon Inspector" />
-  <option value="Amazon Interactive Video Service" />
-  <option value="Amazon Kendra" />
-  <option value="Amazon Keyspaces (for Apache Cassandra)" />
-  <option value="Amazon Kinesis" />
-  <option value="Amazon Kinesis Analytics" />
-  <option value="Amazon Kinesis Firehose" />
-  <option value="Amazon Lambda" />
-  <option value="Amazon Lex" />
-  <option value="Amazon Lightsail" />
-  <option value="Amazon Location Service" />
-  <option value="Amazon Machine Learning" />
-  <option value="Amazon Macie" />
-  <option value="Amazon Managed Blockchain" />
-  <option value="Amazon Managed Grafana" />
-  <option value="Amazon Managed Service for Prometheus" />
-  <option value="Amazon Managed Streaming for Apache Kafka" />
-  <option value="Amazon Managed Workflows for Apache Airflow" />
-  <option value="Amazon Mechanical Turk" />
-  <option value="Amazon Mechanical Turk Worker Rewards" />
-  <option value="Amazon MemoryDB" />
-  <option value="Amazon MQ" />
-  <option value="Amazon Neptune" />
-  <option value="Amazon Omics" />
-  <option value="Amazon OpenSearch Service" />
-  <option value="Amazon Personalize" />
-  <option value="Amazon Polly" />
-  <option value="Amazon Q" />
-  <option value="Amazon Quantum Ledger Database" />
-  <option value="Amazon QuickSight" />
-  <option value="Amazon RDS" />
-  <option value="Amazon Redshift" />
-  <option value="Amazon Registrar" />
-  <option value="Amazon Rekognition" />
-  <option value="Amazon Relational Database Service" />
-  <option value="Amazon Route 53" />
-  <option value="Amazon S3" />
-  <option value="Amazon S3 Glacier Deep Archive" />
-  <option value="Amazon SageMaker" />
-  <option value="Amazon Security Lake" />
-  <option value="Amazon Simple Email Service" />
-  <option value="Amazon Simple Notification Service" />
-  <option value="Amazon Simple Queue Service" />
-  <option value="Amazon Simple Storage Service" />
-  <option value="Amazon Simple Workflow Service" />
-  <option value="Amazon SimpleDB" />
-  <option value="Amazon Textract" />
-  <option value="Amazon Timestream" />
-  <option value="Amazon Transcribe" />
-  <option value="Amazon Translate" />
-  <option value="Amazon Verified Permissions" />
-  <option value="Amazon Virtual Private Cloud" />
-  <option value="Amazon VPC" />
-  <option value="Amazon WorkDocs" />
-  <option value="Amazon WorkSpaces" />
-  <option value="Amazon WorkSpaces Web" />
-  <option value="AmazonCloudWatch" />
-  <option value="AmazonWorkMail" />
-  <option value="AWS Amplify" />
-  <option value="AWS App Runner" />
-  <option value="AWS AppSync" />
-  <option value="AWS Application Migration Service" />
-  <option value="AWS Audit Manager" />
-  <option value="AWS Backup" />
-  <option value="AWS Billing Conductor" />
-  <option value="AWS Budgets" />
-  <option value="AWS Certificate Manager" />
-  <option value="AWS Cloud Map" />
-  <option value="AWS Cloud WAN" />
-  <option value="AWS CloudFormation" />
-  <option value="AWS CloudHSM" />
-  <option value="AWS CloudShell" />
-  <option value="AWS CloudTrail" />
-  <option value="AWS CodeArtifact" />
-  <option value="AWS CodeBuild" />
-  <option value="AWS CodeCommit" />
-  <option value="AWS CodePipeline" />
-  <option value="AWS Compute Optimizer" />
-  <option value="AWS Config" />
-  <option value="AWS Cost Explorer" />
-  <option value="AWS Data Pipeline" />
-  <option value="AWS Data Transfer" />
-  <option value="AWS Database Migration Service" />
-  <option value="AWS DataSync" />
-  <option value="AWS DeepRacer" />
-  <option value="AWS Device Farm" />
-  <option value="AWS Direct Connect" />
-  <option value="AWS Directory Service" />
-  <option value="AWS Elemental MediaConnect" />
-  <option value="AWS Elemental MediaConvert" />
-  <option value="AWS Elemental MediaLive" />
-  <option value="AWS Elemental MediaStore" />
-  <option value="AWS End User Messaging" />
-  <option value="AWS Firewall Manager" />
-  <option value="AWS Global Accelerator" />
-  <option value="AWS Glue" />
-  <option value="AWS HealthImaging" />
-  <option value="AWS Identity and Access Management Access Analyzer" />
-  <option value="AWS IoT" />
-  <option value="AWS IoT Device Defender" />
-  <option value="AWS IoT Device Management" />
-  <option value="AWS IoT Events" />
-  <option value="AWS IoT TwinMaker" />
-  <option value="AWS Key Management Service" />
-  <option value="AWS Lambda" />
-  <option value="AWS Migration Hub Refactor Spaces" />
-  <option value="AWS Network Firewall" />
-  <option value="AWS Payment Cryptography" />
-  <option value="AWS Route 53 Application Recovery Controller" />
-  <option value="AWS Secrets Manager" />
-  <option value="AWS Security Hub" />
-  <option value="AWS Service Catalog" />
-  <option value="AWS Shield" />
-  <option value="AWS Skill Builder Individual" />
-  <option value="AWS Step Functions" />
-  <option value="AWS Storage Gateway" />
-  <option value="AWS Support (Business)" />
-  <option value="AWS Support (Developer)" />
-  <option value="AWS Support (Enterprise)" />
-  <option value="AWS Premium Support" />
-  <option value="AWS Systems Manager" />
-  <option value="AWS Telco Network Builder" />
-  <option value="AWS Transfer Family" />
-  <option value="AWS WAF" />
-  <option value="AWS X-Ray" />
-  <option value="CloudWatch Events" />
-  <option value="CodeBuild" />
-  <option value="Contact Lens for Amazon Connect" />
-  <option value="DynamoDB Accelerator (DAX)" />
-  <option value="Elastic Load Balancing" />
-  <option value="Savings Plans for AWS Compute usage" />
-  <option value="Savings Plans for AWS Machine Learning" />
-</datalist>
-        <div class="small-label">Product Include Data Transfer:</div>
-        <div class="small-select">
-          <select class="productIncludeDataTransfer">
-            <option value="">(inherit)</option>
-            <option value="true">true</option>
-            <option value="false">false</option>
-          </select>
+        <div class="flex-container">
+          <div class="flex-item">
+            <label>Product Name:</label>
+            <input type="text" class="productName" list="productList" placeholder="Leave empty for Any Products" />
+          </div>
+          <div class="flex-item">
+            <div class="small-label">Product Include Data Transfer:</div>
+            <div class="small-select">
+              <select class="productIncludeDataTransfer">
+                <option value="">(inherit)</option>
+                <option value="true">true</option>
+                <option value="false">false</option>
+              </select>
+            </div>
+          </div>
+          <div class="flex-item">
+            <div class="small-label">Product Include RI Purchases:</div>
+            <div class="small-select">
+              <select class="productIncludeRIPurchases">
+                <option value="">(inherit)</option>
+                <option value="true">true</option>
+                <option value="false">false</option>
+              </select>
+            </div>
+          </div>
         </div>
 
-        <div class="small-label">Product Include RI Purchases:</div>
-        <div class="small-select">
-          <select class="productIncludeRIPurchases">
-            <option value="">(inherit)</option>
-            <option value="true">true</option>
-            <option value="false">false</option>
-          </select>
-        </div>
 <!-- Region -->
         <label>Region (optional):</label>
         <input type="text" class="region" />
