@@ -38,13 +38,28 @@ section {
 .flex-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 15px;
   margin-bottom: 10px;
+  align-items: center;
 }
 
 .flex-item {
   flex: 1;
-  min-width: 150px;
+  min-width: 180px;
+}
+
+.flex-item input,
+.flex-item select {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box; /* Add box-sizing to include padding and border in the element's total width */
+}
+
+.flex-item label {
+ margin-bottom: 5px;
+ display: block;
 }
 .import-section,
 .details-section,
