@@ -47,10 +47,39 @@ section {
   transition: background-color 0.3s;
 }
 
-.rule .addUsageType:hover, .rule .addOperation:hover, .rule .addRecordType:hover, .rule .addInstanceProperty:hover, .rule .addLineItem:hover, .rule .addSavingsPlanOfferingType:hover {
+.rule .addUsageType:hover, .rule .addOperation:hover, .rule .addRecordType:hover, .rule .addInstanceProperty:hover, .rule .addLineItem:hover, .addSavingsPlanOfferingType:hover {
     background-color: #0056b3;
 }
 
+.remove-rule-group {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 5px 10px;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.remove-rule-group:hover {
+  background-color: #c82333;
+}
+
+.ruleGroup .sub-entry button, .remove-rule {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 5px 10px;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.ruleGroup .sub-entry button:hover, .remove-rule:hover {
+  background-color: #c82333;
+}
 .remove-rule-group {
   background-color: #dc3545;
   color: white;
