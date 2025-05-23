@@ -1,460 +1,469 @@
-    body {
-      font-family: Arial;
-      margin: 20px;
-    }
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background-color: #f4f4f9;
+  color: #333;
+}
 
-    input,
-    select,
-    button,
-    textarea {
-      margin: 5px 0;
-    }
+input,
+select,
+button,
+textarea {
+  margin: 5px 0;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
 
-    .ruleGroup,
-    .rule,
-    .sub-entry {
-      border: 1px solid #ccc;
-      padding: 10px;
-      margin-bottom: 10px;
-      border-radius: 6px;
-    }
+.ruleGroup,
+.rule,
+.sub-entry {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  background-color: #fff;
+}
 
-    .section-title {
-      margin-top: 20px;
-      font-weight: bold;
-    }
+.section-title {
+  margin-top: 20px;
+  font-weight: bold;
+  font-size: 1.2em;
+}
 
-    .sub-group {
-      margin-top: 10px;
-    }
+.sub-group {
+  margin-top: 10px;
+}
 
-    .sub-entry {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin-top: 5px;
-    }
+.sub-entry {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 5px;
+}
 
-    .sub-entry input[type="text"] {
-      flex-grow: 1;
-      max-width: 80%;
-    }
+.sub-entry input[type="text"] {
+  flex-grow: 1;
+  max-width: 80%;
+}
 
-    .sub-entry select.lineItemType {
-      width: 125px;
-      flex-shrink: 0;
-      padding: 6px;
-    }
+.sub-entry select.lineItemType {
+  width: 125px;
+  flex-shrink: 0;
+  padding: 6px;
+}
 
-    .sub-entry button {
-      padding: 0 8px;
-    }
+.sub-entry button {
+  padding: 0 8px;
+}
 
-    /*Updated select style with padding and round corners */
-    select {
-      padding: 5px;
-      background-color: #eee;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-    }
+label.includeDataTransfer,
+label.includeRIPurchases {
+  font-size: 0.8em;
+  margin-top: 5px;
+  margin-left: 22px;
+}
 
-    .small-label {
-      font-size: 0.8em;
-      margin-top: 5px;
-    }
+select.includeDataTransfer,
+select.includeRIPurchases,
+select.productIncludeDataTransfer,
+select.productIncludeRIPurchases {
+  font-size: 0.8em;
+  padding: 2px 4px;
+}
 
-    .small-select select {
-      font-size: 0.8em;
-      padding: 2px 4px;
-    }
-    #cxAPIId{
-      width: 20ch;
-      padding: 5px;
-      border-radius: 6px;
-      margin-right: 15px;
-      margin-bottom: 15px;
-      box-sizing: border-box;
-    }
-    input.ruleName,
-    input.productName,
-    .sub-entry input.usageTypeName,
-    .sub-entry input.lineItemValue {
-      display: block;
-      width: 75%;
-      padding: 5px;
-      margin-bottom: 10px;
-      border-radius: 6px;
-      box-sizing: border-box;
-    }
+input.productName {
+  width: 35%;
+  padding: 5px;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
 
-    .sub-entry input.operationName,
-    .sub-entry input.recordTypeName,
-    .sub-entry input.savingsPlanOfferingTypeName {
-      display: block;
-      width: 75%;
-      padding: 5px;
-      margin-bottom: 10px;
-      border-radius: 6px;
-      box-sizing: border-box;
-    }
+select {
+  padding: 5px;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
 
-    /* .sub-entry input.instanceType,
-    .sub-entry input.instanceSize{
-      display: block;
-      width: 40%;
-      padding: 5px;
-      margin-bottom: 10px;
-      border-radius: 6px;
-      box-sizing: border-box;
-    } */
-    .sub-entry input.instanceType,
-    .sub-entry input.instanceSize,
-    .sub-entry .checkbox-wrapper input {
-      display: block;
-      width: 40%;
-      padding: 5px;
-      margin-bottom: 10px;
-      border-radius: 6px;
-      box-sizing: border-box;
-    }
+.small-label {
+  font-size: 0.8em;
+  margin-top: 5px;
+}
 
-    .sub-entry .checkbox-wrapper {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
+.small-select select {
+  font-size: 0.8em;
+  padding: 2px 4px;
+}
 
-    .sub-entry .checkbox-wrapper input[type="checkbox"] {
-      width: auto;
-      margin-right: 6px;
-    }
+#cxAPIId {
+  width: 15%;
+  padding: 5px;
+  border-radius: 6px;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+}
 
-    .sub-entry .checkbox-wrapper label {
-      font-size: 0.9em;
-      color: inherit;
-    }
+input.ruleName {
+  width: 60%;
+  padding: 5px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
 
+.sub-entry input.usageTypeName {
+  display: block;
+  width: 60%;
+  padding: 5px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
 
-    input.billingAdjustment,
-    input.startDate,
-    input.endDate,
-    input.region {
-      padding: 5px;
-      border-radius: 6px;
-      box-sizing: border-box;
-    }
-    .required-asterisk {
-      color: red;
-      margin-left: 2px;
-    }
+.sub-entry input.lineItemValue {
+  display: block;
+  width: 50%;
+  padding: 5px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
 
-    #bookName,
-    #createdBy,
-    #comment{
-      width: 15%;
-      padding: 5px;
-      border-radius: 6px;
-      margin-right: 15px;
-      margin-bottom: 15px;
-      box-sizing: border-box;
-    }
+.sub-entry input.operationName,
+.sub-entry input.recordTypeName,
+.sub-entry input.savingsPlanOfferingTypeName {
+  display: block;
+  width: 60%;
+  padding: 5px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
 
-    #bookName+label,
-    #createdBy+label,
-    #comment+label{
-      margin-top: 15px;
-    }
+.sub-entry input.instanceType,
+.sub-entry input.instanceSize,
+.sub-entry .checkbox-wrapper input {
+  display: block;
+  width: 30%;
+  padding: 5px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
 
-    #cxPayerId{
-      width: 40%;
-      padding: 5px;
-      border-radius: 6px;
-      margin-right: 15px;
-      margin-bottom: 15px;
-      box-sizing: border-box;
-    }
-    .ruleGroup label,
-    .ruleGroup input {
-      margin-bottom: 10px;
-    }
+.sub-entry .checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
 
-    .ruleGroup .startDate,
-    .ruleGroup .endDate {
-      margin-right: 30px;
-    }
+.sub-entry .checkbox-wrapper input[type="checkbox"] {
+  width: auto;
+  margin-right: 6px;
+}
 
-    .rule .billingAdjustment {
-      margin-right: 30px;
-      margin-bottom: 15px;
-    }
+.sub-entry .checkbox-wrapper label {
+  font-size: 0.9em;
+  color: inherit;
+}
 
-    .rule .billingRuleType {
-      margin-top: 10px;
-    }
+input.billingAdjustment,
+input.startDate,
+input.endDate,
+input.region {
+  padding: 5px;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
 
-    select.includeRIPurchases,
-    select.productIncludeRIPurchases {
-      margin-bottom: 20px;
-    }
+.required-asterisk {
+  color: red;
+  margin-left: 2px;
+}
 
-    body {
-      background-color: #fff;
-      color: #000;
-    }
+#bookName,
+#createdBy,
+#comment {
+  width: 15%;
+  padding: 5px;
+  border-radius: 6px;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+}
 
-    /* Updated button styling */
-    #infoButton:hover {
-      background-color: #3b8e96;
-      /* Slightly darker shade of teal */
-      transform: scale(1.1);
-      /* Slightly enlarge the button */
-    }
+#bookName+label,
+#createdBy+label,
+#comment+label {
+  margin-top: 15px;
+}
 
-    button.export-json {
-      padding: 6px 12px;
-      background: linear-gradient(135deg, #4a90e2, #256dbe);
-      color: white;
-      border: none;
-      border-radius: 12px;
-      font-size: 16px;
-      cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      transition: background 0.3s, transform 0.2s;
-    }
+#cxPayerId {
+  width: 42%;
+  padding: 5px;
+  border-radius: 6px;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+}
 
-    button.export-json:hover {
-      background: linear-gradient(135deg, #3f7fd9, #1e5fa8);
-      transform: scale(1.05);
-    }
+.ruleGroup label,
+.ruleGroup input {
+  margin-bottom: 10px;
+}
 
-    button.export-json:focus {
-      outline: none;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    }
+.ruleGroup .startDate,
+.ruleGroup .endDate {
+  margin-right: 30px;
+}
 
-    button.remove-usagetype,
-    button.remove-lineitem,
-    button.remove-rule,
-    button.remove-rule-group {
-      background-color: #d9534f;
-      /* soft bootstrap-style red */
-      color: white;
-      border: none;
-      border-radius: 12px;
-      padding: 6px 12px;
-      font-size: 16px;
-      cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      transition: background-color 0.3s, transform 0.2s;
-    }
+.rule .billingAdjustment {
+  margin-right: 30px;
+  margin-bottom: 15px;
+}
 
-    button.remove-usagetype:hover,
-    button.remove-lineitem:hover,
-    button.remove-rule:hover,
-    button.remove-rule-group:hover {
-      background-color: #c9302c;
-      /* darker red for hover */
-      transform: scale(1.05);
-    }
+.rule .billingRuleType {
+  margin-top: 10px;
+}
 
-    button.remove-usagetype:focus,
-    button.remove-lineitem:focus,
-    button.remove-rule:focus,
-    button.remove-rule-group:focus {
-      outline: none;
-      box-shadow: 0 0 5px rgba(217, 83, 79, 0.5);
-    }
+select.includeRIPurchases,
+select.productIncludeRIPurchases {
+  margin-bottom: 20px;
+}
 
-    button.addUsageType,
-    button.addLineItem {
-      background-color: #4CAF50;
-      /* soft bootstrap-style red */
-      color: white;
-      border: none;
-      border-radius: 12px;
-      padding: 6px 12px;
-      font-size: 16px;
-      cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      transition: background-color 0.3s, transform 0.2s;
-    }
+body {
+  background-color: #f4f4f9;
+  color: #333;
+}
 
-    button.addOperation,
-    button.addRecordType,
-    button.addInstanceProperty,
-    button.addSavingsPlanOfferingType {
-      padding: 6px 12px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 12px;
-      font-size: 16px;
-      cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      transition: background-color 0.3s, transform 0.2s;
-    }
+#infoButton:hover {
+  background-color: #3b8e96;
+  transform: scale(1.1);
+}
 
-    button.addOperation:hover,
-    button.addRecordType:hover,
-    button.addInstanceProperty:hover,
-    button.addSavingsPlanOfferingType:hover {
-      background-color: #45a049;
-      transform: scale(1.05);
-    }
+button.export-json {
+  padding: 6px 12px;
+  background: linear-gradient(135deg, #4a90e2, #256dbe);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s, transform 0.2s;
+}
 
-    button.addOperation:focus,
-    button.addRecordType:focus,
-    button.addInstanceProperty:focus,
-    button.addSavingsPlanOfferingType:focus {
-      outline: none;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    }
+button.export-json:hover {
+  background: linear-gradient(135deg, #3f7fd9, #1e5fa8);
+  transform: scale(1.05);
+}
 
-    button.xmlGen {
-      padding: 6px 12px;
-      background: linear-gradient(135deg, #3aa76d, #359e9b);
-      color: white;
-      border: none;
-      border-radius: 12px;
-      font-size: 16px;
-      cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      transition: background 0.3s, transform 0.2s;
-    }
+button.export-json:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
 
-    button.xmlGen:hover {
-      background: linear-gradient(135deg, #339864, #2f9091);
-      transform: scale(1.05);
-    }
+button.remove-usagetype,
+button.remove-lineitem,
+button.remove-rule,
+button.remove-rule-group {
+  background-color: #d9534f;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 6px 12px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, transform 0.2s;
+}
 
-    button.xmlGen:focus {
-      outline: none;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    }
+button.remove-usagetype:hover,
+button.remove-lineitem:hover,
+button.remove-rule:hover,
+button.remove-rule-group:hover {
+  background-color: #c9302c;
+  transform: scale(1.05);
+}
 
-    button.importJSON {
-      padding: 6px 12px;
-      background: linear-gradient(135deg, #6a5acd, #4682b4);
-      /* SlateBlue to SteelBlue */
-      color: white;
-      border: none;
-      border-radius: 12px;
-      font-size: 16px;
-      cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      transition: background 0.3s, transform 0.2s;
-    }
+button.remove-usagetype:focus,
+button.remove-lineitem:focus,
+button.remove-rule:focus,
+button.remove-rule-group:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(217, 83, 79, 0.5);
+}
 
-    button.importJSON:hover {
-      background: linear-gradient(135deg, #5a4fcf, #3b75a5);
-      /* Slightly darker on hover */
-      transform: scale(1.05);
-    }
+button.addUsageType,
+button.addLineItem {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 6px 12px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, transform 0.2s;
+}
 
-    button.importJSON:focus {
-      outline: none;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    }
+button.addOperation,
+button.addRecordType,
+button.addInstanceProperty,
+button.addSavingsPlanOfferingType {
+  padding: 6px 12px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, transform 0.2s;
+}
 
+button.addOperation:hover,
+button.addRecordType:hover,
+button.addInstanceProperty:hover,
+button.addSavingsPlanOfferingType:hover {
+  background-color: #45a049;
+  transform: scale(1.05);
+}
 
-    button {
-      padding: 6px 12px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 12px;
-      font-size: 16px;
-      cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      transition: background-color 0.3s, transform 0.2s;
-    }
+button.addOperation:focus,
+button.addRecordType:focus,
+button.addInstanceProperty:focus,
+button.addSavingsPlanOfferingType:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
 
-    button:hover {
-      background-color: #45a049;
-      transform: scale(1.05);
-    }
+button.xmlGen {
+  padding: 6px 12px;
+  background: linear-gradient(135deg, #3aa76d, #359e9b);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s, transform 0.2s;
+}
 
-    button:focus {
-      outline: none;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    }
+button.xmlGen:hover {
+  background: linear-gradient(135deg, #339864, #2f9091);
+  transform: scale(1.05);
+}
 
-    .icon-actions {
-      position: absolute;
-      top: 5px;
-      right: 5px;
-      display: flex;
-      gap: 6px;
-    }
+button.xmlGen:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
 
-    .icon-actions button {
-      background: none;
-      border: none;
-      font-size: 18px;
-      cursor: pointer;
-      padding: 4px;
-      border-radius: 6px;
-      transition: background-color 0.2s;
-    }
+button.importJSON {
+  padding: 6px 12px;
+  background: linear-gradient(135deg, #6a5acd, #4682b4);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s, transform 0.2s;
+}
 
-    .icon-actions button:hover {
-      background-color: #eee;
-    }
+button.importJSON:hover {
+  background: linear-gradient(135deg, #5a4fcf, #3b75a5);
+  transform: scale(1.05);
+}
 
-    /* Dark mode styles including select updates */
-    @media (prefers-color-scheme: dark) {
-      body {
-        background-color: #1e1e1e;
-        color: #f0f0f0;
-      }
+button.importJSON:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
 
-      input,
-      select,
-      textarea {
-        background-color: #333;
-        color: #f0f0f0;
-        border: 1px solid #555;
-      }
+button {
+  padding: 6px 12px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, transform 0.2s;
+}
 
-      .ruleGroup,
-      .rule,
-      .sub-entry {
-        border-color: #444;
-      }
+button:hover {
+  background-color: #45a049;
+  transform: scale(1.05);
+}
 
-      .icon-actions button:hover {
-        background-color: #444;
-        color: #fff;
-      }
+button:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
 
-      /*
-      button {
-        background-color: #444;
-        color: #fff;
-        border-radius: 12px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-      }
+.icon-actions {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  display: flex;
+  gap: 6px;
+}
 
-      button:hover {
-        background-color: #555;
-        transform: scale(1.05);
-      }
+.icon-actions button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
 
-      button:focus {
-        outline: none;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-      } */
+.icon-actions button:hover {
+  background-color: #eee;
+}
 
-      select {
-        background-color: #333;
-        border-radius: 6px;
-      }
-    }
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #1e1e1e;
+    color: #f0f0f0;
+  }
 
-    footer {
-      text-align: right;
-      margin-top: 20px;
-      padding: 5px 0;
-      font-size: 0.70em;
-      color: #616060f2;
-    }
+  input,
+  select,
+  textarea {
+    background-color: #333;
+    color: #f0f0f0;
+    border: 1px solid #555;
+  }
+
+  .ruleGroup,
+  .rule,
+  .sub-entry {
+    border-color: #444;
+  }
+
+  .icon-actions button:hover {
+    background-color: #444;
+    color: #fff;
+  }
+
+  select {
+    background-color: #333;
+    border-radius: 6px;
+  }
+}
+
+footer {
+  text-align: right;
+  margin-top: 20px;
+  padding: 5px 0;
+  font-size: 0.70em;
+  color: #616060f2;
+}
