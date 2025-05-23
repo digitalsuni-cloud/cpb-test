@@ -40,7 +40,8 @@ section {
 .details-section,
 .action-section,
 .output-section,
-.results-section {
+.results-section,
+.ruleGroup {
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -131,6 +132,66 @@ footer p {
   margin: 0;
 }
 
+/* Additional styles for Rule Group */
+.ruleGroup .section-title {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.ruleGroup label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.ruleGroup input,
+.ruleGroup select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.ruleGroup .sub-group {
+  margin-top: 10px;
+}
+
+.ruleGroup .sub-entry {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 5px;
+}
+
+.ruleGroup .sub-entry input[type="text"] {
+  flex-grow: 1;
+  max-width: 80%;
+}
+
+.ruleGroup .sub-entry button {
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  padding: 5px 10px;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.ruleGroup .sub-entry button:hover {
+  background-color: #0056b3;
+}
+
+.ruleGroup .sub-entry button.remove {
+  background-color: #dc3545;
+}
+
+.ruleGroup .sub-entry button.remove:hover {
+  background-color: #c82333;
+}
+
 @media (prefers-color-scheme: dark) {
   body {
     background-color: #121212;
@@ -145,7 +206,8 @@ footer p {
   .details-section,
   .action-section,
   .output-section,
-  .results-section {
+  .results-section,
+  .ruleGroup {
     background-color: #1f1f1f;
   }
 
