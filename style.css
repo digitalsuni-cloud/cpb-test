@@ -47,6 +47,7 @@ section {
 .flex-item {
   flex: 1;
   min-width: 180px;
+  padding: 0 5px;
 }
 
 .flex-item input,
@@ -189,6 +190,7 @@ footer p {
   border: 1px solid #ccc;
   border-radius: 4px;
   margin-bottom: 10px;
+  box-sizing: border-box;
 }
 
 .ruleGroup .sub-group {
@@ -234,18 +236,18 @@ footer p {
   max-width: 80%;
 }
 
-.sub-entry button {
+.sub-entry button, .addUsageType, .addOperation, .addRecordType, .addInstanceProperty, .addLineItem, .addSavingsPlanOfferingType {
   background-color: #dc3545;
+  color: white;
   border: none;
   border-radius: 4px;
-  color: white;
   cursor: pointer;
   padding: 5px 10px;
   font-size: 14px;
   transition: background-color 0.3s;
 }
 
-.sub-entry button:hover {
+.sub-entry button:hover, .addUsageType:hover, .addOperation:hover, .addRecordType:hover, .addInstanceProperty:hover, .addLineItem:hover, .addSavingsPlanOfferingType:hover {
   background-color: #c82333;
 }
 
