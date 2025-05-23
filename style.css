@@ -47,8 +47,9 @@ section {
   border: 1px solid rgba(27, 31, 35, .15);
   border-radius: 6px;
   cursor: pointer;
-  padding: 5px 10px;
-  font-size: 14px;
+  padding: 4px 8px; /* Smaller padding */
+  font-size: 12px; /* Smaller font size */
+  height: 28px; /* Fixed height */
   transition: background-color 0.3s;
 }
 
@@ -70,8 +71,9 @@ section {
   border: 1px solid rgba(27, 31, 35, .15);
   border-radius: 6px;
   cursor: pointer;
-  padding: 5px 10px;
-  font-size: 14px;
+  padding: 4px 8px; /* Smaller padding */
+  font-size: 12px; /* Smaller font size */
+  height: 28px; /* Fixed height */
   transition: background-color 0.3s;
 }
 
@@ -99,10 +101,12 @@ section {
 .flex-item input,
 .flex-item select {
   width: 100%;
-  padding: 5px;
+  padding: 4px 8px; /* Smaller padding */
   border: 1px solid #e1e4e8;
   border-radius: 6px;
   box-sizing: border-box;
+  font-size: 12px; /* Smaller font size */
+  height: 28px; /* Fixed height */
 }
 
 .flex-item label {
@@ -145,9 +149,11 @@ section {
 
 .input-group input {
   width: 100%;
-  padding: 10px;
+  padding: 8px; /* Smaller padding */
   border: 1px solid #e1e4e8;
   border-radius: 6px;
+  font-size: 12px; /* Smaller font size */
+  height: 28px; /* Fixed height */
 }
 
 .required {
@@ -160,11 +166,11 @@ button {
   border-radius: 6px;
   color: white;
   cursor: pointer;
-  padding: 10px 20px;
-  font-size: 16px;
+  padding: 8px 16px; /* Smaller padding */
+  font-size: 14px; /* Smaller font size */
   transition: background-color 0.3s;
-  min-width: 150px; /* Set a minimum width for all buttons */
-  height: 40px; /* Set a fixed height for all buttons */
+  min-width: 120px; /* Smaller minimum width */
+  height: 32px; /* Smaller fixed height */
   box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
 
@@ -175,10 +181,10 @@ button:hover {
 .info-btn {
   background-color: #0366d6;
   border-radius: 50%;
-  font-size: 20px;
-  padding: 10px;
-  width: 40px;
-  height: 40px;
+  font-size: 18px; /* Smaller font size */
+  padding: 6px; /* Smaller padding */
+  width: 32px; /* Smaller width */
+  height: 32px; /* Smaller height */
 }
 
 .icon-actions {
@@ -192,8 +198,8 @@ button:hover {
   border: 1px solid #e1e4e8;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 18px;
-  padding: 5px;
+  font-size: 16px; /* Smaller font size */
+  padding: 4px 8px; /* Smaller padding */
   transition: background-color 0.3s;
 }
 
@@ -203,10 +209,11 @@ button:hover {
 
 textarea {
   width: 100%;
-  padding: 10px;
+  padding: 8px; /* Smaller padding */
   border: 1px solid #e1e4e8;
   border-radius: 6px;
   resize: vertical;
+  font-size: 12px; /* Smaller font size */
 }
 
 footer {
@@ -235,11 +242,13 @@ footer p {
 .ruleGroup input,
 .ruleGroup select {
   width: 100%;
-  padding: 10px;
+  padding: 4px 8px; /* Smaller padding */
   border: 1px solid #e1e4e8;
   border-radius: 6px;
   margin-bottom: 10px;
   box-sizing: border-box;
+  font-size: 12px; /* Smaller font size */
+  height: 28px; /* Fixed height */
 }
 
 .ruleGroup .sub-group {
@@ -253,9 +262,16 @@ footer p {
   margin-top: 5px;
 }
 
-.ruleGroup .sub-entry input[type="text"] {
+.ruleGroup .sub-entry input[type="text"],
+.ruleGroup .sub-entry select {
   flex-grow: 1;
   max-width: 80%;
+  padding: 4px 8px; /* Smaller padding */
+  border: 1px solid #e1e4e8;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-size: 12px; /* Smaller font size */
+  height: 28px; /* Fixed height */
 }
 
 .sub-entry {
@@ -265,16 +281,23 @@ footer p {
   margin-top: 5px;
 }
 
-.sub-entry input[type="text"] {
+.sub-entry input[type="text"],
+.sub-entry select {
   flex-grow: 1;
   max-width: 80%;
+  padding: 4px 8px; /* Smaller padding */
+  border: 1px solid #e1e4e8;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-size: 12px; /* Smaller font size */
+  height: 28px; /* Fixed height */
 }
 
 .small-button {
   min-width: 0 !important; /* Override the global button style */
-  height: auto !important; /* Override the global button style */
-  padding: 5px 10px !important; /* Override the global button style */
-  font-size: 14px !important; /* Override the global button style */
+  height: 28px !important; /* Fixed height */
+  padding: 4px 8px !important; /* Smaller padding */
+  font-size: 12px !important; /* Smaller font size */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -314,8 +337,9 @@ footer p {
     border: 1px solid rgba(27, 31, 35, .15);
     border-radius: 6px;
     cursor: pointer;
-    padding: 5px 10px;
-    font-size: 14px;
+    padding: 4px 8px; /* Smaller padding */
+    font-size: 12px; /* Smaller font size */
+    height: 28px; /* Fixed height */
     transition: background-color 0.3s;
   }
 
@@ -337,8 +361,9 @@ footer p {
     border: 1px solid rgba(27, 31, 35, .15);
     border-radius: 6px;
     cursor: pointer;
-    padding: 5px 10px;
-    font-size: 14px;
+    padding: 4px 8px; /* Smaller padding */
+    font-size: 12px; /* Smaller font size */
+    height: 28px; /* Fixed height */
     transition: background-color 0.3s;
   }
 
@@ -351,6 +376,9 @@ footer p {
 
   button {
     background-color: #238636;
+    padding: 8px 16px; /* Smaller padding */
+    font-size: 14px; /* Smaller font size */
+    height: 32px; /* Smaller fixed height */
   }
 
   button:hover {
@@ -360,6 +388,8 @@ footer p {
   .icon-actions button {
     background-color: #161b22;
     border: 1px solid #30363d;
+    font-size: 16px; /* Smaller font size */
+    padding: 4px 8px; /* Smaller padding */
   }
 
   .icon-actions button:hover {
