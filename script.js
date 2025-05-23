@@ -173,6 +173,7 @@ function addRule(button) {
 <br />
 <button class="remove-rule" onclick="this.parentElement.remove()">Remove Billing Rule</button>
 <br />
+<br>
       `;
   rulesContainer.appendChild(div);
 }
