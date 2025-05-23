@@ -1,469 +1,131 @@
 body {
-  font-family: Arial, sans-serif;
-  margin: 20px;
-  background-color: #f4f4f9;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f0f4f8;
   color: #333;
+  margin: 0;
+  padding: 0;
 }
 
-input,
-select,
-button,
-textarea {
-  margin: 5px 0;
-  padding: 10px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
+header {
+  background-color: #007bff;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
 }
 
-.ruleGroup,
-.rule,
-.sub-entry {
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 6px;
-  background-color: #fff;
+header h1 {
+  margin: 0;
+  font-size: 2em;
 }
 
-.section-title {
-  margin-top: 20px;
-  font-weight: bold;
-  font-size: 1.2em;
+header p {
+  margin: 10px 0;
 }
 
-.sub-group {
-  margin-top: 10px;
+header a {
+  color: #ffdd57;
+  text-decoration: none;
 }
 
-.sub-entry {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: 5px;
+main {
+  padding: 20px;
 }
 
-.sub-entry input[type="text"] {
-  flex-grow: 1;
-  max-width: 80%;
-}
-
-.sub-entry select.lineItemType {
-  width: 125px;
-  flex-shrink: 0;
-  padding: 6px;
-}
-
-.sub-entry button {
-  padding: 0 8px;
-}
-
-label.includeDataTransfer,
-label.includeRIPurchases {
-  font-size: 0.8em;
-  margin-top: 5px;
-  margin-left: 22px;
-}
-
-select.includeDataTransfer,
-select.includeRIPurchases,
-select.productIncludeDataTransfer,
-select.productIncludeRIPurchases {
-  font-size: 0.8em;
-  padding: 2px 4px;
-}
-
-input.productName {
-  width: 35%;
-  padding: 5px;
-  border-radius: 6px;
-  box-sizing: border-box;
-}
-
-select {
-  padding: 5px;
-  background-color: #eee;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-}
-
-.small-label {
-  font-size: 0.8em;
-  margin-top: 5px;
-}
-
-.small-select select {
-  font-size: 0.8em;
-  padding: 2px 4px;
-}
-
-#cxAPIId {
-  width: 15%;
-  padding: 5px;
-  border-radius: 6px;
-  margin-right: 15px;
-  margin-bottom: 15px;
-  box-sizing: border-box;
-}
-
-input.ruleName {
-  width: 60%;
-  padding: 5px;
-  margin-bottom: 10px;
-  border-radius: 6px;
-  box-sizing: border-box;
-}
-
-.sub-entry input.usageTypeName {
-  display: block;
-  width: 60%;
-  padding: 5px;
-  margin-bottom: 10px;
-  border-radius: 6px;
-  box-sizing: border-box;
-}
-
-.sub-entry input.lineItemValue {
-  display: block;
-  width: 50%;
-  padding: 5px;
-  margin-bottom: 10px;
-  border-radius: 6px;
-  box-sizing: border-box;
-}
-
-.sub-entry input.operationName,
-.sub-entry input.recordTypeName,
-.sub-entry input.savingsPlanOfferingTypeName {
-  display: block;
-  width: 60%;
-  padding: 5px;
-  margin-bottom: 10px;
-  border-radius: 6px;
-  box-sizing: border-box;
-}
-
-.sub-entry input.instanceType,
-.sub-entry input.instanceSize,
-.sub-entry .checkbox-wrapper input {
-  display: block;
-  width: 30%;
-  padding: 5px;
-  margin-bottom: 10px;
-  border-radius: 6px;
-  box-sizing: border-box;
-}
-
-.sub-entry .checkbox-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.sub-entry .checkbox-wrapper input[type="checkbox"] {
-  width: auto;
-  margin-right: 6px;
-}
-
-.sub-entry .checkbox-wrapper label {
-  font-size: 0.9em;
-  color: inherit;
-}
-
-input.billingAdjustment,
-input.startDate,
-input.endDate,
-input.region {
-  padding: 5px;
-  border-radius: 6px;
-  box-sizing: border-box;
-}
-
-.required-asterisk {
-  color: red;
-  margin-left: 2px;
-}
-
-#bookName,
-#createdBy,
-#comment {
-  width: 15%;
-  padding: 5px;
-  border-radius: 6px;
-  margin-right: 15px;
-  margin-bottom: 15px;
-  box-sizing: border-box;
-}
-
-#bookName+label,
-#createdBy+label,
-#comment+label {
-  margin-top: 15px;
-}
-
-#cxPayerId {
-  width: 42%;
-  padding: 5px;
-  border-radius: 6px;
-  margin-right: 15px;
-  margin-bottom: 15px;
-  box-sizing: border-box;
-}
-
-.ruleGroup label,
-.ruleGroup input {
-  margin-bottom: 10px;
-}
-
-.ruleGroup .startDate,
-.ruleGroup .endDate {
-  margin-right: 30px;
-}
-
-.rule .billingAdjustment {
-  margin-right: 30px;
-  margin-bottom: 15px;
-}
-
-.rule .billingRuleType {
-  margin-top: 10px;
-}
-
-select.includeRIPurchases,
-select.productIncludeRIPurchases {
+section {
   margin-bottom: 20px;
 }
 
-body {
-  background-color: #f4f4f9;
-  color: #333;
-}
-
-#infoButton:hover {
-  background-color: #3b8e96;
-  transform: scale(1.1);
-}
-
-button.export-json {
-  padding: 6px 12px;
-  background: linear-gradient(135deg, #4a90e2, #256dbe);
-  color: white;
-  border: none;
-  border-radius: 12px;
-  font-size: 16px;
-  cursor: pointer;
+.import-section,
+.details-section,
+.action-section,
+.output-section,
+.results-section {
+  background-color: #fff;
+  border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: background 0.3s, transform 0.2s;
+  padding: 20px;
 }
 
-button.export-json:hover {
-  background: linear-gradient(135deg, #3f7fd9, #1e5fa8);
-  transform: scale(1.05);
+.input-group {
+  margin-bottom: 15px;
 }
 
-button.export-json:focus {
-  outline: none;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+.input-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
 }
 
-button.remove-usagetype,
-button.remove-lineitem,
-button.remove-rule,
-button.remove-rule-group {
-  background-color: #d9534f;
-  color: white;
-  border: none;
-  border-radius: 12px;
-  padding: 6px 12px;
-  font-size: 16px;
-  cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s, transform 0.2s;
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
-button.remove-usagetype:hover,
-button.remove-lineitem:hover,
-button.remove-rule:hover,
-button.remove-rule-group:hover {
-  background-color: #c9302c;
-  transform: scale(1.05);
-}
-
-button.remove-usagetype:focus,
-button.remove-lineitem:focus,
-button.remove-rule:focus,
-button.remove-rule-group:focus {
-  outline: none;
-  box-shadow: 0 0 5px rgba(217, 83, 79, 0.5);
-}
-
-button.addUsageType,
-button.addLineItem {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 12px;
-  padding: 6px 12px;
-  font-size: 16px;
-  cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s, transform 0.2s;
-}
-
-button.addOperation,
-button.addRecordType,
-button.addInstanceProperty,
-button.addSavingsPlanOfferingType {
-  padding: 6px 12px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 12px;
-  font-size: 16px;
-  cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s, transform 0.2s;
-}
-
-button.addOperation:hover,
-button.addRecordType:hover,
-button.addInstanceProperty:hover,
-button.addSavingsPlanOfferingType:hover {
-  background-color: #45a049;
-  transform: scale(1.05);
-}
-
-button.addOperation:focus,
-button.addRecordType:focus,
-button.addInstanceProperty:focus,
-button.addSavingsPlanOfferingType:focus {
-  outline: none;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-}
-
-button.xmlGen {
-  padding: 6px 12px;
-  background: linear-gradient(135deg, #3aa76d, #359e9b);
-  color: white;
-  border: none;
-  border-radius: 12px;
-  font-size: 16px;
-  cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: background 0.3s, transform 0.2s;
-}
-
-button.xmlGen:hover {
-  background: linear-gradient(135deg, #339864, #2f9091);
-  transform: scale(1.05);
-}
-
-button.xmlGen:focus {
-  outline: none;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-}
-
-button.importJSON {
-  padding: 6px 12px;
-  background: linear-gradient(135deg, #6a5acd, #4682b4);
-  color: white;
-  border: none;
-  border-radius: 12px;
-  font-size: 16px;
-  cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: background 0.3s, transform 0.2s;
-}
-
-button.importJSON:hover {
-  background: linear-gradient(135deg, #5a4fcf, #3b75a5);
-  transform: scale(1.05);
-}
-
-button.importJSON:focus {
-  outline: none;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+.required {
+  color: red;
 }
 
 button {
-  padding: 6px 12px;
-  background-color: #4CAF50;
-  color: white;
+  background-color: #007bff;
   border: none;
-  border-radius: 12px;
-  font-size: 16px;
+  border-radius: 4px;
+  color: white;
   cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s, transform 0.2s;
+  padding: 10px 20px;
+  font-size: 16px;
+  transition: background-color 0.3s;
 }
 
 button:hover {
-  background-color: #45a049;
-  transform: scale(1.05);
+  background-color: #0056b3;
 }
 
-button:focus {
-  outline: none;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+.info-btn {
+  background-color: #28a745;
+  border-radius: 50%;
+  font-size: 20px;
+  padding: 10px;
+  width: 40px;
+  height: 40px;
 }
 
 .icon-actions {
-  position: absolute;
-  top: 5px;
-  right: 5px;
   display: flex;
-  gap: 6px;
+  gap: 10px;
+  margin-top: 10px;
 }
 
 .icon-actions button {
-  background: none;
-  border: none;
-  font-size: 18px;
+  background-color: #f8f9fa;
+  border: 1px solid #ccc;
+  border-radius: 4px;
   cursor: pointer;
-  padding: 4px;
-  border-radius: 6px;
-  transition: background-color 0.2s;
+  font-size: 18px;
+  padding: 5px;
+  transition: background-color 0.3s;
 }
 
 .icon-actions button:hover {
-  background-color: #eee;
+  background-color: #e2e6ea;
 }
 
-@media (prefers-color-scheme: dark) {
-  body {
-    background-color: #1e1e1e;
-    color: #f0f0f0;
-  }
-
-  input,
-  select,
-  textarea {
-    background-color: #333;
-    color: #f0f0f0;
-    border: 1px solid #555;
-  }
-
-  .ruleGroup,
-  .rule,
-  .sub-entry {
-    border-color: #444;
-  }
-
-  .icon-actions button:hover {
-    background-color: #444;
-    color: #fff;
-  }
-
-  select {
-    background-color: #333;
-    border-radius: 6px;
-  }
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
 }
 
 footer {
-  text-align: right;
-  margin-top: 20px;
-  padding: 5px 0;
-  font-size: 0.70em;
-  color: #616060f2;
+  background-color: #343a40;
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+}
+
+footer p {
+  margin: 0;
 }
