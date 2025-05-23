@@ -356,6 +356,27 @@ footer p {
   line-height: 20px;
 }
 
+/* Gradient background for Generate XML button */
+.generate-xml-btn {
+  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+}
+
+/* Gradient background for Generate JSON and Terminal Command buttons */
+.generate-json-btn,
+.generate-terminal-btn {
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  margin-left: 10px; /* Move the buttons further from Generate XML button */
+}
+
+.generate-xml-btn:hover {
+  background: linear-gradient(135deg, #e64a19, #d32f2f);
+}
+
+.generate-json-btn:hover,
+.generate-terminal-btn:hover {
+  background: linear-gradient(135deg, #4a00e0, #0f9b0f);
+}
+
 @media (prefers-color-scheme: dark) {
   body {
     background: linear-gradient(135deg, #2c3e50, #4ca1af);
@@ -444,6 +465,25 @@ footer p {
     background-color: #2c3e50;
     border: 1px solid #555;
     color: #ecf0f1;
+  }
+
+  .generate-xml-btn {
+    background: linear-gradient(135deg, #e67e22, #e74c3c);
+  }
+
+  .generate-json-btn,
+  .generate-terminal-btn {
+    background: linear-gradient(135deg, #3498db, #2ecc71);
+    margin-left: 10px; /* Move the buttons further from Generate XML button */
+  }
+
+  .generate-xml-btn:hover {
+    background: linear-gradient(135deg, #d35400, #c0392b);
+  }
+
+  .generate-json-btn:hover,
+  .generate-terminal-btn:hover {
+    background: linear-gradient(135deg, #2980b9, #27ae60);
   }
 
   footer {
