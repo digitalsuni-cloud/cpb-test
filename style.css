@@ -365,7 +365,7 @@ footer p {
 .generate-json-btn,
 .generate-terminal-btn {
   background: linear-gradient(135deg, #6a11cb, #2575fc);
-  margin-left: 10px; /* Move the buttons further from Generate XML button */
+  margin-left: 15px; /* Move the buttons further from Generate XML button */
 }
 
 .generate-xml-btn:hover {
@@ -474,7 +474,7 @@ footer p {
   .generate-json-btn,
   .generate-terminal-btn {
     background: linear-gradient(135deg, #3498db, #2ecc71);
-    margin-left: 10px; /* Move the buttons further from Generate XML button */
+    margin-left: 15px; /* Move the buttons further from Generate XML button */
   }
 
   .generate-xml-btn:hover {
