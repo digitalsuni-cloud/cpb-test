@@ -36,7 +36,7 @@ section {
   margin-bottom: 20px;
 }
 
-.addUsageType, .addOperation, .addRecordType, .addInstanceProperty, .addLineItem, .addSavingsPlanOfferingType {
+.rule .addUsageType, .rule .addOperation, .rule .addRecordType, .rule .addInstanceProperty, .rule .addLineItem, .rule .addSavingsPlanOfferingType {
   background-color: #007bff;
   color: white;
   border: none;
@@ -47,7 +47,7 @@ section {
   transition: background-color 0.3s;
 }
 
-.addUsageType:hover, .addOperation:hover, .addRecordType:hover, .addInstanceProperty:hover, .addLineItem:hover, .addSavingsPlanOfferingType:hover {
+.rule .addUsageType:hover, .rule .addOperation:hover, .rule .addRecordType:hover, .rule .addInstanceProperty:hover, .rule .addLineItem:hover, .rule .addSavingsPlanOfferingType:hover {
     background-color: #0056b3;
 }
 
