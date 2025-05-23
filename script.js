@@ -41,8 +41,7 @@
     }
 
     // Add Billing Rule Button
-
-  function addRule(button) {
+function addRule(button) {
   const rulesContainer = button.previousElementSibling;
   const div = document.createElement('div');
   div.className = 'rule';
@@ -121,7 +120,7 @@
         <!-- usageType -->
         <div class="sub-group">
           <label>Usage Types:</label>
-          <div class="usageTypes\"></div>
+          <div class="usageTypes"></div>
           <div class="sub-entry">
             <button class="addUsageType" type="button" onclick="addUsageType(this)">+</button>
           </div>
@@ -130,7 +129,7 @@
         <!-- Operation -->
 <div class="sub-group">
   <label>Operations:</label>
-  <div class="operations\"></div>
+  <div class="operations"></div>
   <div class="sub-entry">
     <button class="addOperation" type="button" onclick="addOperation(this)">+</button>
   </div>
@@ -139,7 +138,7 @@
 <!-- RecordType -->
 <div class="sub-group">
   <label>Record Types:</label>
-  <div class="recordTypes\"></div>
+  <div class="recordTypes"></div>
   <div class="sub-entry">
     <button class="addRecordType" type="button" onclick="addRecordType(this)">+</button>
   </div>
@@ -148,7 +147,7 @@
 <!-- InstanceProperties -->
 <div class="sub-group">
   <label>Instance Properties:</label>
-  <div class="instanceProperties\"></div>
+  <div class="instanceProperties"></div>
   <div class="sub-entry">
     <button class="addInstanceProperty" type="button" onclick="addInstanceProperty(this)">+</button>
   </div>
@@ -157,7 +156,7 @@
 <!-- LineItemDescription -->
         <div class="sub-group">
           <label>Line Item Descriptions:</label>
-          <div class="lineItemDescriptions\"></div>
+          <div class="lineItemDescriptions"></div>
           <div class="sub-entry">
             <button class="addLineItem" type="button" onclick="addLineItemDescription(this)">+</button>
           </div>
@@ -166,13 +165,14 @@
 <!-- SavingsPlanOfferingType -->
 <div class="sub-group">
   <label>Savings Plan Offering Types:</label>
-  <div class="savingsPlanOfferingTypes\"></div>
+  <div class="savingsPlanOfferingTypes"></div>
   <div class="sub-entry">
     <button class="addSavingsPlanOfferingType" type="button" onclick="addSavingsPlanOfferingType(this)">+</button>
   </div>
 </div>
-<br>
-        <button class="remove-rule" onclick="this.parentElement.remove()">Remove Billing Rule</button>
+<br />
+<button class="remove-rule" onclick="this.parentElement.remove()">Remove Billing Rule</button>
+<br />
       `;
   rulesContainer.appendChild(div);
 }
