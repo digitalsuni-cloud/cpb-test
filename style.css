@@ -35,7 +35,17 @@ main {
 section {
   margin-bottom: 20px;
 }
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 10px;
+}
 
+.flex-item {
+  flex: 1;
+  min-width: 150px;
+}
 .import-section,
 .details-section,
 .action-section,
