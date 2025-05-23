@@ -40,195 +40,197 @@
       }
     }
 
-    // Add Billing Rule Button
+ // Add Billing Rule Button
 function addRule(button) {
   const rulesContainer = button.previousElementSibling;
   const div = document.createElement('div');
   div.className = 'rule';
   div.innerHTML = `
-        <div class="flex-container">
-          <div class="flex-item">
-            <label>Billing Rule Name:</label>
-            <input type="text" class="ruleName" placeholder="Enter Billing Rule name" />
-          </div>
+    <div class="flex-container">
+      <div class="flex-item">
+        <label>Billing Rule Name:</label>
+        <input type="text" class="ruleName" placeholder="Enter Billing Rule name" />
+      </div>
+    </div>
+
+    <div class="flex-container">
+      <div class="flex-item">
+        <label>Billing Adjustment (e.g. 0.00):</label>
+        <input type="int" class="billingAdjustment" />
+      </div>
+      <div class="flex-item">
+        <label>Billing Rule Type:</label>
+        <select class="billingRuleType">
+          <option value="percentDiscount">percentDiscount</option>
+          <option value="percentIncrease">percentIncrease</option>
+          <option value="fixedRate">fixedRate</option>
+        </select>
+      </div>
+      <div class="flex-item">
+        <div class="small-label">Include Data Transfer:</div>
+        <div class="small-select">
+          <select class="includeDataTransfer">
+            <option value="true">true</option>
+            <option value="false">false</option>
+          </select>
         </div>
-
-        <div class="flex-container">
-          <div class="flex-item">
-            <label>Billing Adjustment (e.g. 0.00):</label>
-            <input type="int" class="billingAdjustment" />
-          </div>
-          <div class="flex-item">
-            <label>Billing Rule Type:</label>
-            <select class="billingRuleType">
-              <option value="percentDiscount">percentDiscount</option>
-              <option value="percentIncrease">percentIncrease</option>
-              <option value="fixedRate">fixedRate</option>
-            </select>
-          </div>
-          <div class="flex-item">
-            <div class="small-label">Include Data Transfer:</div>
-            <div class="small-select">
-              <select class="includeDataTransfer">
-                <option value="true">true</option>
-                <option value="false">false</option>
-              </select>
-            </div>
-          </div>
-          <div class="flex-item">
-            <div class="small-label">Include RI Purchases:</div>
-            <div class="small-select">
-              <select class="includeRIPurchases">
-                <option value="true">true</option>
-                <option value="false" selected>false</option>
-              </select>
-            </div>
-          </div>
+      </div>
+      <div class="flex-item">
+        <div class="small-label">Include RI Purchases:</div>
+        <div class="small-select">
+          <select class="includeRIPurchases">
+            <option value="true">true</option>
+            <option value="false" selected>false</option>
+          </select>
         </div>
+      </div>
+    </div>
 
-        <div class="flex-container">
-          <div class="flex-item">
-            <label>Product Name:</label>
-            <input type="text" class="productName" list="productList" placeholder="Leave empty for Any Products" />
-          </div>
-          <div class="flex-item">
-            <div class="small-label">Product Include Data Transfer:</div>
-            <div class="small-select">
-              <select class="productIncludeDataTransfer">
-                <option value="">(inherit)</option>
-                <option value="true">true</option>
-                <option value="false">false</option>
-              </select>
-            </div>
-          </div>
-          <div class="flex-item">
-            <div class="small-label">Product Include RI Purchases:</div>
-            <div class="small-select">
-              <select class="productIncludeRIPurchases">
-                <option value="">(inherit)</option>
-                <option value="true">true</option>
-                <option value="false">false</option>
-              </select>
-            </div>
-          </div>
+    <div class="flex-container">
+      <div class="flex-item">
+        <label>Product Name:</label>
+        <input type="text" class="productName" list="productList" placeholder="Leave empty for Any Products" />
+      </div>
+      <div class="flex-item">
+        <div class="small-label">Product Include Data Transfer:</div>
+        <div class="small-select">
+          <select class="productIncludeDataTransfer">
+            <option value="">(inherit)</option>
+            <option value="true">true</option>
+            <option value="false">false</option>
+          </select>
         </div>
-
-<!-- Region -->
-        <label>Region (optional):</label>
-        <input type="text" class="region" />
-
-        <!-- usageType -->
-        <div class="sub-group">
-          <label>Usage Types:</label>
-          <div class="usageTypes"></div>
-          <div class="sub-entry">
-            <button class="addUsageType" type="button" onclick="addUsageType(this)">+</button>
-          </div>
+      </div>
+      <div class="flex-item">
+        <div class="small-label">Product Include RI Purchases:</div>
+        <div class="small-select">
+          <select class="productIncludeRIPurchases">
+            <option value="">(inherit)</option>
+            <option value="true">true</option>
+            <option value="false">false</option>
+          </select>
         </div>
+      </div>
+    </div>
 
-        <!-- Operation -->
-<div class="sub-group">
-  <label>Operations:</label>
-  <div class="operations"></div>
-  <div class="sub-entry">
-    <button class="addOperation small-button" type="button" onclick="addOperation(this)">+</button>
-  </div>
-</div>
+    <!-- Region -->
+    <label>Region (optional):</label>
+    <input type="text" class="region" />
 
-<!-- RecordType -->
-<div class="sub-group">
-  <label>Record Types:</label>
-  <div class="recordTypes"></div>
-  <div class="sub-entry">
-    <button class="addRecordType small-button" type="button" onclick="addRecordType(this)">+</button>
-  </div>
-</div>
+    <!-- usageType -->
+    <div class="sub-group">
+      <label>Usage Types:</label>
+      <div class="usageTypes"></div>
+      <div class="sub-entry">
+        <button class="addUsageType small-button" type="button" onclick="addUsageType(this)">+</button>
+      </div>
+    </div>
 
-<!-- InstanceProperties -->
-<div class="sub-group">
-  <label>Instance Properties:</label>
-  <div class="instanceProperties"></div>
-  <div class="sub-entry">
-    <button class="addInstanceProperty small-button" type="button" onclick="addInstanceProperty(this)">+</button>
-  </div>
-</div>
+    <!-- Operation -->
+    <div class="sub-group">
+      <label>Operations:</label>
+      <div class="operations"></div>
+      <div class="sub-entry">
+        <button class="addOperation small-button" type="button" onclick="addOperation(this)">+</button>
+      </div>
+    </div>
 
-<!-- LineItemDescription -->
-        <div class="sub-group">
-          <label>Line Item Descriptions:</label>
-          <div class="lineItemDescriptions"></div>
-          <div class="sub-entry">
-            <button class="addLineItem small-button" type="button" onclick="addLineItemDescription(this)">+</button>
-          </div>
-        </div>
+    <!-- RecordType -->
+    <div class="sub-group">
+      <label>Record Types:</label>
+      <div class="recordTypes"></div>
+      <div class="sub-entry">
+        <button class="addRecordType small-button" type="button" onclick="addRecordType(this)">+</button>
+      </div>
+    </div>
 
-<!-- SavingsPlanOfferingType -->
-<div class="sub-group">
-  <label>Savings Plan Offering Types:</label>
-  <div class="savingsPlanOfferingTypes"></div>
-  <div class="sub-entry">
-    <button class="addSavingsPlanOfferingType small-button" type="button" onclick="addSavingsPlanOfferingType(this)">+</button>
-  </div>
-</div>
-<br />
-<button class="remove-rule" onclick="this.parentElement.remove()">Remove Billing Rule</button>
-<br />
-      `;
+    <!-- InstanceProperties -->
+    <div class="sub-group">
+      <label>Instance Properties:</label>
+      <div class="instanceProperties"></div>
+      <div class="sub-entry">
+        <button class="addInstanceProperty small-button" type="button" onclick="addInstanceProperty(this)">+</button>
+      </div>
+    </div>
+
+    <!-- LineItemDescription -->
+    <div class="sub-group">
+      <label>Line Item Descriptions:</label>
+      <div class="lineItemDescriptions"></div>
+      <div class="sub-entry">
+        <button class="addLineItem small-button" type="button" onclick="addLineItemDescription(this)">+</button>
+      </div>
+    </div>
+
+    <!-- SavingsPlanOfferingType -->
+    <div class="sub-group">
+      <label>Savings Plan Offering Types:</label>
+      <div class="savingsPlanOfferingTypes"></div>
+      <div class="sub-entry">
+        <button class="addSavingsPlanOfferingType small-button" type="button" onclick="addSavingsPlanOfferingType(this)">+</button>
+      </div>
+    </div>
+    <br />
+    <button class="remove-rule" onclick="this.parentElement.remove()">Remove Billing Rule</button>
+    <br />
+  `;
   rulesContainer.appendChild(div);
 }
 
-    function addUsageType(button) {
-      const container = button.closest('.sub-group').querySelector('.usageTypes');
-      const div = document.createElement('div');
-      div.className = 'sub-entry';
-      div.innerHTML = `
-        <button type="button" class="remove-usagetype small-button" onclick="this.parentElement.remove()">×</button>
-        <input type="text" class="usageTypeName" placeholder="UsageType name..." />
-      `;
-      container.appendChild(div);
-    }
+function addUsageType(button) {
+  const container = button.closest('.sub-group').querySelector('.usageTypes');
+  const div = document.createElement('div');
+  div.className = 'sub-entry';
+  div.innerHTML = `
+    <button type="button" class="remove-usagetype small-button" onclick="this.parentElement.remove()">×</button>
+    <input type="text" class="usageTypeName" placeholder="UsageType name..." />
+  `;
+  container.appendChild(div);
+}
 
-    function addLineItemDescription(button) {
-      const container = button.closest('.sub-group').querySelector('.lineItemDescriptions');
-      const div = document.createElement('div');
-      div.className = 'sub-entry';
-      div.innerHTML = `
-        <button type="button" class="remove-lineitem small-button" onclick="this.parentElement.remove()">×</button>
-        <select class="lineItemType">
-          <option value="contains">contains</option>
-          <option value="startsWith">startsWith</option>
-          <option value="matchesRegex">matchesRegex</option>
-        </select>
-        <input type="text" class="lineItemValue" placeholder="Enter LineItem Description..." />
-      `;
-      container.appendChild(div);
-    }
+function addLineItemDescription(button) {
+  const container = button.closest('.sub-group').querySelector('.lineItemDescriptions');
+  const div = document.createElement('div');
+  div.className = 'sub-entry';
+  div.innerHTML = `
+    <button type="button" class="remove-lineitem small-button" onclick="this.parentElement.remove()">×</button>
+    <select class="lineItemType">
+      <option value="contains">contains</option>
+      <option value="startsWith">startsWith</option>
+      <option value="matchesRegex">matchesRegex</option>
+    </select>
+    <input type="text" class="lineItemValue" placeholder="Enter LineItem Description..." />
+  `;
+  container.appendChild(div);
+}
 
-    function addOperation(button) {
-      const container = button.closest('.sub-group').querySelector('.operations');
-      const div = document.createElement('div');
-      div.className = 'sub-entry';
-      div.innerHTML = `
+function addOperation(button) {
+  const container = button.closest('.sub-group').querySelector('.operations');
+  const div = document.createElement('div');
+  div.className = 'sub-entry';
+  div.innerHTML = `
     <button type="button" class="remove-lineitem small-button" onclick="this.parentElement.remove()">×</button>
     <input type="text" class="operationName" placeholder="Enter Operation name..." />
   `;
-      container.appendChild(div);
-    }
-    function addRecordType(button) {
-      const container = button.closest('.sub-group').querySelector('.recordTypes');
-      const div = document.createElement('div');
-      div.className = 'sub-entry';
-      div.innerHTML = `
+  container.appendChild(div);
+}
+
+function addRecordType(button) {
+  const container = button.closest('.sub-group').querySelector('.recordTypes');
+  const div = document.createElement('div');
+  div.className = 'sub-entry';
+  div.innerHTML = `
     <button type="button" class="remove-lineitem small-button" onclick="this.parentElement.remove()">×</button>
     <input type="text" class="recordTypeName" placeholder="Enter RecordType..." />
   `;
-      container.appendChild(div);
-    }
-    function addInstanceProperty(button) {
-      const container = button.closest('.sub-group').querySelector('.instanceProperties');
-      const div = document.createElement('div');
-      div.className = 'sub-entry';
-      div.innerHTML = `
+  container.appendChild(div);
+}
+
+function addInstanceProperty(button) {
+  const container = button.closest('.sub-group').querySelector('.instanceProperties');
+  const div = document.createElement('div');
+  div.className = 'sub-entry';
+  div.innerHTML = `
     <button type="button" class="remove-lineitem small-button" onclick="this.parentElement.remove()">×</button>
     <input type="text" class="instanceType" placeholder="Instance Type (e.g., t2)" />
     <input type="text" class="instanceSize" placeholder="Instance Size (e.g., 8xlarge)" />
@@ -237,18 +239,20 @@ function addRule(button) {
       <label for="reservedInstance" class="checkbox-label"> Reserved</label>
     </div>
   `;
-      container.appendChild(div);
-    }
-    function addSavingsPlanOfferingType(button) {
-      const container = button.closest('.sub-group').querySelector('.savingsPlanOfferingTypes');
-      const div = document.createElement('div');
-      div.className = 'sub-entry';
-      div.innerHTML = `
+  container.appendChild(div);
+}
+
+function addSavingsPlanOfferingType(button) {
+  const container = button.closest('.sub-group').querySelector('.savingsPlanOfferingTypes');
+  const div = document.createElement('div');
+  div.className = 'sub-entry';
+  div.innerHTML = `
     <button type="button" class="remove-lineitem small-button" onclick="this.parentElement.remove()">×</button>
     <input type="text" class="savingsPlanOfferingTypeName" placeholder="Enter Savings Plan Offering Type..." />
   `;
-      container.appendChild(div);
-    }
+  container.appendChild(div);
+}
+
 
     //Export XML Button Function
 
