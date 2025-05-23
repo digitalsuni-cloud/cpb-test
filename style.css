@@ -277,6 +277,7 @@ footer p {
   font-size: 12px; /* Smaller font size */
   height: 28px; /* Fixed height */
   background-color: #f6f8fa; /* Match theme */
+  vertical-align: middle; /* Align vertically with buttons */
 }
 
 .sub-entry {
@@ -297,6 +298,7 @@ footer p {
   font-size: 12px; /* Smaller font size */
   height: 28px; /* Fixed height */
   background-color: #f6f8fa; /* Match theme */
+  vertical-align: middle; /* Align vertically with buttons */
 }
 
 .small-button {
@@ -400,6 +402,19 @@ footer p {
 
   .icon-actions button:hover {
     background-color: #21262d;
+  }
+
+  .flex-item input,
+  .flex-item select,
+  .ruleGroup input,
+  .ruleGroup select,
+  .ruleGroup .sub-entry input[type="text"],
+  .ruleGroup .sub-entry select,
+  .sub-entry input[type="text"],
+  .sub-entry select {
+    background-color: #0d1117;
+    border: 1px solid #30363d;
+    color: #c9d1d9;
   }
 
   footer {
