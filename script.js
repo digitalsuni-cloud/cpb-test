@@ -122,7 +122,7 @@ function addRule(button) {
           <label>Usage Types:</label>
           <div class="usageTypes"></div>
           <div class="sub-entry">
-            <button class="addUsageType small-button" type="button" onclick="addUsageType(this)">+</button>
+            <button class="addUsageType" type="button" onclick="addUsageType(this)">+</button>
           </div>
         </div>
 
