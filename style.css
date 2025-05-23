@@ -42,7 +42,7 @@ section {
 .addInstanceProperty,
 .addLineItem,
 .addSavingsPlanOfferingType {
-  background-color: #007bff !important; /* Use !important to override other styles */
+  background-color: #007bff;
   color: white;
   border: none;
   border-radius: 4px;
@@ -58,10 +58,12 @@ section {
 .addInstanceProperty:hover,
 .addLineItem:hover,
 .addSavingsPlanOfferingType:hover {
-  background-color: #0056b3 !important; /* Use !important to override other styles */
+  background-color: #0056b3;
 }
 
-.remove-rule-group {
+.remove-rule-group,
+.ruleGroup .sub-entry button,
+.remove-rule {
   background-color: #dc3545;
   color: white;
   border: none;
@@ -72,36 +74,9 @@ section {
   transition: background-color 0.3s;
 }
 
-.remove-rule-group:hover {
-  background-color: #c82333;
-}
-
-.ruleGroup .sub-entry button, .remove-rule {
-  background-color: #dc3545;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  padding: 5px 10px;
-  font-size: 14px;
-  transition: background-color 0.3s;
-}
-
-.ruleGroup .sub-entry button:hover, .remove-rule:hover {
-  background-color: #c82333;
-}
-.remove-rule-group {
-  background-color: #dc3545;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  padding: 5px 10px;
-  font-size: 14px;
-  transition: background-color 0.3s;
-}
-
-.remove-rule-group:hover {
+.remove-rule-group:hover,
+.ruleGroup .sub-entry button:hover,
+.remove-rule:hover {
   background-color: #c82333;
 }
 
@@ -281,21 +256,6 @@ footer p {
   max-width: 80%;
 }
 
-.ruleGroup .sub-entry button, .remove-rule {
-  background-color: #dc3545;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  padding: 5px 10px;
-  font-size: 14px;
-  transition: background-color 0.3s;
-}
-
-.ruleGroup .sub-entry button:hover, .remove-rule:hover {
-  background-color: #c82333;
-}
-
 .sub-entry {
   display: flex;
   align-items: center;
@@ -307,6 +267,7 @@ footer p {
   flex-grow: 1;
   max-width: 80%;
 }
+
 .small-button {
   min-width: 0 !important; /* Override the global button style */
   height: auto !important; /* Override the global button style */
@@ -339,35 +300,50 @@ footer p {
     border: 1px solid #555;
     color: #e0e0e0;
   }
-  .addUsageType, .addOperation, .addRecordType, .addInstanceProperty, .addLineItem, .addSavingsPlanOfferingType {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  padding: 5px 10px;
-  font-size: 14px;
-  transition: background-color 0.3s;
-}
 
-.addUsageType:hover, .addOperation:hover, .addRecordType:hover, .addInstanceProperty:hover, .addLineItem:hover, .addSavingsPlanOfferingType:hover {
+  .addUsageType,
+  .addOperation,
+  .addRecordType,
+  .addInstanceProperty,
+  .addLineItem,
+  .addSavingsPlanOfferingType {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+  }
+
+  .addUsageType:hover,
+  .addOperation:hover,
+  .addRecordType:hover,
+  .addInstanceProperty:hover,
+  .addLineItem:hover,
+  .addSavingsPlanOfferingType:hover {
     background-color: #0056b3;
-}
+  }
 
-.remove-rule-group {
-  background-color: #dc3545;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  padding: 5px 10px;
-  font-size: 14px;
-  transition: background-color 0.3s;
-}
+  .remove-rule-group,
+  .ruleGroup .sub-entry button,
+  .remove-rule {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+  }
 
-.remove-rule-group:hover {
-  background-color: #c82333;
-}
+  .remove-rule-group:hover,
+  .ruleGroup .sub-entry button:hover,
+  .remove-rule:hover {
+    background-color: #c82333;
+  }
 
   button {
     background-color: #2196f3;
