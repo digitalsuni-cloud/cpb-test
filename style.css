@@ -238,10 +238,19 @@ textarea {
   font-size: 14px;
   background-color: #f9f9f9;
   transition: border-color 0.3s;
+  position: relative;
 }
 
 textarea:focus {
   border-color: #ff6f61;
+}
+
+.icon-actions {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  gap: 5px;
 }
 
 footer {
