@@ -426,6 +426,19 @@ footer p {
     background-color: #a93226;
   }
 
+  .flex-item input,
+  .flex-item select,
+  .ruleGroup input,
+  .ruleGroup select,
+  .ruleGroup .sub-entry input[type="text"],
+  .ruleGroup .sub-entry select,
+  .sub-entry input[type="text"],
+  .sub-entry select {
+    background-color: #2c3e50;
+    border: 1px solid #555;
+    color: #ecf0f1;
+  }
+
   button {
     background-color: #e67e22;
     padding: 10px 20px;
