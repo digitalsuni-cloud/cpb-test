@@ -42,7 +42,7 @@ section {
 .addInstanceProperty,
 .addLineItem,
 .addSavingsPlanOfferingType {
-  background-color: #007bff;
+  background-color: #007bff; /* Ensure these buttons have the blue color */
   color: white;
   border: none;
   border-radius: 4px;
@@ -62,7 +62,6 @@ section {
 }
 
 .remove-rule-group,
-.ruleGroup .sub-entry button,
 .remove-rule {
   background-color: #dc3545;
   color: white;
@@ -75,7 +74,6 @@ section {
 }
 
 .remove-rule-group:hover,
-.ruleGroup .sub-entry button:hover,
 .remove-rule:hover {
   background-color: #c82333;
 }
@@ -327,7 +325,6 @@ footer p {
   }
 
   .remove-rule-group,
-  .ruleGroup .sub-entry button,
   .remove-rule {
     background-color: #dc3545;
     color: white;
@@ -340,7 +337,6 @@ footer p {
   }
 
   .remove-rule-group:hover,
-  .ruleGroup .sub-entry button:hover,
   .remove-rule:hover {
     background-color: #c82333;
   }
