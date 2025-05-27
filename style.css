@@ -66,6 +66,74 @@
             cursor: pointer;
             color: var(--text);
         }
+                .rule-group-header {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .rule-group-header .input-group {
+            flex: 1;
+            margin-bottom: 0;
+        }
+
+        .rule-group-header label {
+            margin-bottom: 2px;
+            font-size: 0.9rem;
+        }
+
+        .rule-group-header input,
+        .rule-group-header select {
+            padding: 5px;
+            font-size: 0.9rem;
+        }
+
+        .billing-rule-inline {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .billing-rule-inline .input-group {
+            flex: 1;
+            margin-bottom: 0;
+        }
+
+        .billing-rule-inline label {
+            margin-bottom: 2px;
+            font-size: 0.8rem;
+        }
+
+        .billing-rule-inline input,
+        .billing-rule-inline select {
+            padding: 5px;
+            font-size: 0.8rem;
+        }
+
+        .output-area {
+            position: relative;
+        }
+
+        .output-area textarea {
+            width: 100%;
+            min-height: 200px;
+            resize: vertical;
+            padding: 30px 10px 10px;
+        }
+
+        .icon-actions {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            display: flex;
+            gap: 5px;
+            background-color: var(--surface);
+            padding: 2px;
+            border-radius: 3px;
+        }
 
         .input-row {
             display: flex;
