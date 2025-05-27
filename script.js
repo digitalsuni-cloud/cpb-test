@@ -1,33 +1,36 @@
  //Add Rule Group Button
 
-  function addRuleGroup(afterElement = null, insertAtTop = false) {
+        function addRuleGroup(afterElement = null, insertAtTop = false) {
             const div = document.createElement('div');
             div.className = 'rule-group';
             div.innerHTML = `
                 <h3>Rule Group</h3>
-                <div class="input-group">
-                    <label>Start Date:</label>
-                    <input type="date" class="startDate" required />
-                </div>
-                <div class="input-group">
-                    <label>End Date (optional):</label>
-                    <input type="date" class="endDate" />
-                </div>
-                <div class="input-group">
-                    <label>Enabled:</label>
-                    <select class="enabled">
-                        <option value="true" selected>true</option>
-                        <option value="false">false</option>
-                    </select>
+                <div class="input-row">
+                    <div class="small-input-group">
+                        <label>Start Date:</label>
+                        <input type="date" class="startDate small-input" required />
+                    </div>
+                    <div class="small-input-group">
+                        <label>End Date:</label>
+                        <input type="date" class="endDate small-input" />
+                    </div>
+                    <div class="small-input-group">
+                        <label>Enabled:</label>
+                        <select class="enabled small-input">
+                            <option value="true" selected>true</option>
+                            <option value="false">false</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="rules"></div>
-                <button onclick="addRule(this)" class="button">Add Billing Rule</button>
-                <button onclick="addRuleGroup(this.parentElement)" class="button">Add Rule Group</button>
-                <button class="button remove-rule-group" onclick="this.parentElement.remove()">Remove Rule Group</button>
+                <div class="button-group">
+                    <button onclick="addRule(this)" class="button">Add Billing Rule</button>
+                    <button onclick="addRuleGroup(this.parentElement.parentElement)" class="button">Add Rule Group</button>
+                    <button class="button remove-button" onclick="this.closest('.rule-group').remove()">Remove Rule Group</button>
+                </div>
             `;
 
             const container = document.getElementById('groupsContainer');
-
             if (insertAtTop) {
                 container.insertBefore(div, container.firstChild);
             } else if (afterElement) {
@@ -38,39 +41,43 @@
         }
 
         function addRule(button) {
-            const rulesContainer = button.previousElementSibling;
+            const rulesContainer = button.closest('.rule-group').querySelector('.rules');
             const div = document.createElement('div');
             div.className = 'rule';
             div.innerHTML = `
-                <div class="input-group">
-                    <label>Billing Rule Name:</label>
-                    <input type="text" class="ruleName" placeholder="Enter Billing Rule name" />
+                <div class="input-row">
+                    <div class="input-group">
+                        <label>Billing Rule Name</label>
+                        <input type="text" class="ruleName" placeholder="Enter Billing Rule name" />
+                    </div>
                 </div>
-                <div class="input-group">
-                    <label>Billing Adjustment:</label>
-                    <input type="number" class="billingAdjustment" placeholder="e.g. 0.00"/>
-                </div>
-                <div class="input-group">
-                    <label>Billing Rule Type:</label>
-                    <select class="billingRuleType">
-                        <option value="percentDiscount">percentDiscount</option>
-                        <option value="percentIncrease">percentIncrease</option>
-                        <option value="fixedRate">fixedRate</option>
-                    </select>
-                </div>
-                <div class="input-group">
-                    <label>Include Data Transfer:</label>
-                    <select class="includeDataTransfer">
-                        <option value="true">true</option>
-                        <option value="false">false</option>
-                    </select>
-                </div>
-                <div class="input-group">
-                    <label>Include RI Purchases:</label>
-                    <select class="includeRIPurchases">
-                        <option value="true">true</option>
-                        <option value="false" selected>false</option>
-                    </select>
+                <div class="input-row small-input-group">
+                    <div class="input-group">
+                        <label>Billing Adjustment</label>
+                        <input type="number" class="billingAdjustment small-input" placeholder="e.g. 0.00"/>
+                    </div>
+                    <div class="input-group">
+                        <label>Billing Rule Type</label>
+                        <select class="billingRuleType small-input">
+                            <option value="percentDiscount">percentDiscount</option>
+                            <option value="percentIncrease">percentIncrease</option>
+                            <option value="fixedRate">fixedRate</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Include Data Transfer</label>
+                        <select class="includeDataTransfer small-input">
+                            <option value="true">true</option>
+                            <option value="false">false</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Include RI Purchases</label>
+                        <select class="includeRIPurchases small-input">
+                            <option value="true">true</option>
+                            <option value="false" selected>false</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="input-group">
                     <label>Product Name:</label>
