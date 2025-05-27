@@ -1,182 +1,138 @@
  //Add Rule Group Button
 
-    function addRuleGroup(afterElement = null, insertAtTop = false) {
-      const div = document.createElement('div');
-      div.className = 'ruleGroup';
-      div.innerHTML = `
-    <div class="section-title">Rule Group</div>
-    <div class="flex-container">
-      <div class="flex-item">
-        <label>Start Date:</label>
-        <input type="date" class="startDate" required />
-      </div>
-      <div class="flex-item">
-        <label>End Date (optional):</label>
-        <input type="date" class="endDate" />
-      </div>
-      <div class="flex-item">
-        <label>Enabled:</label>
-        <select class="enabled">
-          <option value="true" selected>true</option>
-          <option value="false">false</option>
-        </select>
-      </div>
-    </div>
+  function addRuleGroup(afterElement = null, insertAtTop = false) {
+            const div = document.createElement('div');
+            div.className = 'rule-group';
+            div.innerHTML = `
+                <h3>Rule Group</h3>
+                <div class="input-group">
+                    <label>Start Date:</label>
+                    <input type="date" class="startDate" required />
+                </div>
+                <div class="input-group">
+                    <label>End Date (optional):</label>
+                    <input type="date" class="endDate" />
+                </div>
+                <div class="input-group">
+                    <label>Enabled:</label>
+                    <select class="enabled">
+                        <option value="true" selected>true</option>
+                        <option value="false">false</option>
+                    </select>
+                </div>
+                <div class="rules"></div>
+                <button onclick="addRule(this)" class="button">Add Billing Rule</button>
+                <button onclick="addRuleGroup(this.parentElement)" class="button">Add Rule Group</button>
+                <button class="button remove-rule-group" onclick="this.parentElement.remove()">Remove Rule Group</button>
+            `;
 
-    <div class="rules"></div>
-    <button onclick="addRule(this)" style="margin-right: 15px;">Add Billing Rule</button>
-    <button onclick="addRuleGroup(this.parentElement)" style="margin-right: 15px;">Add Rule Group</button>
-    <button class="remove-rule-group" onclick="this.parentElement.remove()" style="margin-right: 15px;">Remove Rule Group</button>
-  `;
+            const container = document.getElementById('groupsContainer');
 
-      const container = document.getElementById('groupsContainer');
+            if (insertAtTop) {
+                container.insertBefore(div, container.firstChild);
+            } else if (afterElement) {
+                container.insertBefore(div, afterElement.nextSibling);
+            } else {
+                container.appendChild(div);
+            }
+        }
 
-      if (insertAtTop) {
-        container.insertBefore(div, container.firstChild);
-      } else if (afterElement) {
-        container.insertBefore(div, afterElement.nextSibling);
-      } else {
-        container.appendChild(div);
-      }
-    }
-
- // Add Billing Rule Button
-function addRule(button) {
-  const rulesContainer = button.previousElementSibling;
-  const div = document.createElement('div');
-  div.className = 'rule';
-  div.innerHTML = `
-    <div class="flex-container">
-      <div class="flex-item">
-        <label>Billing Rule Name:</label>
-        <input type="text" class="ruleName" placeholder="Enter Billing Rule name" />
-      </div>
-    </div>
-
-    <div class="flex-container">
-      <div class="flex-item">
-        <label>Billing Adjustment (e.g. 0.00):</label>
-        <input type="int" class="billingAdjustment" />
-      </div>
-      <div class="flex-item">
-        <label>Billing Rule Type:</label>
-        <select class="billingRuleType">
-          <option value="percentDiscount">percentDiscount</option>
-          <option value="percentIncrease">percentIncrease</option>
-          <option value="fixedRate">fixedRate</option>
-        </select>
-      </div>
-      <div class="flex-item">
-        <div class="small-label">Include Data Transfer:</div>
-        <div class="small-select">
-          <select class="includeDataTransfer">
-            <option value="true">true</option>
-            <option value="false">false</option>
-          </select>
-        </div>
-      </div>
-      <div class="flex-item">
-        <div class="small-label">Include RI Purchases:</div>
-        <div class="small-select">
-          <select class="includeRIPurchases">
-            <option value="true">true</option>
-            <option value="false" selected>false</option>
-          </select>
-        </div>
-      </div>
-    </div>
-
-    <div class="flex-container">
-      <div class="flex-item">
-        <label>Product Name:</label>
-        <input type="text" class="productName" list="productList" placeholder="Leave empty for Any Products" />
-      </div>
-      <div class="flex-item">
-        <div class="small-label">Product Include Data Transfer:</div>
-        <div class="small-select">
-          <select class="productIncludeDataTransfer">
-            <option value="">(inherit)</option>
-            <option value="true">true</option>
-            <option value="false">false</option>
-          </select>
-        </div>
-      </div>
-      <div class="flex-item">
-        <div class="small-label">Product Include RI Purchases:</div>
-        <div class="small-select">
-          <select class="productIncludeRIPurchases">
-            <option value="">(inherit)</option>
-            <option value="true">true</option>
-            <option value="false">false</option>
-          </select>
-        </div>
-      </div>
-    </div>
-
-    <!-- Region -->
-    <label>Region (optional):</label>
-    <input type="text" class="region" />
-
-    <!-- usageType -->
-    <div class="sub-group">
-      <label>Usage Types:</label>
-      <div class="usageTypes"></div>
-      <div class="sub-entry">
-        <button class="addUsageType small-button" type="button" onclick="addUsageType(this)">+</button>
-      </div>
-    </div>
-
-    <!-- Operation -->
-    <div class="sub-group">
-      <label>Operations:</label>
-      <div class="operations"></div>
-      <div class="sub-entry">
-        <button class="addOperation small-button" type="button" onclick="addOperation(this)">+</button>
-      </div>
-    </div>
-
-    <!-- RecordType -->
-    <div class="sub-group">
-      <label>Record Types:</label>
-      <div class="recordTypes"></div>
-      <div class="sub-entry">
-        <button class="addRecordType small-button" type="button" onclick="addRecordType(this)">+</button>
-      </div>
-    </div>
-
-    <!-- InstanceProperties -->
-    <div class="sub-group">
-      <label>Instance Properties:</label>
-      <div class="instanceProperties"></div>
-      <div class="sub-entry">
-        <button class="addInstanceProperty small-button" type="button" onclick="addInstanceProperty(this)">+</button>
-      </div>
-    </div>
-
-    <!-- LineItemDescription -->
-    <div class="sub-group">
-      <label>Line Item Descriptions:</label>
-      <div class="lineItemDescriptions"></div>
-      <div class="sub-entry">
-        <button class="addLineItem small-button" type="button" onclick="addLineItemDescription(this)">+</button>
-      </div>
-    </div>
-
-    <!-- SavingsPlanOfferingType -->
-    <div class="sub-group">
-      <label>Savings Plan Offering Types:</label>
-      <div class="savingsPlanOfferingTypes"></div>
-      <div class="sub-entry">
-        <button class="addSavingsPlanOfferingType small-button" type="button" onclick="addSavingsPlanOfferingType(this)">+</button>
-      </div>
-    </div>
-    <br />
-    <button class="remove-rule" onclick="this.parentElement.remove()">Remove Billing Rule</button>
-    <br />
-    <br>
-  `;
-  rulesContainer.appendChild(div);
-}
+        function addRule(button) {
+            const rulesContainer = button.previousElementSibling;
+            const div = document.createElement('div');
+            div.className = 'rule';
+            div.innerHTML = `
+                <div class="input-group">
+                    <label>Billing Rule Name:</label>
+                    <input type="text" class="ruleName" placeholder="Enter Billing Rule name" />
+                </div>
+                <div class="input-group">
+                    <label>Billing Adjustment:</label>
+                    <input type="number" class="billingAdjustment" placeholder="e.g. 0.00"/>
+                </div>
+                <div class="input-group">
+                    <label>Billing Rule Type:</label>
+                    <select class="billingRuleType">
+                        <option value="percentDiscount">percentDiscount</option>
+                        <option value="percentIncrease">percentIncrease</option>
+                        <option value="fixedRate">fixedRate</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Include Data Transfer:</label>
+                    <select class="includeDataTransfer">
+                        <option value="true">true</option>
+                        <option value="false">false</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Include RI Purchases:</label>
+                    <select class="includeRIPurchases">
+                        <option value="true">true</option>
+                        <option value="false" selected>false</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Product Name:</label>
+                    <input type="text" class="productName" list="productList" placeholder="Leave empty for Any Products" />
+                    <datalist id="productList">
+                        <!-- Your existing product options here -->
+                    </datalist>
+                </div>
+                <div class="input-group">
+                    <label>Product Include Data Transfer:</label>
+                    <select class="productIncludeDataTransfer">
+                        <option value="">(inherit)</option>
+                        <option value="true">true</option>
+                        <option value="false">false</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Product Include RI Purchases:</label>
+                    <select class="productIncludeRIPurchases">
+                        <option value="">(inherit)</option>
+                        <option value="true">true</option>
+                        <option value="false">false</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Region (optional):</label>
+                    <input type="text" class="region" />
+                </div>
+                <div class="sub-group">
+                    <label>Usage Types:</label>
+                    <div class="usageTypes"></div>
+                    <button class="button addUsageType" type="button" onclick="addUsageType(this)">Add Usage Type</button>
+                </div>
+                <div class="sub-group">
+                    <label>Operations:</label>
+                    <div class="operations"></div>
+                    <button class="button addOperation" type="button" onclick="addOperation(this)">Add Operation</button>
+                </div>
+                <div class="sub-group">
+                    <label>Record Types:</label>
+                    <div class="recordTypes"></div>
+                    <button class="button addRecordType" type="button" onclick="addRecordType(this)">Add Record Type</button>
+                </div>
+                <div class="sub-group">
+                    <label>Instance Properties:</label>
+                    <div class="instanceProperties"></div>
+                    <button class="button addInstanceProperty" type="button" onclick="addInstanceProperty(this)">Add Instance Property</button>
+                </div>
+                <div class="sub-group">
+                    <label>Line Item Descriptions:</label>
+                    <div class="lineItemDescriptions"></div>
+                    <button class="button addLineItem" type="button" onclick="addLineItemDescription(this)">Add Line Item</button>
+                </div>
+                <div class="sub-group">
+                    <label>Savings Plan Offering Types:</label>
+                    <div class="savingsPlanOfferingTypes"></div>
+                    <button class="button addSavingsPlanOfferingType" type="button" onclick="addSavingsPlanOfferingType(this)">Add Savings Plan Offering Type</button>
+                </div>
+                <button class="button remove-rule" onclick="this.parentElement.remove()">Remove Billing Rule</button>
+            `;
+            rulesContainer.appendChild(div);
+        }
 
 function addUsageType(button) {
   const container = button.closest('.sub-group').querySelector('.usageTypes');
@@ -730,20 +686,15 @@ function downloadText(textareaId, extension) {
   link.click();
 }
     //info button
-    document.addEventListener('DOMContentLoaded', function () {
-            document.getElementById('infoButton').classList.add('small-button');
+   document.getElementById('infoButton').addEventListener('click', function() {
+            document.getElementById('infoModal').style.display = 'block';
+            document.getElementById('infoContent').innerHTML = `
+                <p><strong>Rule Order:</strong> Custom price book XML specifications process rules in top-down order. The first applicable rule that satisfies all specified constraints for a line item is used, and then no subsequent rules are used for that line item. If no applicable and matching rule is found, the line item will have a 0% calculated price adjustment.</p>
+                <p><strong>Rule Applicability:</strong> Rule applicability is determined by the startDate and endDate attributes in enabled RuleGroup elements. startDates and endDates are inclusive. Whether or not an applicable rule is actually used depends on its order relative to other rules and the constraints it specifies for matching line items.</p>
+                <p><strong>For more details:</strong> <a href="https://apidocs.cloudhealthtech.com/#price-book_introduction-to-price-book-api" target="_blank">API Documentation</a></p>
+            `;
+        });
 
-      document.getElementById('infoButton').addEventListener('click', function () {
-        var infoModal = document.getElementById('infoModal');
-        infoModal.style.display = 'block';
-        document.getElementById('infoContent').innerHTML = `
-        <p><strong>Rule Order:</strong> Custom price book XML specifications process rules in top-down order. The first applicable rule that satisfies all specified constraints for a line item is used, and then no subsequent rules are used for that line item. If no applicable and matching rule is found, the line item will have a 0% calculated price adjustment.</p>
-        <p><strong>Rule Applicability:</strong> Rule applicability is determined by the startDate and endDate attributes in enabled RuleGroup elements. startDates and endDates are inclusive. Whether or not an applicable rule is actually used depends on its order relative to other rules and the constraints it specifies for matching line items.</p>
-        <p><strong>For more details:</strong> <a href="https://apidocs.cloudhealthtech.com/#price-book_introduction-to-price-book-api" target="_blank" style="color: #4ca1af;">API Documentation</a></p>
-      `;
-      });
-
-      window.closeModal = function () {
-        document.getElementById('infoModal').style.display = 'none';
-      };
-    });
+        function closeModal() {
+            document.getElementById('infoModal').style.display = 'none';
+        }
