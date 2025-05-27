@@ -15,20 +15,22 @@
             div.className = 'rule-group';
             div.innerHTML = `
                 <h3>Rule Group</h3>
-                <div class="input-group">
-                    <label>Start Date</label>
-                    <input type="date" class="startDate" required />
-                </div>
-                <div class="input-group">
-                    <label>End Date (optional)</label>
-                    <input type="date" class="endDate" />
-                </div>
-                <div class="input-group">
-                    <label>Enabled</label>
-                    <select class="enabled">
-                        <option value="true" selected>true</option>
-                        <option value="false">false</option>
-                    </select>
+                <div class="rule-group-header">
+                    <div class="input-group">
+                        <label>Start Date</label>
+                        <input type="date" class="startDate" required />
+                    </div>
+                    <div class="input-group">
+                        <label>End Date (optional)</label>
+                        <input type="date" class="endDate" />
+                    </div>
+                    <div class="input-group">
+                        <label>Enabled</label>
+                        <select class="enabled">
+                            <option value="true" selected>true</option>
+                            <option value="false">false</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="rules"></div>
                 <div class="button-group">
@@ -58,31 +60,33 @@
                     <label>Billing Rule Name</label>
                     <input type="text" class="ruleName" placeholder="Enter Billing Rule name" />
                 </div>
-                <div class="input-group">
-                    <label>Billing Adjustment</label>
-                    <input type="number" class="billingAdjustment" placeholder="e.g. 0.00"/>
-                </div>
-                <div class="input-group">
-                    <label>Billing Rule Type</label>
-                    <select class="billingRuleType">
-                        <option value="percentDiscount">percentDiscount</option>
-                        <option value="percentIncrease">percentIncrease</option>
-                        <option value="fixedRate">fixedRate</option>
-                    </select>
-                </div>
-                <div class="input-group">
-                    <label>Include Data Transfer</label>
-                    <select class="includeDataTransfer">
-                        <option value="true">true</option>
-                        <option value="false">false</option>
-                    </select>
-                </div>
-                <div class="input-group">
-                    <label>Include RI Purchases</label>
-                    <select class="includeRIPurchases">
-                        <option value="true">true</option>
-                        <option value="false" selected>false</option>
-                    </select>
+                <div class="billing-rule-inline">
+                    <div class="input-group">
+                        <label>Billing Adjustment</label>
+                        <input type="number" class="billingAdjustment" placeholder="e.g. 0.00"/>
+                    </div>
+                    <div class="input-group">
+                        <label>Billing Rule Type</label>
+                        <select class="billingRuleType">
+                            <option value="percentDiscount">percentDiscount</option>
+                            <option value="percentIncrease">percentIncrease</option>
+                            <option value="fixedRate">fixedRate</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Include Data Transfer</label>
+                        <select class="includeDataTransfer">
+                            <option value="true">true</option>
+                            <option value="false">false</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Include RI Purchases</label>
+                        <select class="includeRIPurchases">
+                            <option value="true">true</option>
+                            <option value="false" selected>false</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="input-group">
                     <label>Product Name</label>
