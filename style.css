@@ -1,385 +1,568 @@
-function toggleTheme() {
-            const body = document.body;
-            const currentTheme = body.getAttribute('data-theme');
-            if (currentTheme === 'dark') {
-                body.removeAttribute('data-theme');
-            } else {
-                body.setAttribute('data-theme', 'dark');
+:root {
+            --primary: #3498db;
+            --primary-dark: #2980b9;
+            --secondary: #2ecc71;
+            --background: #f5f7fa;
+            --surface: #ffffff;
+            --text: #333333;
+            --text-light: #666666;
+            --border: #e0e0e0;
+            --error: #e74c3c;
+            --success: #27ae60;
+            --focus-ring: rgba(52, 152, 219, 0.4);
+            --transition-speed: 0.3s;
+        }
+
+        [data-theme="dark"] {
+            --primary: #3498db;
+            --primary-dark: #2980b9;
+            --secondary: #2ecc71;
+            --background: #1a1a1a;
+            --surface: #2c2c2c;
+            --text: #f5f5f5;
+            --text-light: #bdbdbd;
+            --border: #444444;
+            --error: #e74c3c;
+            --success: #27ae60;
+            --focus-ring: rgba(52, 152, 219, 0.6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: 2px solid var(--text-light);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text);
+            transition: all var(--transition-speed);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: scale(1.1);
+        }
+
+        .theme-toggle:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px var(--focus-ring);
+        }
+
+        .import-section {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .input-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .input-group {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .input-group input,
+        .input-group select,
+        .rule-group input,
+        .rule-group select,
+        .rule input,
+        .rule select,
+        .billing-rule-inline input,
+        .billing-rule-inline select,
+        .product-inline input,
+        .product-inline select,
+        .sub-entry input,
+        .sub-entry select {
+            width: 100%;
+            height: 37px;
+            padding: 0 12px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            background-color: var(--surface);
+            color: var(--text);
+            font-size: 0.9rem;
+            transition: all var(--transition-speed);
+            line-height: 38px;
+            vertical-align: middle;
+        }
+
+        .input-group select,
+        .rule-group select,
+        .rule select,
+        .billing-rule-inline select,
+        .product-inline select,
+        .sub-entry select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+            background-size: 16px;
+            padding-right: 32px;
+        }
+
+        .input-group input[type="date"],
+        .rule-group input[type="date"],
+        .rule input[type="date"] {
+            display: flex;
+            align-items: center;
+            padding-right: 8px;
+        }
+
+        .input-group input:focus,
+        .input-group select:focus,
+        .rule-group input:focus,
+        .rule-group select:focus,
+        .rule input:focus,
+        .rule select:focus,
+        .billing-rule-inline input:focus,
+        .billing-rule-inline select:focus,
+        .product-inline input:focus,
+        .product-inline select:focus,
+        .sub-entry input:focus,
+        .sub-entry select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--focus-ring);
+        }
+
+        .input-group input[aria-invalid="true"] {
+            border-color: var(--error);
+        }
+
+        .error-message {
+            color: var(--error);
+            font-size: 0.875rem;
+            margin-top: 4px;
+            display: none;
+        }
+
+        .input-group input[aria-invalid="true"]+.error-message {
+            display: block;
+        }
+
+        .customer-ids {
+            display: flex;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .customer-ids .input-group:first-child {
+            flex: 0 0 20%;
+            min-width: auto;
+        }
+
+        .customer-ids .input-group:last-child {
+            flex: 0 0 78%;
+            min-width: auto;
+        }
+
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all var(--transition-speed);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            height: 37px;
+        }
+
+        .button:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .button:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px var(--focus-ring);
+        }
+
+        .button[disabled] {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .button-red {
+            background-color: var(--error);
+        }
+
+        .button-red:hover {
+            background-color: #c0392b;
+        }
+
+        .button-icon {
+            font-size: 1.2rem;
+            margin-right: 8px;
+        }
+
+        .help-button {
+            width: 37px;
+            height: 37px;
+            border-radius: 8px;
+            background-color: var(--primary);
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+            border: none;
+        }
+
+        .help-button:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .rule-group {
+            background-color: var(--surface);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all var(--transition-speed);
+        }
+
+        .rule-group:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .rule-group h3,
+        .rule h4 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .rule {
+            background-color: rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .rule .input-group:first-child {
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 15px;
+        }
+
+        .billing-rule-inline {
+            margin-top: 15px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+            align-items: start;
+        }
+
+        .billing-rule-inline .input-group {
+            min-width: 0;
+        }
+
+        .billing-rule-inline .input-group.compact {
+            min-width: 0;
+        }
+
+        .product-inline {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+            align-items: start;
+        }
+
+        .product-inline .input-group {
+            min-width: 0;
+        }
+
+        .product-inline .input-group.compact {
+            min-width: 0;
+        }
+
+        .sub-group {
+            margin: 15px 0;
+            padding: 15px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background-color: var(--surface);
+        }
+
+        .sub-group label {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .sub-entry {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 10px;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+
+        .sub-entry.with-select {
+            grid-template-columns: auto auto 1fr;
+        }
+
+        .sub-entry.with-double-input {
+            grid-template-columns: auto 1fr 1fr auto;
+        }
+
+        .sub-entry .small-button {
+            background-color: var(--error);
+            color: white;
+            border: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 0;
+            transition: all var(--transition-speed);
+        }
+
+        .sub-entry .small-button:hover {
+            background-color: #c0392b;
+            transform: scale(1.1);
+        }
+
+        .checkbox-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .checkbox-wrapper input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            margin: 0;
+        }
+
+        .checkbox-wrapper label {
+            margin: 0;
+            font-size: 0.9rem;
+            color: var(--text);
+        }
+
+        .output-section {
+            margin-top: 30px;
+        }
+
+        .output-area {
+            position: relative;
+            background-color: var(--surface);
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 10px;
+        }
+
+        .output-area textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 12px;
+            border: none;
+            background-color: var(--surface);
+            color: var(--text);
+            font-family: monospace;
+            font-size: 0.9rem;
+            resize: vertical;
+        }
+
+        .output-area textarea:focus {
+            outline: none;
+        }
+
+        .icon-actions {
+            position: absolute;
+            top: 10px;
+            right: 33px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .icon-button {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            padding: 4px;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: all var(--transition-speed);
+        }
+
+        .icon-button:hover {
+            color: var(--primary);
+            transform: scale(1.1);
+        }
+
+        .loading-indicator {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: var(--surface);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        .loading-indicator.active {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .spinner {
+            width: 24px;
+            height: 24px;
+            border: 3px solid var(--border);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
             }
         }
 
-        function validateForm() {
-            let isValid = true;
-            const requiredFields = ['bookName', 'createdBy'];
-
-            requiredFields.forEach(fieldId => {
-                const field = document.getElementById(fieldId);
-                const errorElement = document.getElementById(`${fieldId}-error`);
-                
-                if (!field.value.trim()) {
-                    isValid = false;
-                    field.setAttribute('aria-invalid', 'true');
-                    errorElement.textContent = 'This field is required.';
-                } else {
-                    field.removeAttribute('aria-invalid');
-                    errorElement.textContent = '';
-                }
-            });
-
-            return isValid;
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
         }
 
-        function addRuleGroup(afterElement = null, insertAtTop = false) {
-            const div = document.createElement('div');
-            div.className = 'rule-group';
-            div.innerHTML = `
-                <h3>Rule Group</h3>
-                <div class="input-row">
-                    <div class="input-group">
-                        <label for="startDate-${Date.now()}">Start Date</label>
-                        <input type="date" id="startDate-${Date.now()}" required>
-                    </div>
-                    <div class="input-group">
-                        <label for="endDate-${Date.now()}">End Date (Optional)</label>
-                        <input type="date" id="endDate-${Date.now()}">
-                    </div>
-                    <div class="input-group">
-                        <label for="enabled-${Date.now()}">Enabled</label>
-                        <select id="enabled-${Date.now()}">
-                            <option value="true">Yes</option>
-                            <option value="false">No</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="rules"></div>
-                <div class="button-group">
-                    <button onclick="addRule(this)" class="button">
-                        <span class="button-icon">➕</span>Add Billing Rule
-                    </button>
-                    <button onclick="addRuleGroup(this.closest('.rule-group'))" class="button">
-                        <span class="button-icon">➕</span>Add Rule Group
-                    </button>
-                    <button class="button button-red" onclick="this.closest('.rule-group').remove()">
-                        <span class="button-icon">×</span>Remove Rule Group
-                    </button>
-                </div>
-            `;
-
-            const container = document.getElementById('groupsContainer');
-
-            if (insertAtTop) {
-                container.insertBefore(div, container.firstChild);
-            } else if (afterElement) {
-                container.insertBefore(div, afterElement.nextSibling);
-            } else {
-                container.appendChild(div);
-            }
+        .modal-content {
+            position: relative;
+            background-color: var(--surface);
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 12px;
+            max-width: 600px;
+            width: 90%;
         }
 
-        function addRule(button) {
-            const rulesContainer = button.closest('.rule-group').querySelector('.rules');
-            const div = document.createElement('div');
-            div.className = 'rule';
-            div.innerHTML = `
-                <div class="input-group">
-                    <label>Billing Rule Name</label>
-                    <input type="text" class="ruleName" placeholder="Enter Billing Rule name" />
-                </div>
-                <div class="billing-rule-inline">
-                    <div class="input-group">
-                        <label>Billing Adjustment</label>
-                        <input type="number" class="billingAdjustment" placeholder="e.g. 0.00"/>
-                    </div>
-                    <div class="input-group">
-                        <label>Billing Rule Type</label>
-                        <select class="billingRuleType">
-                            <option value="percentDiscount">percentDiscount</option>
-                            <option value="percentIncrease">percentIncrease</option>
-                            <option value="fixedRate">fixedRate</option>
-                        </select>
-                    </div>
-                    <div class="input-group compact">
-                        <label>Include Data Transfer</label>
-                        <select class="includeDataTransfer">
-                            <option value="true">true</option>
-                            <option value="false">false</option>
-                        </select>
-                    </div>
-                    <div class="input-group compact">
-                        <label>Include RI Purchases</label>
-                        <select class="includeRIPurchases">
-                            <option value="true">true</option>
-                            <option value="false" selected>false</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="product-inline">
-                    <div class="input-group">
-                        <label>Product Name</label>
-                        <input type="text" class="productName" list="productList" placeholder="Leave empty for Any Products" />
-                        <datalist id="productList">
-                            <option value="Amazon API Gateway" />
-                            <option value="Amazon AppFlow" />
-                            <option value="Savings Plans for AWS Machine Learning" />
-                        </datalist>
-                    </div>
-                    <div class="input-group compact">
-                        <label>Product Include Data Transfer</label>
-                        <select class="productIncludeDataTransfer">
-                            <option value="">(inherit)</option>
-                            <option value="true">true</option>
-                            <option value="false">false</option>
-                        </select>
-                    </div>
-                    <div class="input-group compact">
-                        <label>Product Include RI Purchases</label>
-                        <select class="productIncludeRIPurchases">
-                            <option value="">(inherit)</option>
-                            <option value="true">true</option>
-                            <option value="false">false</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="input-group">
-                    <label>Region (optional)</label>
-                    <input type="text" class="region" />
-                </div>
-                <div class="sub-group">
-                    <label>Usage Types</label>
-                    <div class="usageTypes"></div>
-                    <button class="button" type="button" onclick="addUsageType(this)">Add Usage Type</button>
-                </div>
-                <div class="sub-group">
-                    <label>Operations</label>
-                    <div class="operations"></div>
-                    <button class="button" type="button" onclick="addOperation(this)">Add Operation</button>
-                </div>
-                <div class="sub-group">
-                    <label>Record Types</label>
-                    <div class="recordTypes"></div>
-                    <button class="button" type="button" onclick="addRecordType(this)">Add Record Type</button>
-                </div>
-                <div class="sub-group">
-                    <label>Instance Properties</label>
-                    <div class="instanceProperties"></div>
-                    <button class="button" type="button" onclick="addInstanceProperty(this)">Add Instance Property</button>
-                </div>
-                <div class="sub-group">
-                    <label>Line Item Descriptions</label>
-                    <div class="lineItemDescriptions"></div>
-                    <button class="button" type="button" onclick="addLineItemDescription(this)">Add Line Item</button>
-                </div>
-                <div class="sub-group">
-                    <label>Savings Plan Offering Types</label>
-                    <div class="savingsPlanOfferingTypes"></div>
-                    <button class="button" type="button" onclick="addSavingsPlanOfferingType(this)">Add Savings Plan Offering Type</button>
-                </div>
-                <button class="button button-red" onclick="this.closest('.rule').remove()">
-                    <span class="button-icon">×</span>Remove Billing Rule
-                </button>
-            `;
-            rulesContainer.appendChild(div);
+        .modal-close {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: color var(--transition-speed);
         }
 
-        function addUsageType(button) {
-            const container = button.closest('.sub-group').querySelector('.usageTypes');
-            const div = document.createElement('div');
-            div.className = 'sub-entry';
-            div.innerHTML = `
-                <button type="button" class="small-button" onclick="this.parentElement.remove()">×</button>
-                <input type="text" class="usageTypeName" placeholder="UsageType name..." />
-            `;
-            container.appendChild(div);
+        .modal-close:hover {
+            color: var(--primary);
         }
 
-        function addLineItemDescription(button) {
-            const container = button.closest('.sub-group').querySelector('.lineItemDescriptions');
-            const div = document.createElement('div');
-            div.className = 'sub-entry with-select';
-            div.innerHTML = `
-                <button type="button" class="small-button" onclick="this.parentElement.remove()">×</button>
-                <select class="lineItemType">
-                    <option value="contains">contains</option>
-                    <option value="startsWith">startsWith</option>
-                    <option value="matchesRegex">matchesRegex</option>
-                </select>
-                <input type="text" class="lineItemValue" placeholder="Enter LineItem Description..." />
-            `;
-            container.appendChild(div);
-        }
-
-        function addOperation(button) {
-            const container = button.closest('.sub-group').querySelector('.operations');
-            const div = document.createElement('div');
-            div.className = 'sub-entry';
-            div.innerHTML = `
-                <button type="button" class="small-button" onclick="this.parentElement.remove()">×</button>
-                <input type="text" class="operationName" placeholder="Enter Operation name..." />
-            `;
-            container.appendChild(div);
-        }
-
-        function addRecordType(button) {
-            const container = button.closest('.sub-group').querySelector('.recordTypes');
-            const div = document.createElement('div');
-            div.className = 'sub-entry';
-            div.innerHTML = `
-                <button type="button" class="small-button" onclick="this.parentElement.remove()">×</button>
-                <input type="text" class="recordTypeName" placeholder="Enter RecordType..." />
-            `;
-            container.appendChild(div);
-        }
-
-        function addInstanceProperty(button) {
-            const container = button.closest('.sub-group').querySelector('.instanceProperties');
-            const div = document.createElement('div');
-            div.className = 'sub-entry with-double-input';
-            div.innerHTML = `
-                <button type="button" class="small-button" onclick="this.parentElement.remove()">×</button>
-                <input type="text" class="instanceType" placeholder="Instance Type (e.g., t2)" />
-                <input type="text" class="instanceSize" placeholder="Instance Size (e.g., 8xlarge)" />
-                <div class="checkbox-wrapper">
-                    <input type="checkbox" class="reservedInstance" id="reservedInstance-${Date.now()}" />
-                    <label for="reservedInstance-${Date.now()}" class="checkbox-label">Reserved</label>
-                </div>
-            `;
-            container.appendChild(div);
-        }
-
-        function addSavingsPlanOfferingType(button) {
-            const container = button.closest('.sub-group').querySelector('.savingsPlanOfferingTypes');
-            const div = document.createElement('div');
-            div.className = 'sub-entry';
-            div.innerHTML = `
-                <button type="button" class="small-button" onclick="this.parentElement.remove()">×</button>
-                <input type="text" class="savingsPlanOfferingTypeName" placeholder="Enter Savings Plan Offering Type..." />
-            `;
-            container.appendChild(div);
-        }
-
-        function generateOutput(type) {
-            if (!validateForm()) {
-                return;
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
             }
 
-            showLoadingIndicator();
-
-            setTimeout(() => {
-                let output = '';
-                switch (type) {
-                    case 'xml':
-                        output = generateXML();
-                        document.getElementById('xmlOutput').value = output;
-                        break;
-                    case 'json':
-                        output = generateJSON();
-                        document.getElementById('jsonOutput').value = output;
-                        break;
-                    case 'curl':
-                        output = generateCURL();
-                        document.getElementById('jsonOutput').value = output;
-                        break;
-                }
-
-                hideLoadingIndicator();
-            }, 500);
-        }
-
-        function generateXML() {
-            return `<?xml version="1.0" encoding="UTF-8"?>\n<CHTBillingRules>\n    <!-- XML content would be generated here -->\n</CHTBillingRules>`;
-        }
-
-        function generateJSON() {
-            return JSON.stringify({
-                book_name: document.getElementById('bookName').value,
-                created_by: document.getElementById('createdBy').value,
-                // Other fields would be included here
-            }, null, 2);
-        }
-
-        function generateCURL() {
-            const jsonPayload = generateJSON();
-            return `curl -X POST https://chapi.cloudhealthtech.com/v1/price_books \\\n  -H "Authorization: Bearer <YOUR_API_KEY>" \\\n  -H "Content-Type: application/json" \\\n  -d '${jsonPayload}'`;
-        }
-
-        function copyOutput(elementId) {
-            const outputElement = document.getElementById(elementId);
-            outputElement.select();
-            document.execCommand('copy');
-            alert('Copied to clipboard!');
-        }
-
-        function downloadOutput(elementId, fileType) {
-            const content = document.getElementById(elementId).value;
-            const filename = `price_book_${new Date().toISOString().split('T')[0]}.${fileType}`;
-            const blob = new Blob([content], { type: 'text/plain' });
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = filename;
-            link.click();
-        }
-
-        function showLoadingIndicator() {
-            document.querySelector('.loading-indicator').classList.add('active');
-        }
-
-        function hideLoadingIndicator() {
-            document.querySelector('.loading-indicator').classList.remove('active');
-        }
-
-        document.getElementById('helpButton').addEventListener('click', () => {
-            const modal = document.getElementById('helpModal');
-            const content = document.getElementById('helpContent');
-            content.innerHTML = `
-                <p><strong>Rule Order:</strong> Rules are processed top-down. The first applicable rule is used.</p>
-                <p><strong>Rule Applicability:</strong> Determined by start and end dates in enabled rule groups.</p>
-                <p><strong>More Info:</strong> <a href="https://apidocs.cloudhealthtech.com/#price-book_introduction-to-price-book-api" target="_blank" rel="noopener noreferrer">API Documentation</a></p>
-            `;
-            modal.style.display = 'block';
-        });
-
-        function closeModal() {
-            document.getElementById('helpModal').style.display = 'none';
-        }
-
-        document.getElementById('importButton').addEventListener('click', () => {
-            document.getElementById('fileInput').click();
-        });
-
-        document.getElementById('fileInput').addEventListener('change', (event) => {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    try {
-                        const content = e.target.result;
-                        if (file.name.endsWith('.json')) {
-                            const jsonData = JSON.parse(content);
-                            populateFormFromJSON(jsonData);
-                        } else if (file.name.endsWith('.xml')) {
-                            populateFormFromXML(content);
-                        }
-                    } catch (error) {
-                        console.error('Error parsing file:', error);
-                        alert('Error parsing the file. Please ensure it\'s a valid JSON or XML file.');
-                    }
-                };
-                reader.readAsText(file);
+            .input-row {
+                flex-direction: column;
             }
-        });
 
-        function populateFormFromJSON(data) {
-            document.getElementById('bookName').value = data.book_name || '';
-            document.getElementById('createdBy').value = data.created_by || '';
-            // Add logic to populate other fields and create rule groups
+            .input-group {
+                min-width: 100%;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .button {
+                width: 100%;
+            }
+
+            .billing-rule-inline,
+            .product-inline {
+                grid-template-columns: 1fr;
+            }
         }
-
-        function populateFormFromXML(xmlString) {
-            const parser = new DOMParser();
-            const xmlDoc = parser.parseFromString(xmlString, "text/xml");
-            // Add logic to extract data from XML and populate the form
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            addRuleGroup(null, true); // Add an initial rule group
-        });
