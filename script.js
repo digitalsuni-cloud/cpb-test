@@ -547,10 +547,10 @@
                 const modal = document.getElementById('helpModal');
                 const content = document.getElementById('helpContent');
                 content.innerHTML = `
-                <p><strong>Rule Order:</strong> Rules are processed top-down. The first applicable rule is used.</p>
-                <p><strong>Rule Applicability:</strong> Determined by start and end dates in enabled rule groups.</p>
-                <p><strong>More Info:</strong> <a href="https://apidocs.cloudhealthtech.com/#price-book_introduction-to-price-book-api" target="_blank" rel="noopener noreferrer">API Documentation</a></p>
-            `;
+        <p><strong>Rule Order:</strong> Custom price book XML specifications process rules in top-down order. The first applicable rule that satisfies all specified constraints for a line item is used, and then no subsequent rules are used for that line item. If no applicable and matching rule is found, the line item will have a 0% calculated price adjustment.</p>
+        <p><strong>Rule Applicability:</strong> Rule applicability is determined by the startDate and endDate attributes in enabled RuleGroup elements. startDates and endDates are inclusive. Whether or not an applicable rule is actually used depends on its order relative to other rules and the constraints it specifies for matching line items.</p>
+        <p><strong>For more details:</strong> <a href="https://apidocs.cloudhealthtech.com/#price-book_introduction-to-price-book-api" target="_blank" style="color: #4ca1af;">API Documentation</a></p>
+      `;
                 modal.style.display = 'block';
             });
 
